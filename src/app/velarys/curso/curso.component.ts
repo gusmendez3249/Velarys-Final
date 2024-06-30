@@ -1,3 +1,4 @@
+// src/app/curso/curso.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NivelesService } from '../niveles/niveles.service';
@@ -8,33 +9,45 @@ import { NivelesService } from '../niveles/niveles.service';
   styleUrls: ['./curso.component.css']
 })
 export class CursoComponent implements OnInit {
-  niveles: any[] = [];  // Inicialización de niveles como un array vacío
+  niveles: any[] = [];
 
   constructor(private nivelesService: NivelesService, private router: Router) {}
 
   ngOnInit(): void {
+    this.cargarNiveles();
+  }
+
+  cargarNiveles(): void {
     this.niveles = this.nivelesService.getNiveles();
-  }
-
-  volver(): void {
-    this.router.navigate(['/']); // Ruta de volver
-  }
-
-  cerrarSesion(): void {
-    // Lógica para cerrar sesión
   }
 
   accederNivel(id: number): void {
     if (this.nivelesService.verificarAcceso(id)) {
-      this.router.navigate([`/contenido/${id}`]); // Redirige al contenido del nivel
+      this.router.navigate([`/nivel/${id}`]);
     } else {
-      // Mostrar mensaje de pago requerido
+      alert('Este nivel es de paga. Realiza el pago para acceder.');
     }
   }
 
   realizarPago(id: number): void {
-    // Lógica de pago
-    this.nivelesService.actualizarAcceso(id);
+    if (confirm('¿Estás seguro de que deseas pagar para acceder a este nivel?')) {
+      this.nivelesService.realizarPago(id).subscribe(exito => {
+        if (exito) {
+          this.nivelesService.actualizarAcceso(id);
+          this.router.navigate([`/nivel/${id}`]);
+        } else {
+          alert('Hubo un error al realizar el pago. Por favor, intenta de nuevo.');
+        }
+      });
+    }
+  }
+
+  volver(): void {
+    this.router.navigate(['/']);
+  }
+
+  cerrarSesion(): void {
+    // Implementar la lógica de cierre de sesión aquí
+    console.log('Cerrar sesión');
   }
 }
-

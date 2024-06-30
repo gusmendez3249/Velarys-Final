@@ -1,0 +1,27 @@
+/* src/app/niveles/nivel2/nivel2.component.css */
+.barra-superior {
+  background-color: #9b59b6;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.barra-superior button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.barra-superior h1 {
+  font-size: 24px;
+}
+
+.contenido-nivel {
+  padding: 20px;
+  text-align: center;
+}

@@ -1,3 +1,4 @@
+<!-- src/app/curso/curso.component.html -->
 <div class="header">
   <div class="logo">
     <img src="assets/logo.jpg" alt="Logo">
@@ -25,8 +26,11 @@
       <h2>{{ nivel.nombre }}</h2>
       <p>{{ nivel.descripcion }}</p>
       <p>Status: {{ nivel.esDePaga ? 'De Paga' : 'Gratis' }}</p>
-      <button class="btn-acceder" (click)="accederNivel(nivel.id)">
-        {{ nivel.esDePaga && !nivel.acceso ? 'Pagar para acceder' : 'Acceder' }}
+      <button *ngIf="nivel.acceso" class="btn-acceder" (click)="accederNivel(nivel.id)">
+        Acceder
+      </button>
+      <button *ngIf="!nivel.acceso && nivel.esDePaga" class="btn-pagar" (click)="realizarPago(nivel.id)">
+        Pagar {{ nivel.precio | currency }}
       </button>
       <div *ngIf="nivel.esDePaga && !nivel.acceso" class="pago">
         <p>Precio: {{ nivel.precio }} USD</p>

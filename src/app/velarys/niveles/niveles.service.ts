@@ -1,4 +1,6 @@
+// src/app/niveles/niveles.service.ts
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 interface Nivel {
   id: number;
@@ -33,5 +35,10 @@ export class NivelesService {
   verificarAcceso(id: number): boolean {
     const nivel = this.niveles.find(n => n.id === id);
     return nivel ? nivel.acceso : false;
+  }
+
+  realizarPago(id: number): Observable<boolean> {
+    // Simular el proceso de pago
+    return of(true); // Simula un pago exitoso. Cambia esto según tu lógica real.
   }
 }

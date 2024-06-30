@@ -5,6 +5,9 @@ import { CursoComponent } from './curso/curso.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { NavbarComponent } from './velarys/navbar/navbar.component';
 import { NivelComponent } from './niveles/nivel/nivel.component';
+import { Nivel1Component } from './niveles/nivel1/nivel1.component';
+import { Nivel2Component } from './niveles/nivel2/nivel2.component';
+import { Nivel3Component } from './niveles/nivel3/nivel3.component';
 
 
 
@@ -14,7 +17,10 @@ import { NivelComponent } from './niveles/nivel/nivel.component';
     CursoComponent,
     NivelesComponent,
     NavbarComponent,
-    NivelComponent
+    NivelComponent,
+    Nivel1Component,
+    Nivel2Component,
+    Nivel3Component
   ],
   imports: [
     CommonModule
