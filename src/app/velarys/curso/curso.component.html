@@ -29,12 +29,12 @@
       <button *ngIf="nivel.acceso" class="btn-acceder" (click)="accederNivel(nivel.id)">
         Acceder
       </button>
-      <button *ngIf="!nivel.acceso && nivel.esDePaga" class="btn-pagar" (click)="realizarPago(nivel.id)">
+      <button *ngIf="!nivel.acceso && nivel.esDePaga" class="btn-pagar" (click)="irAPago(nivel.id)">
         Pagar {{ nivel.precio | currency }}
       </button>
       <div *ngIf="nivel.esDePaga && !nivel.acceso" class="pago">
         <p>Precio: {{ nivel.precio }} USD</p>
-        <button class="btn-pagar" (click)="realizarPago(nivel.id)">Realizar Pago</button>
+        <button class="btn-pagar" (click)="irAPago(nivel.id)">Realizar Pago</button>
       </div>
     </div>
   </div>

@@ -5,12 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { Nivel1Component } from './velarys/niveles/nivel1/nivel1.component';
 import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
+import { PagoComponent } from './velarys/niveles/pago/pago.component';
 
 const routes: Routes = [
   { path: 'curso', component: CursoComponent },
   { path: 'nivel/1', component: Nivel1Component },
   { path: 'nivel/2', component: Nivel2Component },
   { path: 'nivel/3', component: Nivel3Component },
+  { path: 'pago/:id', component: PagoComponent },
   { path: '', redirectTo: '/curso', pathMatch: 'full' }
 ];
 

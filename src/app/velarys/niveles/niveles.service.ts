@@ -1,4 +1,3 @@
-// src/app/niveles/niveles.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -38,7 +37,12 @@ export class NivelesService {
   }
 
   realizarPago(id: number): Observable<boolean> {
-    // Simular el proceso de pago
-    return of(true); // Simula un pago exitoso. Cambia esto según tu lógica real.
+    // Simulando un servicio de pago exitoso
+    return new Observable<boolean>(observer => {
+      setTimeout(() => {
+        observer.next(true);
+        observer.complete();
+      }, 1000);
+    });
   }
 }

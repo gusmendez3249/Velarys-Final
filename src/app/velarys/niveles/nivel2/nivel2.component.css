@@ -1,27 +1,45 @@
-/* src/app/niveles/nivel2/nivel2.component.css */
-.barra-superior {
-  background-color: #9b59b6;
-  color: #fff;
-  padding: 10px;
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
-}
-
-.barra-superior button {
-  background: none;
-  border: none;
+  background-color: #9b59b6;
   color: #fff;
-  font-size: 16px;
-  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
-.barra-superior h1 {
+.logo img {
+  height: 40px;
+}
+
+.title h1 {
+  margin: 0;
   font-size: 24px;
 }
 
-.contenido-nivel {
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-volver, .btn-cerrar-sesion {
+  background-color: #fff;
+  color: #9b59b6;
+  border: 1px solid #9b59b6;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-volver:hover, .btn-cerrar-sesion:hover {
+  background-color: #9b59b6;
+  color: #fff;
+}
+
+.nivel-content {
   padding: 20px;
-  text-align: center;
+  background-color: #f4f4f9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
