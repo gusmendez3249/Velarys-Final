@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { InicioComponent } from './inicio/inicio.component';
 import { CursoComponent } from './curso/curso.component';
 import { NivelesComponent } from './niveles/niveles.component';
+import { NavbarComponent } from './velarys/navbar/navbar.component';
+import { NivelComponent } from './niveles/nivel/nivel.component';
 
 
 
@@ -10,7 +12,9 @@ import { NivelesComponent } from './niveles/niveles.component';
   declarations: [
     InicioComponent,
     CursoComponent,
-    NivelesComponent
+    NivelesComponent,
+    NavbarComponent,
+    NivelComponent
   ],
   imports: [
     CommonModule

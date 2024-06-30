@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { CursoComponent } from './velarys/curso/curso.component';
+import { NivelesService } from './velarys/niveles/niveles.service';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CursoComponent,
+    // Otras declaraciones
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // Otros módulos
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [NivelesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

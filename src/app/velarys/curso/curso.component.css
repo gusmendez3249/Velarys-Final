@@ -1,0 +1,216 @@
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px; /* Añadido padding horizontal */
+  background-color: #f4e1ff; /* Morado clarito */
+  border-bottom: 2px solid #9b59b6; /* Morado oscuro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fijo para que esté siempre en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+}
+
+/* Logo */
+.logo img {
+  height: 50px;
+}
+
+/* Título */
+.title h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Botones de Acciones */
+.actions {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+
+/* Botón Volver */
+.btn-volver {
+  background-color: #9b59b6; /* Morado */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-volver:hover {
+  background-color: #8e44ad; /* Morado más oscuro */
+}
+
+/* Botón Cerrar Sesión */
+.btn-cerrar-sesion {
+  background-color: #e74c3c; /* Rojo */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: #c0392b; /* Rojo más oscuro */
+}
+
+/* Mensaje de Bienvenida */
+.bienvenida {
+  width: 80%;
+  margin: 80px auto 30px auto; /* Ajuste el margen superior para dar espacio al encabezado fijo */
+  text-align: center;
+  background-color: #fff; /* Sin fondo morado */
+  border: 2px solid #9b59b6; /* Morado oscuro */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bienvenida h2 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.bienvenida p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Contenido del Nivel */
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Niveles */
+.niveles {
+  display: flex;
+  flex-wrap: wrap; /* Para permitir el ajuste de niveles en pantallas pequeñas */
+  gap: 20px;
+  justify-content: center; /* Centra los niveles horizontalmente */
+  width: 100%;
+}
+
+/* Nivel */
+.nivel {
+  padding: 20px;
+  border: 2px solid #9b59b6; /* Color morado */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f4e1ff; /* Morado clarito */
+  text-align: center;
+  font-family: 'Arial', sans-serif; /* Tipografía */
+  flex: 1;
+  min-width: 300px; /* Ancho mínimo para que se vea bien en pantallas pequeñas */
+  max-width: 400px; /* Máximo ancho de cada nivel */
+}
+
+/* Títulos y Texto del Nivel */
+.nivel h2 {
+  font-size: 26px;
+  margin: 0;
+}
+
+.nivel p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Botones de Nivel */
+.nivel button {
+  margin-top: 10px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Botón Acceder */
+.nivel .btn-acceder {
+  background-color: #a47fd1; /* Morado medio */
+  color: #fff;
+}
+
+.nivel .btn-acceder:hover {
+  background-color: #8e44ad; /* Morado más oscuro */
+}
+
+/* Botón Pagar */
+.nivel .btn-pagar {
+  background-color: #ff9f43; /* Naranja bonito */
+  color: #fff;
+}
+
+.nivel .btn-pagar:hover {
+  background-color: #ff7f11; /* Naranja más oscuro */
+}
+
+/* Pago */
+.pago {
+  margin-top: 10px;
+}
+
+.pago p {
+  margin: 0;
+}
+
+.pago button {
+  margin-top: 5px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .title h1 {
+    font-size: 20px;
+  }
+
+  .actions {
+    margin-top: 10px;
+    gap: 5px;
+  }
+
+  .btn-volver, .btn-cerrar-sesion {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .bienvenida {
+    width: 90%;
+  }
+
+  .niveles {
+    flex-direction: column;
+  }
+
+  .nivel {
+    min-width: 100%; /* Asegura que cada nivel ocupe toda la pantalla */
+    max-width: none; /* Elimina el límite superior del ancho */
+  }
+}
