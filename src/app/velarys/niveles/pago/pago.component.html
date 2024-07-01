@@ -11,30 +11,53 @@
   </div>
 </div>
 
-<div class="pago-formulario">
-  <h2>Formulario de Pago</h2>
-  <form (ngSubmit)="realizarPago()" #pagoForm="ngForm">
+<div class="pago-form">
+  <h2>Realizar Pago</h2>
+  <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="nombre">Nombre Completo</label>
-      <input id="nombre" [(ngModel)]="nombre" name="nombre" required />
+      <input id="nombre" formControlName="nombre" type="text">
+      <div *ngIf="pagoForm.get('nombre')?.invalid && (pagoForm.get('nombre')?.dirty || pagoForm.get('nombre')?.touched)">
+        <small *ngIf="pagoForm.get('nombre')?.errors?.['required']">El nombre es requerido.</small>
+      </div>
     </div>
+
     <div class="form-group">
-      <label for="email">Correo Electrónico</label>
-      <input id="email" type="email" [(ngModel)]="email" name="email" required />
+      <label for="numeroTarjeta">Número de Tarjeta</label>
+      <input id="numeroTarjeta" formControlName="numeroTarjeta" type="text">
+      <div *ngIf="pagoForm.get('numeroTarjeta')?.invalid && (pagoForm.get('numeroTarjeta')?.dirty || pagoForm.get('numeroTarjeta')?.touched)">
+        <small *ngIf="pagoForm.get('numeroTarjeta')?.errors?.['required']">El número de tarjeta es requerido.</small>
+        <small *ngIf="pagoForm.get('numeroTarjeta')?.errors?.['pattern']">El número de tarjeta debe tener 16 dígitos.</small>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="tarjeta">Número de Tarjeta</label>
-      <input id="tarjeta" [(ngModel)]="tarjeta" name="tarjeta" required />
-    </div>
-    <div class="form-group">
-      <label for="fecha-expiracion">Fecha de Expiración</label>
-      <input id="fecha-expiracion" [(ngModel)]="fechaExpiracion" name="fechaExpiracion" required />
-    </div>
+
     <div class="form-group">
       <label for="cvv">CVV</label>
-      <input id="cvv" [(ngModel)]="cvv" name="cvv" required />
+      <input id="cvv" formControlName="cvv" type="text">
+      <div *ngIf="pagoForm.get('cvv')?.invalid && (pagoForm.get('cvv')?.dirty || pagoForm.get('cvv')?.touched)">
+        <small *ngIf="pagoForm.get('cvv')?.errors?.['required']">El CVV es requerido.</small>
+        <small *ngIf="pagoForm.get('cvv')?.errors?.['pattern']">El CVV debe tener 3 dígitos.</small>
+      </div>
     </div>
-    <button type="submit" class="btn-pagar" [disabled]="!pagoForm.form.valid">Pagar</button>
+
+    <div class="form-group">
+      <label for="expiracion">Fecha de Expiración (MM/AA)</label>
+      <input id="expiracion" formControlName="expiracion" type="text">
+      <div *ngIf="pagoForm.get('expiracion')?.invalid && (pagoForm.get('expiracion')?.dirty || pagoForm.get('expiracion')?.touched)">
+        <small *ngIf="pagoForm.get('expiracion')?.errors?.['required']">La fecha de expiración es requerida.</small>
+        <small *ngIf="pagoForm.get('expiracion')?.errors?.['pattern']">La fecha de expiración debe ser en el formato MM/AA.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo Electrónico</label>
+      <input id="correo" formControlName="correo" type="email">
+      <div *ngIf="pagoForm.get('correo')?.invalid && (pagoForm.get('correo')?.dirty || pagoForm.get('correo')?.touched)">
+        <small *ngIf="pagoForm.get('correo')?.errors?.['required']">El correo es requerido.</small>
+        <small *ngIf="pagoForm.get('correo')?.errors?.['email']">El correo debe ser válido.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="pagoForm.invalid">Pagar</button>
   </form>
 </div>
-

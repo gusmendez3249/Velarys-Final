@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NivelesService } from '../niveles.service';
 
@@ -8,35 +9,42 @@ import { NivelesService } from '../niveles.service';
   styleUrls: ['./pago.component.css']
 })
 export class PagoComponent implements OnInit {
-  nivelId: number = 0;  // Inicializa a 0 o un valor predeterminado
-  nombre: string = '';
-  email: string = '';
-  tarjeta: string = '';
-  fechaExpiracion: string = '';
-  cvv: string = '';
+  pagoForm: FormGroup;
+  nivelId: number;
 
-  constructor(private route: ActivatedRoute, private nivelesService: NivelesService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.nivelId = +params['id'];  // Obtén el ID del nivel de los parámetros de la ruta
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private nivelesService: NivelesService
+  ) {
+    this.pagoForm = this.fb.group({
+      nombre: ['', Validators.required],
+      numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
+      expiracion: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/?([0-9]{2})$')]],
+      correo: ['', [Validators.required, Validators.email]]
     });
+
+    this.nivelId = this.route.snapshot.params['nivelId'];
   }
 
+  ngOnInit(): void {
+    // any additional initialization
+  }
+
+  onSubmit(): void {
+    if (this.pagoForm.valid) {
+      this.nivelesService.actualizarAcceso(this.nivelId);
+      this.router.navigate(['/curso']);
+    }
+  }
   volver(): void {
-    this.router.navigate(['/curso']);  // Redirige al curso
+    this.router.navigate(['/curso']);
   }
 
   cerrarSesion(): void {
-    // Implementar la lógica de cierre de sesión aquí
-    console.log('Cerrar sesión');
-  }
-
-  realizarPago(): void {
-    // Aquí podrías realizar una llamada al servidor para procesar el pago
-    if (confirm('¿Estás seguro de que deseas realizar el pago?')) {
-      this.nivelesService.actualizarAcceso(this.nivelId);
-      this.router.navigate([`/nivel/${this.nivelId}`]);  // Redirige al nivel una vez pagado
-    }
+    // Lógica para cerrar sesión
+    this.router.navigate(['/login']);
   }
 }

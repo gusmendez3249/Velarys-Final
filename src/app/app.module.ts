@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  // Importa FormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Importa FormsModule
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Nivel1Component } from './velarys/niveles/nivel1/nivel1.component';
@@ -22,7 +22,8 @@ import { PagoComponent } from './velarys/niveles/pago/pago.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule  // Agrega FormsModule aquí
+    FormsModule,  // Agrega FormsModule aquí
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

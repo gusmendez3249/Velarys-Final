@@ -45,4 +45,20 @@ export class NivelesService {
       }, 1000);
     });
   }
+  
+
+  actualizarNivel(nivelActualizado: Nivel): void {
+    const index = this.niveles.findIndex(n => n.id === nivelActualizado.id);
+    if (index !== -1) {
+      this.niveles[index] = nivelActualizado;
+    }
+  }
+
+  eliminarNivel(id: number): void {
+    this.niveles = this.niveles.filter(n => n.id !== id);
+  }
+
+  agregarNivel(nuevoNivel: Nivel): void {
+    this.niveles.push(nuevoNivel);
+  }
 }
