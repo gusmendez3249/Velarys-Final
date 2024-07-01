@@ -8,6 +8,7 @@ import { CursoComponent } from './velarys/curso/curso.component';
 import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
 import { PagoComponent } from './velarys/niveles/pago/pago.component';
+import { AdminComponent } from './velarys/admin/admin.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PagoComponent } from './velarys/niveles/pago/pago.component';
     Nivel1Component,
     Nivel2Component,
     Nivel3Component,
-    PagoComponent
+    PagoComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

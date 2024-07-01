@@ -45,12 +45,13 @@ export class NivelesService {
       }, 1000);
     });
   }
-  
 
-  actualizarNivel(nivelActualizado: Nivel): void {
-    const index = this.niveles.findIndex(n => n.id === nivelActualizado.id);
+
+
+  actualizarNivel(nivel: Nivel): void {
+    const index = this.niveles.findIndex(n => n.id === nivel.id);
     if (index !== -1) {
-      this.niveles[index] = nivelActualizado;
+      this.niveles[index] = nivel;
     }
   }
 
@@ -58,7 +59,10 @@ export class NivelesService {
     this.niveles = this.niveles.filter(n => n.id !== id);
   }
 
-  agregarNivel(nuevoNivel: Nivel): void {
-    this.niveles.push(nuevoNivel);
+  agregarNivel(nivel: Nivel): void {
+    this.niveles.push(nivel);
   }
+
+  
+
 }
