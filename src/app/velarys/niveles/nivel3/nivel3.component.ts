@@ -18,5 +18,6 @@ export class Nivel3Component {
     // Implementar la lógica de cierre de sesión aquí
     console.log('Cerrar sesión');
   }
+  
 }
 

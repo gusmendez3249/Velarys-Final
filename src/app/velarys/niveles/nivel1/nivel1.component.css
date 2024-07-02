@@ -43,3 +43,23 @@
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+
+/* Estilos para el botón de ir a preguntas */
+.btn-preguntas {
+  background-color: #8395C3; /* Color turquesa agradable */
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px; /* Espacio desde el borde inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centra el botón horizontalmente */
+}
+
+.btn-preguntas:hover {
+  background-color: #1CC5AE; /* Un tono más oscuro al pasar el mouse */
+}

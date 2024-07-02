@@ -18,6 +18,10 @@ export class Nivel1Component {
     // Implementar la lógica de cierre de sesión aquí
     console.log('Cerrar sesión');
   }
+
+  irAPreguntas(): void {
+    this.router.navigate(['/preguntas']);
+  }
 }
 
 
