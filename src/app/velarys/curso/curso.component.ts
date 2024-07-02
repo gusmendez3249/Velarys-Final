@@ -29,7 +29,7 @@ export class CursoComponent implements OnInit {
 
 
   cerrarSesion(): void {
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/cerrar']);
   }
 
   irAdmin(): void {

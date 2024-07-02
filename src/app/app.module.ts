@@ -13,6 +13,7 @@ import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/pregunt
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
 import { RegistroComponent } from './auth/registro/registro.component';
+import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { RegistroComponent } from './auth/registro/registro.component';
     PreguntasComponent,
     BienvenidaComponent,
     InicioSecionComponent,
-    RegistroComponent
+    RegistroComponent,
+    CerrarSecionComponent
   ],
   imports: [
     BrowserModule,

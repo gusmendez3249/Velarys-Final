@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="card">
+    <h2>Cerrar Sesión</h2>
+    <p>¿Estás seguro de que deseas cerrar sesión?</p>
+    <button class="btn btn-danger" id="logout-btn" (click)="cerrarSesion()">Cerrar Sesión</button>
+    <button class="btn btn-secondary" id="cancel-btn" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>
+
+<script>
+  const logoutBtn = document.getElementById('logout-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+
+  logoutBtn.addEventListener('click', () => {
+    // Lógica para cerrar sesión aquí
+    alert('Sesión cerrada con éxito!');
+    // Redirigir al usuario a la página de inicio de sesión
+    window.location.href = '/login';
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    // Cerrar el diálogo sin hacer nada
+    alert('Operación cancelada!');
+  });
+</script>
