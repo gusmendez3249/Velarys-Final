@@ -22,6 +22,7 @@ body {
 
 .header .title h1 {
   margin: 0;
+  padding-left: 180px; /* Ajustar según sea necesario */
 }
 
 .header .actions button {
@@ -63,9 +64,10 @@ body {
 }
 
 .niveles {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: flex; /* Alinea los niveles en una fila horizontal */
+  flex-wrap: wrap; /* Permite que los niveles se envuelvan si hay más de una fila */
+  gap: 20px; /* Espacio entre niveles */
+  justify-content: center; /* Centra los niveles horizontalmente */
 }
 
 .nivel {
@@ -76,6 +78,12 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 300px;
   text-align: center;
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+/* Estilo cuando se pasa el cursor sobre el contenedor .nivel */
+.nivel:hover {
+  background-color: #d5d1f3; /* Color de fondo al pasar el cursor */
 }
 
 .nivel h2 {

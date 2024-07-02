@@ -1,0 +1,98 @@
+/* Estilos generales para el cuerpo */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Estilos para el contenedor del contenido */
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+/* Estilo para el título principal */
+h1 {
+  color: #663399;
+  margin-bottom: 20px;
+  font-size: 3em;
+}
+
+/* Estilos para los grupos de formularios */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Estilo para las etiquetas */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #1CC5AE;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el botón de envío */
+button[type="submit"] {
+  background-color: #663399;
+  color: #ffffff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilos para la sección de redes sociales */
+.social-media {
+  margin-top: 20px;
+}
+
+/* Estilos para los enlaces de redes sociales */
+.social-media a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+/* Estilos para las imágenes de redes sociales */
+.social-media img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Estilos para el pingüino */
+.penguin {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+}
+
+/* Estilos para la imagen del pingüino */
+.penguin img {
+  width: 200px;
+  height: auto;
+}
+
+/* Estilos para el pie de página */
+.footer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5em;
+  color: #fefeff;
+}

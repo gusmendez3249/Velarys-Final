@@ -1,0 +1,104 @@
+/* Estilos generales para el cuerpo */
+body {
+  font-family: 'Poppins', sans-serif; /* Tipografía base */
+  background-color: #0E455C; /* Color de fondo */
+  background-size: 20px 20px; /* Tamaño de los puntos */
+  color: #8395C3; /* Color del texto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+
+}
+
+/* Estilos para el contenedor del contenido */
+.container {
+  text-align: center;
+  color: #8395C3; /* Color del texto */
+}
+
+/* Estilo para el título principal */
+h1 {
+  font-family: 'Poppins', sans-serif; /* Tipografía del título */
+  font-size: 4em;
+  margin-bottom: 1em;
+  color: #8395C3; /* Color del texto del título */
+  text-shadow: 2px 2px 4px #000; /* Sombra del texto */
+}
+
+/* Estilo para el subtítulo */
+h2 {
+  font-family: 'Poppins', sans-serif; /* Tipografía del subtítulo */
+  font-size: 2em;
+  margin-bottom: 2em;
+  letter-spacing: 0.1em;
+  color: #8395C3; /* Color del texto del subtítulo */
+}
+
+/* Estilo para los párrafos */
+p {
+  font-family: 'Poppins', sans-serif; /* Tipografía del párrafo */
+  font-size: 1em; /* Tamaño de fuente reducido */
+  margin-bottom: 3em;
+  line-height: 1.6;
+  color: #8395C3; /* Color del texto del párrafo */
+}
+
+/* Estilo para los botones */
+button {
+  font-family: 'Montserrat', sans-serif; /* Tipografía del botón */
+  background-color: #8395C3; /* Color de fondo del botón */
+  color: #F0F2F5; /* Color del texto del botón */
+  border: none;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 30px; /* Bordes del botón ovalados */
+  transition: background-color 0.3s ease; /* Transición de color del fondo */
+  margin-bottom: 2em; /* Añade espacio debajo del botón */
+}
+
+/* Estilo para el estado hover de los botones */
+button:hover {
+  background-color: #6e7c9b; /* Color más oscuro al pasar el ratón */
+}
+
+/* Estilos para los puntos de carga */
+.dots-container {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff; /* Color blanco para los puntos */
+  margin: 10px;
+  animation: blink 1s infinite; /* Animación de parpadeo */
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ffffff; /* Color blanco para el punto central */
+}
+
+/* Animación de parpadeo para los puntos */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}

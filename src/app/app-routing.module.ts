@@ -8,6 +8,8 @@ import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
 import { PagoComponent } from './velarys/niveles/pago/pago.component';
 import { AdminComponent } from './velarys/admin/admin.component';
 import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/preguntas.component';
+import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
+import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
 
 const routes: Routes = [
   { path: 'curso', component: CursoComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'pago/:id', component: PagoComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'preguntas', component: PreguntasComponent},
+  { path: 'bienvenida', component: BienvenidaComponent},
+  { path: 'inicio', component: InicioSecionComponent},
   { path: '', redirectTo: '/curso', pathMatch: 'full' },
 ];
 
