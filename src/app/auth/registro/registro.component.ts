@@ -23,6 +23,10 @@ export class RegistroComponent {
     }
   }
 
+  onVolver() {
+    this.router.navigate(['/inicio']); // Navega a la pantalla de inicio o a donde quieras regresar
+  }
+
   validateInputs(): boolean {
     const { nombres, correo, contrasena } = this.user;
     return nombres.trim() !== '' && this.validateEmail(correo) && contrasena.trim() !== '';

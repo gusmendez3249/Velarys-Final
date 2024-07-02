@@ -10,4 +10,8 @@ export class InicioSecionComponent {
   ingresar(): void {
     this.router.navigate(['/curso']);
   }
+
+  ingresaAdmin(): void {
+    this.router.navigate(['/admin']);
+  }
 }

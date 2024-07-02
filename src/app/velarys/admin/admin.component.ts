@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NivelesService } from '../niveles/niveles.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -17,7 +18,8 @@ export class AdminComponent implements OnInit {
     precio: 0
   };
 
-  constructor(private nivelesService: NivelesService) {}
+
+  constructor(private nivelesService: NivelesService, private router: Router ) {}
 
   ngOnInit(): void {
     this.niveles = this.nivelesService.getNiveles();
@@ -44,6 +46,6 @@ export class AdminComponent implements OnInit {
   }
 
   cerrarSesion(): void {
-    // Lógica para cerrar sesión
+    this.router.navigate(['/cerrar']);
   }
 }
