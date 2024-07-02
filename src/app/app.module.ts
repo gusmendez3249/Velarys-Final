@@ -9,6 +9,7 @@ import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
 import { PagoComponent } from './velarys/niveles/pago/pago.component';
 import { AdminComponent } from './velarys/admin/admin.component';
+import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/preguntas.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdminComponent } from './velarys/admin/admin.component';
     Nivel2Component,
     Nivel3Component,
     PagoComponent,
-    AdminComponent
+    AdminComponent,
+    PreguntasComponent
   ],
   imports: [
     BrowserModule,

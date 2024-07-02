@@ -7,6 +7,7 @@ import { Nivel2Component } from './niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './niveles/nivel3/nivel3.component';
 import { PagoComponent } from './niveles/pago/pago.component';
 import { AdminComponent } from './admin/admin.component';
+import { PreguntasComponent } from './curso/ejercicios/preguntas/preguntas.component';
 
 
 
@@ -18,7 +19,8 @@ import { AdminComponent } from './admin/admin.component';
     Nivel2Component,
     Nivel3Component,
     PagoComponent,
-    AdminComponent
+    AdminComponent,
+    PreguntasComponent
   ],
   imports: [
     CommonModule

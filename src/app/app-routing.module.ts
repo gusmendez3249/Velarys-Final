@@ -7,6 +7,7 @@ import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
 import { PagoComponent } from './velarys/niveles/pago/pago.component';
 import { AdminComponent } from './velarys/admin/admin.component';
+import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/preguntas.component';
 
 const routes: Routes = [
   { path: 'curso', component: CursoComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'nivel/3', component: Nivel3Component },
   { path: 'pago/:id', component: PagoComponent },
   { path: 'admin', component: AdminComponent },
-  { path: '', redirectTo: '/curso', pathMatch: 'full' }
+  { path: 'preguntas', component: PreguntasComponent},
+  { path: '', redirectTo: '/curso', pathMatch: 'full' },
 ];
 
 @NgModule({

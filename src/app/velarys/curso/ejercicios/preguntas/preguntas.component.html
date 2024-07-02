@@ -1,0 +1,26 @@
+<div class="pregunta-container" *ngIf="!isFinished; else finalContent">
+    <div class="pregunta-box">
+      <img [src]="shuffledQuestions[currentIndex].imagen" alt="Imagen de la pregunta">
+      <p>{{ shuffledQuestions[currentIndex].texto }}</p>
+      <form [formGroup]="preguntasForm" (ngSubmit)="guardarRespuesta()">Can't bind to 'formGroup' since it isn't a known property of 'form'.ngtsc(-998002)
+      preguntas.component.ts(4, 37): Error occurs in the template of component PreguntasComponent.
+        <div *ngFor="let opcion of shuffledQuestions[currentIndex].opciones">
+          <label>
+            <input type="radio" formControlName="respuesta" [value]="opcion">
+            {{ opcion }}
+          </label>
+        </div>
+        <button type="submit" [disabled]="!preguntasForm.valid">Guardar Respuesta</button>
+      </form>
+      <button (click)="nextQuestion()">Siguiente Pregunta</button>
+    </div>
+  </div>
+  
+  <!-- Contenido final -->
+  <ng-template #finalContent>
+    <div class="pregunta-box">
+      <img [src]="imagenFinal" alt="Imagen final">
+      <p>¡Has terminado todas las preguntas!</p>
+    </div>
+  </ng-template>
+  
