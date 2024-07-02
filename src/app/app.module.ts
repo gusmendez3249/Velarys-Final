@@ -12,6 +12,7 @@ import { AdminComponent } from './velarys/admin/admin.component';
 import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/preguntas.component';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
+import { RegistroComponent } from './auth/registro/registro.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.compon
     AdminComponent,
     PreguntasComponent,
     BienvenidaComponent,
-    InicioSecionComponent
+    InicioSecionComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,14 @@
-<p>registro works!</p>
+<form class="formulario" (ngSubmit)="onSubmit()">
+  <h1 class="form_titulo">Registro</h1>
+
+  <input type="text" class="form_input" placeholder="Nombres" [(ngModel)]="user.nombres" name="nombres" required>
+  <label class="form_label">Nombres</label>
+
+  <input type="email" class="form_input" placeholder="Correo" [(ngModel)]="user.correo" name="correo" required email>
+  <label for="email" class="form_label">Correo</label>
+
+  <input type="password" class="form_input" placeholder="Contraseña" [(ngModel)]="user.contrasena" name="contrasena" required>
+  <label class="form_label">Contraseña</label>
+
+  <button type="submit" class="form_boton">Registrar</button>
+</form>

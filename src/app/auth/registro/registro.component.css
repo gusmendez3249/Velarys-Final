@@ -1,0 +1,54 @@
+/* Estilos para el formulario */
+.formulario {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+/* Estilo para el título del formulario */
+.form_titulo {
+  color: #663399;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+/* Estilos para los campos de entrada */
+.form_input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #1CC5AE;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los placeholders */
+.form_input::placeholder {
+  color: #aaa; /* Color de los placeholders */
+  font-size: 0.9em; /* Tamaño de letra de los placeholders */
+}
+
+/* Estilo para las etiquetas */
+.form_label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  visibility: hidden; /* Ocultar las etiquetas pero mantener su espacio */
+}
+
+/* Estilo para el botón de envío */
+.form_boton {
+  background-color: #663399;
+  color: #ffffff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}

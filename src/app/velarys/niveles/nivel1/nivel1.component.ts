@@ -14,10 +14,6 @@ export class Nivel1Component {
     this.router.navigate(['/curso']);
   }
 
-  cerrarSesion(): void {
-    // Implementar la lógica de cierre de sesión aquí
-    console.log('Cerrar sesión');
-  }
 
   irAPreguntas(): void {
     this.router.navigate(['/preguntas']);

@@ -10,6 +10,7 @@ import { AdminComponent } from './velarys/admin/admin.component';
 import { PreguntasComponent } from './velarys/curso/ejercicios/preguntas/preguntas.component';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
+import { RegistroComponent } from './auth/registro/registro.component';
 
 const routes: Routes = [
   { path: 'curso', component: CursoComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'preguntas', component: PreguntasComponent},
   { path: 'bienvenida', component: BienvenidaComponent},
   { path: 'inicio', component: InicioSecionComponent},
+  { path: 'registro', component: RegistroComponent},
   { path: '', redirectTo: '/curso', pathMatch: 'full' },
 ];
 

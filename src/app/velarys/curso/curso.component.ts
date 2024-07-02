@@ -27,12 +27,9 @@ export class CursoComponent implements OnInit {
     this.router.navigate(['/pago', id]);
   }
 
-  volver(): void {
-    this.router.navigate(['/']);
-  }
 
   cerrarSesion(): void {
-    // Lógica para cerrar sesión
+    this.router.navigate(['/inicio']);
   }
 
   irAdmin(): void {
