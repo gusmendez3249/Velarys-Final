@@ -12,8 +12,10 @@ import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
 import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
+import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
 
 const routes: Routes = [
+  { path: 'curso/:idiomaId', component: CursoComponent },
   { path: 'curso', component: CursoComponent },
   { path: 'nivel/1', component: Nivel1Component },
   { path: 'nivel/2', component: Nivel2Component },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'inicio', component: InicioSecionComponent},
   { path: 'registro', component: RegistroComponent},
   { path: 'cerrar', component: CerrarSecionComponent},
-  { path: '', redirectTo: '/curso', pathMatch: 'full' },
+  { path: 'idiomas', component: IdiomasComponent},
+  { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
+
 ];
 
 @NgModule({

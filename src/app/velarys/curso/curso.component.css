@@ -14,6 +14,8 @@ body {
   background-color: #4b0082;
   color: white;
   padding: 10px 20px;
+  width: 100%; /* Asegúrate de que el header ocupe todo el ancho */
+  box-sizing: border-box;
 }
 
 .header .logo img {
@@ -126,4 +128,19 @@ body {
 .nivel .pago {
   margin-top: 10px;
   color: #666;
+}
+
+/* Estilo para el botón de volver */
+.btn-volver {
+  background-color: #4b0082;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: auto; /* Alinea el botón a la izquierda */
+}
+
+.btn-volver:hover {
+  background-color: #3a006b;
 }

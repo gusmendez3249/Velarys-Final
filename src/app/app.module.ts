@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Importa FormsModule
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,8 @@ import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
 import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
+import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
+import { CursosService } from './velarys/curso/cursos.service';
 
 
 @NgModule({
@@ -29,15 +32,17 @@ import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.compon
     BienvenidaComponent,
     InicioSecionComponent,
     RegistroComponent,
-    CerrarSecionComponent
+    CerrarSecionComponent,
+    IdiomasComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,  // Agrega FormsModule aquí
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [CursosService,provideHttpClient(withFetch())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,6 +42,27 @@
   visibility: hidden; /* Ocultar las etiquetas pero mantener su espacio */
 }
 
+/* Estilo para el texto de edad */
+.edad-container {
+  position: relative;
+}
+
+.edad-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 1em;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.edad-text {
+  color: #666;
+  font-size: 0.8em;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+
 /* Estilo para el botón de envío */
 .form_boton {
   background-color: #663399;
