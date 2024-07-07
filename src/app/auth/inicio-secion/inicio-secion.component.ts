@@ -14,4 +14,7 @@ export class InicioSecionComponent {
   ingresaAdmin(): void {
     this.router.navigate(['/admin']);
   }
+  volver():void {
+    this.router.navigate(['/bienvenida']);
+  }
 }

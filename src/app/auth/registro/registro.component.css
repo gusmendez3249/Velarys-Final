@@ -1,12 +1,12 @@
 /* Estilos para el formulario */
 .formulario {
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
   margin: auto;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #D1D4E8;
   text-align: center;
   position: relative;
 }
@@ -22,7 +22,7 @@
 .form_input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #1CC5AE;
+  border: 1px solid #838383;
   border-radius: 5px;
   box-sizing: border-box;
   margin-bottom: 20px;
@@ -72,13 +72,19 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
+  font-family: 'Roboto',cursive;
+}
+
+.form_boton:hover{
+  background-color:#1CC5AE;
+  transform: scale(1.05);
 }
 
 /* Estilos para el botón de Volver */
 .btn-volver {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 24px;
+  right: 20px;
   background-color: #1CC5AE;
   color: #ffffff;
   padding: 10px 15px;
@@ -88,8 +94,10 @@
   font-size: 1.2em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
+  font-family: 'Roboto',cursive;
 }
 
 .btn-volver:hover {
   background-color: #17a2b8;
+  transform: scale(1.05);
 }

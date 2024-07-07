@@ -8,15 +8,16 @@ import { Router } from '@angular/router';
 })
 export class CerrarSecionComponent {
 
-  constructor(private router: Router) { }
+  constructor() {}
 
   cerrarSesion() {
-    // Lógica para comenzar el curso o redirigir a otra página
-    this.router.navigate(['/bienvenida']);
+
+    // Redirigir al usuario a la página de inicio de sesión
+    window.location.href = '/bienvenida';
   }
 
   cancelar() {
-    // Lógica para comenzar el curso o redirigir a otra página
-    this.router.navigate(['/curso']);
+    // Volver a la página anterior usando la History API
+    window.history.back(); // Regresa a la página anterior
   }
 }

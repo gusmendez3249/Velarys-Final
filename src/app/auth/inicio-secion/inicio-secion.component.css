@@ -1,12 +1,24 @@
+/* Estilo para el fondo de la página */
+body {
+  background-color: #F5F5DC; /* Color morado cremita */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif; /* Tipografía base */
+}
+
 /* Estilo para el contenedor del formulario */
 .container {
   width: 100%;
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 30px;
+  max-width: 650px; /* Tamaño del contenedor */
+  margin: auto; /* Centrar el contenedor */
+  padding: 60px; /* Reducir padding para mejorar el espaciado */
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #D1D4E8;
   text-align: center;
   position: relative;
 }
@@ -14,89 +26,111 @@
 /* Estilo para el título del formulario */
 h1 {
   color: #663399;
-  margin-bottom: 20px;
-  font-size: 2em;
+  margin-bottom: 30px; /* Aumentar margen inferior para separación */
+  font-size: 2.2em; /* Aumentar tamaño del texto */
 }
 
 /* Estilos para los campos de entrada */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Aumentar el margen inferior para separar campos */
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Aumentar margen debajo de las etiquetas */
   color: #333;
 }
 
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #1CC5AE;
+  padding: 12px; /* Aumentar padding para los campos */
+  border: 1px solid #838383;
   border-radius: 5px;
   box-sizing: border-box;
 }
 
-/* Estilo para el botón de iniciar sesión */
-.btn-login {
+/* Estilo para los botones */
+button {
   background-color: #6A1B9A; /* Color morado medio */
   color: #ffffff;
-  padding: 12px 24px;
+  padding: 14px 24px; /* Aumentar padding en los botones */
   border: none;
   border-radius: 30px; /* Botón ovalado */
   cursor: pointer;
   font-size: 1em;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Aumentar margen inferior para separación */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+  width: 100%;
 }
 
-.btn-login:hover {
+button:hover {
   background-color: #5a2d7f; /* Un tono más oscuro para el hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+  transform: scale(1.05);
 }
 
-/* Estilo para el botón de iniciar sesión como administrador */
-.boton{
+/* Estilos para los botones de administración */
+.botonAdmin {
   background-color: #1CC5AE; /* Color turquesa */
   color: #ffffff;
-  padding: 12px 24px;
+  padding: 14px 24px; /* Aumentar padding en los botones de admin */
   border: none;
   border-radius: 30px; /* Botón ovalado */
   cursor: pointer;
   font-size: 1em;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Aumentar margen inferior para separación */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
-
+  display: block;
+  width: 100%;
+  margin-top: 10px; /* Separar los botones */
 }
 
-.botonAdmin{
-  background-color: #1CC5AE; /* Color turquesa */
+.botonAdmin:hover {
+  background-color: #1a9e84; /* Un tono más oscuro para el hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+  transform: scale(1.05);
+}
+
+/* Estilos para el botón de volver */
+.botonVolver {
+  position: absolute;
+  top: 65px;
+  left: 500px; /* Colocar en la esquina superior izquierda del contenedor */
+  background-color: #1CC5AE;
   color: #ffffff;
-  padding: 12px 24px;
+  padding: 5px 8px;
   border: none;
-  border-radius: 30px; /* Botón ovalado */
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 1em;
-  margin-bottom: 10px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
+  font-size: 1.2em; /* Reducir el tamaño del texto */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  font-weight: 550;
+  width: 110px;
+  font-family: 'Roboto',cursive;
 }
 
-
+.botonVolver:hover {
+  background-color: #17a2b8;
+  transform: scale(1.05);
+}
 
 /* Estilos para los iconos de redes sociales */
 .social-media {
-  margin-top: 20px;
+  margin-top: 30px; /* Aumentar margen superior para separación */
 }
 
 .social-media a {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 15px; /* Aumentar el margen entre los iconos */
+}
+
+.social-media:hover {
+  transform: scale(1.05);
 }
 
 .social-media img {
@@ -107,9 +141,13 @@ input[type="password"] {
 /* Estilo para el pie de página */
 .footer {
   position: absolute;
-  bottom: 20px;
+  bottom: 35px; /* Asegurarse de que esté más cerca del borde */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.5em;
-  color: #fefeff;
+  color: #690d91;
+  font-family: 'Roboto', cursive;
 }
+
+
+

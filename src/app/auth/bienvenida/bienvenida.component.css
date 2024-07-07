@@ -1,104 +1,134 @@
 /* Estilos generales para el cuerpo */
 body {
   font-family: 'Poppins', sans-serif; /* Tipografía base */
-  background-color: #0E455C; /* Color de fondo */
-  background-size: 20px 20px; /* Tamaño de los puntos */
-  color: #8395C3; /* Color del texto */
+  background-color: #9C6FBD; /* Color de fondo morado claro-medio */
+  color: #F0F2F5; /* Color del texto */
+  margin: 0; /* Quitar el margen por defecto */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-
+  min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
+  width: 100vw; /* Ancho mínimo para ocupar toda la pantalla */
 }
 
 /* Estilos para el contenedor del contenido */
 .container {
+  background-color: #6F42C1; /* Color morado medio */
+  color: #F0F2F5; /* Color del texto */
   text-align: center;
-  color: #8395C3; /* Color del texto */
+  border-radius: 15px; /* Bordes redondeados */
+  padding: 5em 6em; /* Espaciado interno */
+  width: 100vw; /* Ancho del contenedor */
+  height: 100vh; /* Altura del contenedor */
+  max-width: 100vw; /* Ancho máximo para abarcar toda la pantalla */
+  max-height: 100vh; /* Altura máxima para abarcar toda la pantalla */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra de contenedor */
+  margin: 0 auto; /* Centrar el contenedor horizontalmente */
+  overflow: hidden; /* Ocultar el desbordamiento */
+  position: relative; /* Necesario para posicionar los círculos */
 }
+
+/* Círculos blancos esparcidos por el contenedor */
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+              radial-gradient(circle, rgba(231, 165, 235, 0.147) 25%, transparent 25%);
+  background-size: 10% 10%;
+  background-repeat: repeat;
+  z-index: 1; /* Asegura que los círculos queden detrás del contenido */
+}
+
+/* Círculos blancos no deben aparecer sobre el texto */
+h1, h2, p.intro, p.copyright {
+  position: relative;
+  z-index: 2; /* Asegura que el texto esté encima de los círculos */
+}
+
 
 /* Estilo para el título principal */
 h1 {
-  font-family: 'Poppins', sans-serif; /* Tipografía del título */
-  font-size: 4em;
-  margin-bottom: 1em;
-  color: #8395C3; /* Color del texto del título */
-  text-shadow: 2px 2px 4px #000; /* Sombra del texto */
+  font-family: 'Roboto',cursive; /* Tipografía del título */
+  font-size: 5em;
+  margin-bottom: 0.5em;
+  color: #F0F2F5; /* Color del texto del título */
+  text-shadow: 10px 10px 20px #000; /* Sombra del texto */
+  letter-spacing: 0.08em; /* Espaciado entre letras */
+  font-weight: 550;
 }
 
 /* Estilo para el subtítulo */
 h2 {
-  font-family: 'Poppins', sans-serif; /* Tipografía del subtítulo */
-  font-size: 2em;
-  margin-bottom: 2em;
-  letter-spacing: 0.1em;
-  color: #8395C3; /* Color del texto del subtítulo */
+  font-family: 'Raleway',cursive; /* Tipografía del subtítulo */
+  font-size: 4em;
+  margin-bottom: .7em;
+  color: #F0F2F5; /* Color del texto del subtítulo */
+  text-shadow: 8px 8px 15px #000; /* Sombra del texto */
+  font-weight: 550;
 }
 
 /* Estilo para los párrafos */
 p {
-  font-family: 'Poppins', sans-serif; /* Tipografía del párrafo */
-  font-size: 1em; /* Tamaño de fuente reducido */
-  margin-bottom: 3em;
+  font-family: 'Roboto',cursive; /* Tipografía del párrafo */
+  font-size: 1.1em; /* Tamaño de fuente aumentado */
+  margin-bottom: 2em;
   line-height: 1.6;
-  color: #8395C3; /* Color del texto del párrafo */
+  color: #D1E8E2; /* Color del texto del párrafo */
+}
+
+/* Estilo para el párrafo de introducción */
+p.intro {
+  font-family: 'Roboto',cursive; /* Tipografía más juguetona para este párrafo */
+  font-size: 1.9em; /* Tamaño de fuente más grande */
+  margin-bottom: 2em;
+  color: #F0F2F5; /* Color del texto del párrafo */
+  font-weight: 700;
+}
+
+/* Estilo para el párrafo de derechos reservados */
+p.copyright {
+  font-family: 'Roboto', sans-serif; /* Tipografía Arial */
+  font-size: 0.9em; /* Tamaño de fuente más pequeño */
+  color: #F0F2F5; /* Color del texto del párrafo */
+  position: absolute;
+  bottom: 1em; /* Alineación al fondo del contenedor */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translateX(-50%); /* Ajustar la posición horizontal */
+  width: auto; /* Ajustar el ancho automáticamente */
+  z-index: 2; /* Asegura que el copyright esté encima de los círculos */
+  text-align: center; /* Centrar el texto */
 }
 
 /* Estilo para los botones */
 button {
-  font-family: 'Montserrat', sans-serif; /* Tipografía del botón */
-  background-color: #8395C3; /* Color de fondo del botón */
-  color: #F0F2F5; /* Color del texto del botón */
+  font-family: 'Roboto',cursive; /* Tipografía del botón */
+  background-color: #f5e2fc; /* Color de fondo del botón */
+  color: #1A7B8A; /* Color del texto del botón */
   border: none;
-  padding: 1em 2em;
-  font-size: 1.2em;
+  padding: 1em 2.5em;
+  font-size: 1.5em; /* Tamaño de fuente aumentado */
   cursor: pointer;
   border-radius: 30px; /* Bordes del botón ovalados */
-  transition: background-color 0.3s ease; /* Transición de color del fondo */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición de color y efecto de escala */
   margin-bottom: 2em; /* Añade espacio debajo del botón */
+  z-index: 3; /* Asegura que el botón esté encima del contenedor */
+  position: relative; /* Asegura que el botón esté encima de los círculos */
+  font-weight: 999;
 }
 
 /* Estilo para el estado hover de los botones */
 button:hover {
-  background-color: #6e7c9b; /* Color más oscuro al pasar el ratón */
+  background-color: #1A7B8A; /* Color más oscuro al pasar el ratón */
+  color: #F0F2F5; /* Color del texto del botón */
+  transform: scale(1.05); /* Escala el botón ligeramente */
 }
 
-/* Estilos para los puntos de carga */
-.dots-container {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #ffffff; /* Color blanco para los puntos */
-  margin: 10px;
-  animation: blink 1s infinite; /* Animación de parpadeo */
-}
-
-.dot::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #ffffff; /* Color blanco para el punto central */
-}
-
-/* Animación de parpadeo para los puntos */
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+/* Estilo para ocultar los círculos entre las 4 PM y 7 PM */
+.hide-circles {
+  background: none !important; /* Elimina el fondo de los círculos */
 }

@@ -1,12 +1,18 @@
 /* Estilo general del contenedor */
 .container {
+  /* Estilo general del contenedor */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 60vh; /* Cambiado para elevar la caja */
-  background-color: #f0f2f5; /* Fondo de color gris claro */
-  padding-top: 50px; /* Agregar espacio en la parte superior */
+  min-height: 60vh; /* Mantener la altura mínima */
+  max-width: 500px; /* Tamaño máximo del contenedor */
+  background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  padding: 30px; /* Padding alrededor del contenido */
+  border-radius: 10px; /* Borde redondeado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+  text-align: center; /* Alinear el texto en el centro */
+
 }
 
 /* Estilo de la tarjeta de cierre de sesión */
@@ -14,7 +20,7 @@
   background-color: #ffffff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
   text-align: center;
   max-width: 400px;
   width: 100%;
@@ -46,6 +52,7 @@
   color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
 }
 
 /* Estilo del botón de cerrar sesión */
