@@ -10,8 +10,9 @@ export class Nivel1Component {
 
   constructor(private router: Router) {}
 
-  volver(): void {
-    this.router.navigate(['/curso']);
+  volver() {
+    // Volver a la página anterior usando la History API
+    window.history.back(); // Regresa a la página anterior
   }
 
 

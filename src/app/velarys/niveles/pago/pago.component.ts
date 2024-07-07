@@ -39,12 +39,14 @@ export class PagoComponent implements OnInit {
       this.router.navigate(['/curso']);
     }
   }
-  volver(): void {
-    this.router.navigate(['/curso']);
+  volver() {
+    // Volver a la página anterior usando la History API
+    window.history.back(); // Regresa a la página anterior
   }
+
 
   cerrarSesion(): void {
     // Lógica para cerrar sesión
-    this.router.navigate(['/login']);
+    this.router.navigate(['/cerrar']);
   }
 }
