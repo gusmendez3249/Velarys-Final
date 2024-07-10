@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nivel1.component.css']
 })
 export class Nivel1Component {
+  seccionActual: string = 'tema1'; // Por defecto, mostrar el primer tema
 
   constructor(private router: Router) {}
 
@@ -15,10 +16,11 @@ export class Nivel1Component {
     window.history.back(); // Regresa a la página anterior
   }
 
-
   irAPreguntas(): void {
     this.router.navigate(['/preguntas']);
   }
+
+  mostrarSeccion(seccion: string): void {
+    this.seccionActual = seccion;
+  }
 }
-
-

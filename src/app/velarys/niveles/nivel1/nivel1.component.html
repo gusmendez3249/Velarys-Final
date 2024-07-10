@@ -13,6 +13,331 @@
 <div class="nivel-content">
   <h2>Contenido del Nivel 1</h2>
   <p>Bienvenido al Nivel 1. Aquí encontrarás los primeros pasos para aprender inglés.</p>
-  <!-- Agrega el contenido específico del Nivel 1 aquí -->
-  <button (click)="irAPreguntas()" class="btn-preguntas">Realizar Ejercicios </button>
+
+  <!-- Navegación entre temas -->
+  <div class="navegacion">
+    <button (click)="mostrarSeccion('tema1')" [ngClass]="{'active': seccionActual === 'tema1'}">Lección 1</button>
+    <button (click)="mostrarSeccion('tema2')" [ngClass]="{'active': seccionActual === 'tema2'}">Lección 2</button>
+    <button (click)="mostrarSeccion('tema3')" [ngClass]="{'active': seccionActual === 'tema3'}">Lección 3</button>
+    <button (click)="mostrarSeccion('tema4')" [ngClass]="{'active': seccionActual === 'tema4'}">Lección 4</button>
+    <button (click)="mostrarSeccion('tema5')" [ngClass]="{'active': seccionActual === 'tema5'}">Lección 5</button>
+
+
+    <!-- Agrega más botones aquí si hay más temas -->
+  </div>
+
+  <!-- Contenido del Tema 1 -->
+  <div *ngIf="seccionActual === 'tema1'" class="tema-content">
+    <h3>Lección 1: Uso de am/is/are</h3>
+    <p>En inglés, los verbos "am", "is" y "are" son formas del verbo "to be" (ser/estar) en presente. Estos verbos se utilizan para hablar sobre estados, identidades, y situaciones actuales.</p>
+    <p>El verbo "to be" cambia según el sujeto de la oración. Aquí te mostramos cómo:</p>
+    <ul>
+      <li><strong>I (Yo) → am</strong></li>
+      <li><strong>You (Tú) → are</strong></li>
+      <li><strong>He (Él) → is</strong></li>
+      <li><strong>She (Ella) → is</strong></li>
+      <li><strong>It (Eso) → is</strong></li>
+      <li><strong>We (Nosotros/Nosotras) → are</strong></li>
+      <li><strong>You (Ustedes) → are</strong></li>
+      <li><strong>They (Ellos/Ellas) → are</strong></li>
+    </ul>
+    <p><strong>Ejemplos con "am":</strong></p>
+    <ul>
+      <li>I am a student. (Yo soy estudiante.)</li>
+      <li>I am happy. (Yo estoy feliz.)</li>
+    </ul>
+    <p><strong>Con "is":</strong></p>
+    <ul>
+      <li>He is a teacher. (Él es maestro.)</li>
+      <li>She is my friend. (Ella es mi amiga.)</li>
+      <li>It is a beautiful day. (Es un día hermoso.)</li>
+    </ul>
+    <p><strong>Con "are":</strong></p>
+    <ul>
+      <li>You are welcome. (Eres bienvenido/a.)</li>
+      <li>We are ready. (Nosotros/Nosotras estamos listos/as.)</li>
+      <li>They are at home. (Ellos/Ellas están en casa.)</li>
+    </ul>
+  </div>
+
+  <!-- Contenido del Tema 2 -->
+  <div *ngIf="seccionActual === 'tema2'" class="tema-content">
+    <h3>Lección 2: Preguntas con am/is/are</h3>
+    <p>En esta lección, aprenderemos cómo formar preguntas y negaciones utilizando las formas del verbo "to be" (am, is, are). Esta es una habilidad fundamental en inglés para interactuar en conversaciones cotidianas.</p>
+    <h4>Formando Preguntas</h4>
+    <p>Para hacer preguntas con "am", "is" y "are", simplemente invierte el orden del sujeto y el verbo. Esto significa que el verbo "to be" se coloca antes del sujeto.</p>
+    <p>(Verbo "to be") + (Sujeto) + (Adjetivo/Complemento) = Pregunta.</p>
+    <ul>
+      <li>Am + I + late = Am I late? (¿Estoy tarde?)</li>
+      <li>Is + she + your sister = Is she your sister? (¿Es ella tu hermana?)</li>
+      <li>Are + they + coming = Are they coming? (¿Ellos vienen?)</li>
+    </ul>
+    <h4>Formando Negaciones</h4>
+    <p>Para formar negaciones, simplemente agrega la palabra "not" después del verbo "to be". Esto transforma una declaración afirmativa en una negativa.</p>
+    <p>(Sujeto) + (Verbo "to be") + (Negación) + (Adjetivo) = Negación.</p>
+    <ul>
+      <li>I + am + not + tired = I am not tired. (No estoy cansado/a.)</li>
+      <li>He + is + not + here = He is not here. (Él no está aquí.)</li>
+      <li>They + are + not + friends = They are not friends. (Ellos no son amigos.)</li>
+    </ul>
+    <h4>Preguntas Negativas</h4>
+    <p>También puedes formar preguntas negativas invirtiendo el orden del sujeto y el verbo "to be" y añadiendo "not" después del sujeto. Esto puede usarse para confirmar algo de manera negativa o expresar sorpresa.</p>
+    <p>(Verbo "to be") + (Sujeto) + (Negación) + (Adjetivo/Complemento) = Pregunta Negativa.</p>
+    <ul>
+      <li>Am + I + not + invited = Am I not invited? (¿No estoy invitado/a?)</li>
+      <li>Is + he + not + coming = Is he not coming? (¿Él no viene?)</li>
+      <li>Are + they + not + friends = Are they not friends? (¿Ellos no son amigos?)</li>
+    </ul>
+    <h4>Vocabulario: preguntas básicas</h4>
+    <ul>
+      <li>¿Qué? - What</li>
+      <li>¿Quién? - Who</li>
+      <li>¿Dónde? - Where</li>
+      <li>¿Cuándo? - When</li>
+      <li>¿Por qué? - Why</li>
+      <li>¿Cómo? - How</li>
+      <li>¿Cuál?/¿Cuáles? - Which</li>
+      <li>¿De quién? - Whose</li>
+      <li>¿A qué hora? - What time</li>
+      <li>¿Cuántos? - How many</li>
+    </ul>
+  </div>
+
+  <!-- Contenido del Tema 3 -->
+  <div *ngIf="seccionActual === 'tema3'" class="tema-content">
+    <h3>Lección 3: Presente Continuo (I am doing)</h3>
+    <p>El presente continuo es un tiempo verbal en inglés que se utiliza para describir acciones que están ocurriendo en este momento o alrededor de este momento. También se puede usar para hablar de acciones futuras planeadas.</p>
+
+    <h4>Cómo formar el presente continuo:</h4>
+    <p>Para formar el presente continuo, necesitas dos cosas:</p>
+    <ul>
+      <li>El verbo "to be" (am/is/are) en presente.</li>
+      <li>El verbo principal en su forma <strong>-ing</strong>.</li>
+    </ul>
+    <p><strong>Estructura:</strong><br>
+    Sujeto + am/is/are + verbo-ing</p>
+
+    <h4>Ejemplos:</h4>
+    <ul>
+      <li><strong>I + am + eating</strong> = I am eating. (Yo estoy comiendo.)</li>
+      <li><strong>You + are + studying</strong> = You are studying. (Tú estás estudiando.)</li>
+      <li><strong>He + is + playing</strong> = He is playing. (Él está jugando.)</li>
+      <li><strong>She + is + reading</strong> = She is reading. (Ella está leyendo.)</li>
+      <li><strong>It + is + raining</strong> = It is raining. (Está lloviendo.)</li>
+      <li><strong>We + are + working</strong> = We are working. (Nosotros estamos trabajando.)</li>
+      <li><strong>They + are + watching</strong> = They are watching TV.
+(Ellos están viendo la televisión.)</li>
+</ul>
+<h4>Cuándo usar el presente continuo:</h4>
+<p><strong>Acciones que están ocurriendo en este momento:</strong></p>
+<ul>
+  <li>I am talking to you. (Estoy hablando contigo.)</li>
+  <li>She is cooking dinner. (Ella está cocinando la cena.)</li>
+</ul>
+<p><strong>Acciones que están ocurriendo alrededor de este momento, aunque no necesariamente en este instante exacto:</strong></p>
+<ul>
+  <li>They are learning English this year. (Ellos están aprendiendo inglés este año.)</li>
+  <li>We are building a new house. (Estamos construyendo una nueva casa.)</li>
+</ul>
+<p><strong>Planes futuros cercanos:</strong></p>
+<ul>
+  <li>I am meeting my friend tomorrow. (Voy a reunirme con mi amigo mañana.)</li>
+  <li>She is traveling to Paris next week. (Ella va a viajar a París la próxima semana.)</li>
+</ul>
+
+<h4>Formando preguntas en presente continuo:</h4>
+<p>Para hacer preguntas en presente continuo, invierte el orden del sujeto y el verbo "to be".</p>
+<ul>
+  <li>Am I doing this correctly? (¿Estoy haciendo esto correctamente?)</li>
+  <li>Are you going to the party? (¿Vas a la fiesta?)</li>
+  <li>Is he working today? (¿Él está trabajando hoy?)</li>
+</ul>
+
+<h4>Formando negaciones en presente continuo:</h4>
+<p>Para hacer negaciones en presente continuo, agrega "not" después del verbo "to be".</p>
+<ul>
+  <li>I am not sleeping. (No estoy durmiendo.)</li>
+  <li>You are not listening. (No estás escuchando.)</li>
+  <li>She is not coming. (Ella no está viniendo.)</li>
+</ul>
+  </div>
+
+  <!--Contenido tema 4--->
+  <div *ngIf="seccionActual === 'tema4'" class="tema-content">
+    <h3>Lección 4: Presente Simple (I do/work/like)</h3>
+    <p>El presente simple es un tiempo verbal en inglés que se usa para hablar de acciones habituales, hechos generales, verdades universales y situaciones permanentes. Es uno de los tiempos más básicos y fundamentales del inglés.</p>
+
+    <h4>Cómo formar el presente simple:</h4>
+    <p>Para formar el presente simple, se usa la forma base del verbo. Sin embargo, hay algunas reglas específicas para los sujetos en tercera persona del singular (he, she, it).</p>
+    <p><strong>Estructura:</strong><br>
+    Sujeto + verbo (en su forma base)</p>
+    <p>Para he, she, it, se agrega una <strong>-s</strong> o <strong>-es</strong> al verbo.</p>
+
+    <h4>Ejemplos:</h4>
+    <ul>
+      <li><strong>I + work</strong> = I work. (Yo trabajo.)</li>
+      <li><strong>You + like</strong> = You like pizza. (Tú gustas de la pizza.)</li>
+      <li><strong>He + plays</strong> = He plays soccer. (Él juega al fútbol.)</li>
+      <li><strong>She + watches</strong> = She watches TV. (Ella mira la televisión.)</li>
+      <li><strong>It + rains</strong> = It rains a lot. (Llueve mucho.)</li>
+      <li><strong>We + study</strong> = We study English. (Nosotros estudiamos inglés.)</li>
+      <li><strong>They + read</strong> = They read books. (Ellos leen libros.)</li>
+    </ul>
+
+    <h4>Cuándo usar el presente simple:</h4>
+    <p><strong>Acciones habituales:</strong></p>
+    <ul>
+      <li>I wake up at 7 a.m. (Yo me despierto a las 7 a.m.)</li>
+      <li>She goes to school every day. (Ella va a la escuela todos los días.)</li>
+    </ul>
+    <p><strong>Hechos generales:</strong></p>
+    <ul>
+      <li>The Earth orbits the Sun. (La Tierra orbita alrededor del Sol.)</li>
+      <li>Water boils at 100 degrees Celsius. (El agua hierve a 100 grados Celsius.)</li>
+    </ul>
+    <p><strong>Verdades universales:</strong></p>
+    <ul>
+      <li>Dogs bark. (Los perros ladran.)</li>
+      <li>Fish swim. (Los peces nadan.)</li>
+    </ul>
+    <p><strong>Situaciones permanentes:</strong></p>
+    <ul>
+      <li>He lives in New York. (Él vive en Nueva York.)</li>
+      <li>They work at a hospital. (Ellos trabajan en un hospital.)</li>
+    </ul>
+
+  </div>
+
+  <!--Contenido tema 5-->
+  <div *ngIf="seccionActual === 'tema5'" class="tema-content">
+    <h3>Lección 5: Negaciones y Preguntas en Presente Simple</h3>
+
+    <h4>Formando preguntas en Presente Simple:</h4>
+    <p>Para hacer preguntas en presente simple, utilizamos los auxiliares <strong>do</strong> o <strong>does</strong>. Se colocan al inicio de la pregunta dependiendo del sujeto:</p>
+    <ul>
+      <li><strong>Do</strong> se usa con los pronombres personales <strong>I</strong>, <strong>you</strong>, <strong>we</strong>, <strong>they</strong> y con cualquier otro sujeto.</li>
+      <li><strong>Does</strong> se usa con los pronombres <strong>he</strong>, <strong>she</strong>, <strong>it</strong>.</li>
+    </ul>
+    <p><strong>Estructura:</strong><br>
+    Do/Does + Sujeto + Verbo base?</p>
+    <p><strong>Ejemplos:</strong></p>
+    <ul>
+      <li>Do you like coffee? (¿Te gusta el café?)</li>
+      <li>Does she play the piano? (¿Ella toca el piano?)</li>
+      <li>Do they study English? (¿Ellos estudian inglés?)</li>
+      <li>Does he work on weekends? (¿Él trabaja los fines de semana?)</li>
+    </ul>
+
+    <h4>Formando negaciones en Presente Simple:</h4>
+    <p>Para hacer negaciones en presente simple, usamos <strong>do not (don't)</strong> o <strong>does not (doesn't)</strong> antes del verbo principal. Esto depende del sujeto de la oración:</p>
+    <ul>
+      <li><strong>Don't</strong> se usa con los pronombres personales <strong>I</strong>, <strong>you</strong>, <strong>we</strong>, <strong>they</strong> y con cualquier otro sujeto.</li>
+      <li><strong>Doesn't</strong> se usa con los pronombres <strong>he</strong>, <strong>she</strong>, <strong>it</strong>.</li>
+    </ul>
+    <p><strong>Estructura:</strong><br>
+    Sujeto + Do/Does + Not + Verbo base</p>
+    <p><strong>Ejemplos:</strong></p>
+    <ul>
+      <li>I do not (don't) like spinach. (No me gusta la espinaca.)</li>
+      <li>She doesn't watch TV. (Ella no mira la televisión.)</li>
+      <li>They don't play soccer on Saturdays. (Ellos no juegan fútbol los sábados.)</li>
+      <li>He doesn't speak French. (Él no habla francés.)</li>
+    </ul>
+
+    <h4>Vocabulario: Más verbos de acción</h4>
+    <ul>
+      <li>Exercise (ejercitarse)</li>
+      <li>Drive (conducir)</li>
+      <li>Travel (viajar)</li>
+      <li>Sing (cantar)</li>
+      <li>Dance (bailar)</li>
+      <li>Cook (cocinar)</li>
+      <li>Shop (comprar)</li>
+      <li>Practice (practicar)</li>
+      <li>Draw (dibujar)</li>
+      <li>Paint (pintar)</li>
+      <li>Listen (escuchar)</li>
+      <li>Teach (enseñar)</li>
+      <li>Train (entrenar)</li>
+      <li>Play sports (jugar deportes)</li>
+      <li>Play music (tocar música)</li>
+    </ul>
+
+    <h4>Actividad: Juego de preguntas y respuestas</h4>
+    <p><strong>Versión a:</strong> Convierte las oraciones a preguntas:</p>
+    <ul>
+      <li>You live in Spain. → Do you live in Spain?</li>
+      <li>She drinks tea. → Does she drink tea?</li>
+      <li>They go to the gym. → Do they go to the gym?</li>
+      <li>You wake up at 7 a.m. → Do you wake up at 7 a.m.?</li>
+      <li>She has breakfast at 8 a.m. → Does she have breakfast at 8 a.m.?</li>
+      <li>They go to the gym every day. → Do they go to the gym every day?</li>
+    </ul>
+    <p><strong>Versión b:</strong> Convierte las oraciones a negaciones:</p>
+    <ul>
+      <li>I eat meat. → I do not (don't) eat meat.</li>
+      <li>He likes homework. → He does not (doesn't) like homework.</li>
+      <li>They travel often. → They do not (don't) travel often.</li>
+      <li>I go to bed late. → I do not (don't) go to bed late.</li>
+      <li>He reads books. → He does not (doesn't) read books.</li>
+      <li>We clean the house. → We do not (don't) clean the house.</li>
+    </ul>
+
+    <h4>BONUS VOCABULARIO:</h4>
+    <ul>
+      <li><strong>Vocabulario Básico:</strong></li>
+      <li>Weather (clima)</li>
+      <li>Family (familia)</li>
+      <li>Food (comida)</li>
+      <li>Time (tiempo)</li>
+      <li>Daily routines (rutinas diarias)</li>
+      <li>Hobbies (hobbies)</li>
+      <li>Travel (viajes)</li>
+      <li>Health (salud)</li>
+      <li>Clothes (ropa)</li>
+      <li>Jobs (trabajos)</li>
+      <li><strong>Frases Útiles:</strong></li>
+      <li>How are you? (¿Cómo estás?)</li>
+      <li>What's your name? (¿Cuál es tu nombre?)</li>
+      <li>Where are you from? (¿De dónde eres?)</li>
+      <li>What time is it? (¿Qué hora es?)</li>
+      <li>I like... (Me gusta...)</li>
+      <li>I don't like... (No me gusta...)</li>
+      <li>Can you...? (¿Puedes...?)</li>
+      <li>I want to... (Quiero...)</li>
+      <li>How do you...? (¿Cómo haces...?)</li>
+      <li>I need... (Necesito...)</li>
+      <li>Where is...? (¿Dónde está...?)</li>
+      <li>There is/are... (Hay...)</li>
+      <li><strong>Verbos Comunes:</strong></li>
+      <li>Cook (cocinar)</li>
+      <li>Travel (viajar)</li>
+      <li>Play (jugar, tocar un instrumento)</li>
+      <li>Listen (escuchar)</li>
+      <li>Buy (comprar)</li>
+      <li>Sell (vender)</li>
+      <li>Read (leer)</li>
+      <li>Write (escribir)</li>
+      <li>Watch (ver, mirar)</li>
+      <li>Wait (esperar)</li>
+      <li><strong>Adjetivos Descriptivos:</strong></li>
+      <li>Beautiful (hermoso/a)</li>
+      <li>Interesting (interesante)</li>
+      <li>Difficult (difícil)</li>
+      <li>Easy (fácil)</li>
+      <li>Busy (ocupado/a)</li>
+      <li>Quiet (silencioso/a)</li>
+      <li>Happy (feliz)</li>
+      <li>Sad (triste)</li>
+      <li>Tired (cansado/a)</li>
+      <li>Energetic (enérgico/a)</li>
+    </ul>
+
+  </div>
+
+
+<!-- Botón para realizar ejercicios -->
+ <div>
+<button (click)="irAPreguntas()" class="btn-preguntas">Realizar Ejercicios</button>
+  </div>
 </div>

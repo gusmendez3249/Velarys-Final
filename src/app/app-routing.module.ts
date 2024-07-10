@@ -13,6 +13,7 @@ import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.compon
 import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
 import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
+import { NivelesAdmin } from './velarys/admin/pages/niveles/niveles.component';
 
 const routes: Routes = [
   { path: 'curso/:idiomaId', component: CursoComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
   { path: 'cerrar', component: CerrarSecionComponent},
   { path: 'idiomas', component: IdiomasComponent},
+  { path: 'niveladmin', component: NivelesAdmin},
   { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
 
 ];

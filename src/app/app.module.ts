@@ -17,6 +17,7 @@ import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
 import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
 import { CursosService } from './velarys/curso/cursos.service';
+import { NivelesAdmin } from './velarys/admin/pages/niveles/niveles.component';
 
 
 @NgModule({
@@ -34,6 +35,8 @@ import { CursosService } from './velarys/curso/cursos.service';
     RegistroComponent,
     CerrarSecionComponent,
     IdiomasComponent,
+    NivelesAdmin
+
   ],
   imports: [
     BrowserModule,
