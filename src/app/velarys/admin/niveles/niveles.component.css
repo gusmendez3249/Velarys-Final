@@ -1,4 +1,4 @@
-/* Admin Component Styles */
+/* Estilos generales para la cabecera */
 .header {
   display: flex;
   justify-content: space-between;
@@ -29,6 +29,7 @@
   color: #4b0082;
 }
 
+/* Estilos para el contenido de administración */
 .admin-content {
   max-width: 800px;
   margin: 20px auto;
@@ -43,9 +44,10 @@
   margin-bottom: 20px;
 }
 
+/* Estilos para cada nivel */
 .nivel {
-  margin-bottom: 15px;
-  padding: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f7f7f7;
@@ -83,6 +85,7 @@
   background-color: #3a006b;
 }
 
+/* Estilos para la sección de agregar nuevo nivel */
 .agregar-nivel {
   margin-top: 30px;
   padding: 20px;
@@ -95,12 +98,22 @@
   color: #4b0082;
 }
 
-.agregar-nivel input {
+.agregar-nivel label {
+  display: block;
+  margin-top: 10px;
+}
+
+.agregar-nivel input[type="text"],
+.agregar-nivel input[type="number"] {
   width: calc(100% - 22px);
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ddd;
   margin-bottom: 10px;
+}
+
+.agregar-nivel input[type="checkbox"] {
+  margin: 0 10px 0 0;
 }
 
 .agregar-nivel button {

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NivelesComponent } from './admin/niveles/niveles.component';
+
+
 
 
 
@@ -8,9 +11,14 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
 
+
+  
+    NivelesComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+
   ]
 })
 export class VelarysModule { }

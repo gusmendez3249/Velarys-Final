@@ -12,7 +12,7 @@ export class InicioSecionComponent {
   }
 
   ingresaAdmin(): void {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/cursoadmin']);
   }
   volver():void {
     this.router.navigate(['/bienvenida']);

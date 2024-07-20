@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Logo">
+  </div>
+  <div class="title">
+    <h1>Velarys - Administrador</h1>
+  </div>
+  <div class="actions">
+    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
+  </div>
+</div>
+
+<div class="admin-content">
+  <h2>Administrar Cursos</h2>
+
+  <div *ngFor="let curso of cursos">
+    <div class="curso">
+      <label>Nombre:</label>
+      <input [(ngModel)]="curso.nombre" type="text">
+      <label>Descripción:</label>
+      <input [(ngModel)]="curso.descripcion" type="text">
+      <button (click)="guardarCambios(curso)">Guardar Cambios</button>
+      <button (click)="eliminarCurso(curso.id)">Eliminar Curso</button>
+      <button (click)="verNiveles(curso.id)">Ver Niveles</button>
+    </div>
+  </div>
+
+  <div class="agregar-curso">
+    <h3>Agregar Nuevo Curso</h3>
+    <label>Nombre:</label>
+    <input [(ngModel)]="nuevoCurso.nombre" placeholder="Nombre">
+    <label>Descripción:</label>
+    <input [(ngModel)]="nuevoCurso.descripcion" placeholder="Descripción">
+    <button (click)="agregarCurso()">Agregar Curso</button>
+  </div>
+</div>

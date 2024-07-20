@@ -6,24 +6,25 @@
     <h1>Velarys - Administrador</h1>
   </div>
   <div class="actions">
-    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
   </div>
 </div>
 
 <div class="admin-content">
   <h2>Administrar Niveles</h2>
+
   <div *ngFor="let nivel of niveles">
     <div class="nivel">
       <label>Nombre:</label>
-      <input (ngModel)="nivel.nombre" type="text">
+      <input [(ngModel)]="nivel.nombre" type="text">
       <label>Descripción:</label>
-      <input (ngModel)="nivel.descripcion" type="text">
+      <input [(ngModel)]="nivel.descripcion" type="text">
       <label>Precio:</label>
-      <input (ngModel)="nivel.precio" type="number">
+      <input [(ngModel)]="nivel.precio" type="number" min="0" step="1" required>
       <label>Es de Paga:</label>
-      <input type="checkbox" (ngModel)="nivel.esDePaga">
+      <input type="checkbox" [(ngModel)]="nivel.esDePaga">
       <label>Acceso:</label>
-      <input type="checkbox" (ngModel)="nivel.acceso">
+      <input type="checkbox" [(ngModel)]="nivel.acceso">
       <button (click)="guardarCambios(nivel)">Guardar Cambios</button>
       <button (click)="eliminarNivel(nivel.id)">Eliminar Nivel</button>
     </div>
@@ -31,13 +32,16 @@
 
   <div class="agregar-nivel">
     <h3>Agregar Nuevo Nivel</h3>
-    <input (ngModel)="nuevoNivel.nombre" placeholder="Nombre">
-    <input (ngModel)="nuevoNivel.descripcion" placeholder="Descripción">
-    <input (ngModel)="nuevoNivel.precio" type="number" placeholder="Precio">
+    <label>Nombre:</label>
+    <input [(ngModel)]="nuevoNivel.nombre" placeholder="Nombre">
+    <label>Descripción:</label>
+    <input [(ngModel)]="nuevoNivel.descripcion" placeholder="Descripción">
+    <label>Precio:</label>
+    <input [(ngModel)]="nuevoNivel.precio" type="number" placeholder="Precio" min="0" step="1">
     <label>Es de Paga:</label>
-    <input type="checkbox" (ngModel)="nuevoNivel.esDePaga">
+    <input type="checkbox" [(ngModel)]="nuevoNivel.esDePaga">
     <label>Acceso:</label>
-    <input type="checkbox" (ngModel)="nuevoNivel.acceso">
+    <input type="checkbox" [(ngModel)]="nuevoNivel.acceso">
     <button (click)="agregarNivel()">Agregar Nivel</button>
   </div>
 </div>
