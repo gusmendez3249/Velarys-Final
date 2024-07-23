@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 interface Nivel {
   id: number;
   nombre: string;
@@ -69,5 +70,9 @@ export class NivelesAdmin implements OnInit {
 
   volver(): void {
     this.router.navigate(['/cursoadmin']);
+  }
+
+  verLecciones(nivelId: number): void {
+    this.router.navigate([`lecciones/${this.cursoSeleccionado}/${nivelId}`]);
   }
 }

@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #4a90e2;
+  color: white;
+}
+
+.logo img {
+  width: 50px;
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.courses-content {
+  padding: 20px;
+}
+
+.curso {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.curso h3 {
+  margin-top: 0;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #357ABD;
+}

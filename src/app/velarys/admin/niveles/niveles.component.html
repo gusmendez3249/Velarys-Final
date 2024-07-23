@@ -3,7 +3,7 @@
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Velarys - Administrador</h1>
+    <h1>Niveles - Administrador</h1>
   </div>
   <div class="actions">
     <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
@@ -27,6 +27,7 @@
       <input type="checkbox" [(ngModel)]="nivel.acceso">
       <button (click)="guardarCambios(nivel)">Guardar Cambios</button>
       <button (click)="eliminarNivel(nivel.id)">Eliminar Nivel</button>
+      <button (click)="verLecciones(nivel.id)">Ver Lecciones</button>
     </div>
   </div>
 
