@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Importa F
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Nivel1Component } from './velarys/niveles/nivel1/nivel1.component';
-import { CursoComponent } from './velarys/curso/curso.component';
 import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
 import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
 import { PagoComponent } from './velarys/niveles/pago/pago.component';
@@ -18,12 +17,11 @@ import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
 import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
 import { CursosService } from './velarys/curso/cursos.service';
-import { CursosAdmin } from './velarys/admin/cursos/cursos.component';
-import { NivelesAdmin } from './velarys/admin/niveles/niveles.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    CursoComponent,
+
     Nivel1Component,
     Nivel2Component,
     Nivel3Component,
@@ -33,8 +31,6 @@ import { NivelesAdmin } from './velarys/admin/niveles/niveles.component';
     RegistroComponent,
     CerrarSecionComponent,
     IdiomasComponent,
-    CursosAdmin,
-    NivelesAdmin
 
   ],
   imports: [

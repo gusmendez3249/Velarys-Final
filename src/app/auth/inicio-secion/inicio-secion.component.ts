@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class InicioSecionComponent {
   constructor(private router: Router) { }
   ingresar(): void {
-    this.router.navigate(['/idiomas']);
+    this.router.navigate(['user/cursos']);
   }
 
   ingresaAdmin(): void {

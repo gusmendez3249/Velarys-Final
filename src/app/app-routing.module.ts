@@ -11,23 +11,19 @@ import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.compon
 import { RegistroComponent } from './auth/registro/registro.component';
 import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
 import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
-import { NivelesAdmin } from './velarys/admin/niveles/niveles.component';
-import { CursosAdmin } from './velarys/admin/cursos/cursos.component';
+
 
 const routes: Routes = [
   { path: 'curso/:idiomaId', component: CursoComponent },
-  { path: 'curso', component: CursoComponent },
   { path: 'nivel/1', component: Nivel1Component },
   { path: 'nivel/2', component: Nivel2Component },
   { path: 'nivel/3', component: Nivel3Component },
   { path: 'pago/:id', component: PagoComponent },
-  { path: 'cursoadmin', component: CursosAdmin },
   { path: 'bienvenida', component: BienvenidaComponent},
   { path: 'inicio', component: InicioSecionComponent},
   { path: 'registro', component: RegistroComponent},
   { path: 'cerrar', component: CerrarSecionComponent},
   { path: 'idiomas', component: IdiomasComponent},
-  { path: 'niveladmin/:cursoId', component: NivelesAdmin},
   { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
 
 ];
