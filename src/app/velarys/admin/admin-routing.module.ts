@@ -7,11 +7,10 @@ import { LeccionesAdmin } from './lecciones/lecciones.component';
 import { JuegosAdmin } from './juegos/juegos.component';
 
 const routes: Routes = [
-  { path: 'cursos', component: CursosAdmin },
-  { path: 'niveles/:cursoId', component: NivelesAdmin },
-  { path: 'lecciones/:cursoId/:nivelId', component: LeccionesAdmin },
-  { path: 'juegos/:leccionId', component: JuegosAdmin },
-  { path: '', redirectTo: '/cursos', pathMatch: 'full' }
+  { path: 'cursoadmin', component: CursosAdmin },
+  { path: 'niveladmin/:cursoId', component: NivelesAdmin },
+  { path: 'leccionesadmin/:cursoId/:nivelId', component: LeccionesAdmin },
+  { path: 'juegosadmin/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
 ];
 
 @NgModule({

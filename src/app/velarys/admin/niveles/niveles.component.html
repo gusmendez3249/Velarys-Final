@@ -3,7 +3,7 @@
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Niveles - Administrador</h1>
+    <h1>Niveles del Curso</h1>
   </div>
   <div class="actions">
     <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
@@ -11,38 +11,59 @@
 </div>
 
 <div class="admin-content">
-  <h2>Administrar Niveles</h2>
+  <h2>Agregar Nivel</h2>
+  <div class="agregar-nivel">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" [(ngModel)]="nuevoNivel.nombre" type="text">
 
-  <div *ngFor="let nivel of niveles">
-    <div class="nivel">
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="nuevoNivel.descripcion"></textarea>
+
+    <label for="esDePaga">Es de Paga:</label>
+    <input id="esDePaga" [(ngModel)]="nuevoNivel.esDePaga" type="checkbox">
+
+    <label for="acceso">Acceso:</label>
+    <input id="acceso" [(ngModel)]="nuevoNivel.acceso" type="checkbox">
+
+    <button (click)="crearNivel()">Agregar Nivel</button>
+  </div>
+
+  <h2>Lista de Niveles</h2>
+  <div *ngFor="let nivel of niveles" class="nivel-card">
+    <div class="nivel-details">
       <label>Nombre:</label>
-      <input [(ngModel)]="nivel.nombre" type="text">
+      <span>{{ nivel.nombre }}</span>
+
       <label>Descripción:</label>
-      <input [(ngModel)]="nivel.descripcion" type="text">
-      <label>Precio:</label>
-      <input [(ngModel)]="nivel.precio" type="number" min="0" step="1" required>
+      <span>{{ nivel.descripcion }}</span>
+
       <label>Es de Paga:</label>
-      <input type="checkbox" [(ngModel)]="nivel.esDePaga">
+      <span>{{ nivel.esDePaga ? 'Sí' : 'No' }}</span>
+
       <label>Acceso:</label>
-      <input type="checkbox" [(ngModel)]="nivel.acceso">
-      <button (click)="guardarCambios(nivel)">Guardar Cambios</button>
-      <button (click)="eliminarNivel(nivel.id)">Eliminar Nivel</button>
-      <button (click)="verLecciones(nivel.id)">Ver Lecciones</button>
+      <span>{{ nivel.acceso ? 'Sí' : 'No' }}</span>
+    </div>
+    <div class="nivel-actions">
+      <button (click)="seleccionarNivel(nivel)">Editar</button>
+      <button (click)="eliminarNivel(nivel.id!)">Eliminar</button>
+      <button (click)="verLecciones(nivel)">Ver Lecciones</button>
     </div>
   </div>
 
-  <div class="agregar-nivel">
-    <h3>Agregar Nuevo Nivel</h3>
-    <label>Nombre:</label>
-    <input [(ngModel)]="nuevoNivel.nombre" placeholder="Nombre">
-    <label>Descripción:</label>
-    <input [(ngModel)]="nuevoNivel.descripcion" placeholder="Descripción">
-    <label>Precio:</label>
-    <input [(ngModel)]="nuevoNivel.precio" type="number" placeholder="Precio" min="0" step="1">
-    <label>Es de Paga:</label>
-    <input type="checkbox" [(ngModel)]="nuevoNivel.esDePaga">
-    <label>Acceso:</label>
-    <input type="checkbox" [(ngModel)]="nuevoNivel.acceso">
-    <button (click)="agregarNivel()">Agregar Nivel</button>
+  <div *ngIf="nivelEditado" class="agregar-nivel">
+    <h3>Editar Nivel</h3>
+    <label for="nombreEditado">Nombre:</label>
+    <input id="nombreEditado" [(ngModel)]="nivelEditado.nombre" type="text">
+
+    <label for="descripcionEditado">Descripción:</label>
+    <textarea id="descripcionEditado" [(ngModel)]="nivelEditado.descripcion"></textarea>
+
+    <label for="esDePagaEditado">Es de Paga:</label>
+    <input id="esDePagaEditado" [(ngModel)]="nivelEditado.esDePaga" type="checkbox">
+
+    <label for="accesoEditado">Acceso:</label>
+    <input id="accesoEditado" [(ngModel)]="nivelEditado.acceso" type="checkbox">
+
+    <button (click)="editarNivel()">Guardar Cambios</button>
   </div>
 </div>

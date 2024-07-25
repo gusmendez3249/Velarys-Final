@@ -31,6 +31,6 @@ export class CursosComponent implements OnInit {
   }
 
   verNiveles(cursoId: number): void {
-    this.router.navigate([`/user/niveles/${cursoId}`]);
+    this.router.navigate([`niveles/${cursoId}`]);
   }
 }

@@ -1,4 +1,4 @@
-// src/app/admin/cursos/cursos.component.ts
+import { CursoService } from './../../services/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,50 +8,80 @@ import { Router } from '@angular/router';
   styleUrls: ['./cursos.component.css']
 })
 export class CursosAdmin implements OnInit {
-  cursos: any[] = [
-    { id: 1, nombre: 'Curso 1', descripcion: 'Descripción del Curso 1' },
-    { id: 2, nombre: 'Curso 2', descripcion: 'Descripción del Curso 2' }
-  ];
+  cursos: any[] = [];
+  nuevoCurso = { nombre: '', descripcion: '', precio: 0, esDePaga: false, acceso: false };
+  cursoEditado: any = null;
 
-  nuevoCurso: any = {
-    id: 0,
-    nombre: '',
-    descripcion: ''
-  };
-
-  constructor(private router: Router) {}
+  constructor(private cursoService: CursoService, private router: Router) { }
 
   ngOnInit(): void {
-    // Inicialización si es necesario
+    this.obtenerCursos();
   }
 
-  agregarCurso(): void {
-    if (this.nuevoCurso.nombre && this.nuevoCurso.descripcion) {
-      this.nuevoCurso.id = this.cursos.length + 1;
-      this.cursos.push(this.nuevoCurso);
-      this.nuevoCurso = { id: 0, nombre: '', descripcion: '' };
+  obtenerCursos(): void {
+    this.cursoService.getCursos().subscribe(
+      (response) => {
+        this.cursos = response;
+      },
+      (error) => {
+        console.error('Error al obtener los cursos:', error);
+      }
+    );
+  }
+
+  crearCurso(): void {
+    this.cursoService.createCurso(this.nuevoCurso).subscribe(
+      (response) => {
+        alert('Curso creado exitosamente');
+        this.obtenerCursos();
+        this.nuevoCurso = { nombre: '', descripcion: '', precio: 0, esDePaga: false, acceso: false };
+      },
+      (error) => {
+        console.error('Error al crear el curso:', error);
+      }
+    );
+  }
+
+  editarCurso(curso: any): void {
+    this.cursoEditado = { ...curso };
+  }
+
+  actualizarCurso(): void {
+    if (this.cursoEditado) {
+      this.cursoService.updateCurso(this.cursoEditado.id, this.cursoEditado).subscribe(
+        (response) => {
+          alert('Curso actualizado exitosamente');
+          this.obtenerCursos();
+          this.cursoEditado = null;
+        },
+        (error) => {
+          console.error('Error al actualizar el curso:', error);
+        }
+      );
     }
   }
 
-  guardarCambios(curso: any): void {
-    const index = this.cursos.findIndex(c => c.id === curso.id);
-    if (index !== -1) {
-      this.cursos[index] = curso;
-    }
+  cancelarEdicion(): void {
+    this.cursoEditado = null;
   }
 
   eliminarCurso(id: number): void {
-    this.cursos = this.cursos.filter(c => c.id !== id);
+    this.cursoService.deleteCurso(id).subscribe(
+      () => {
+        alert('Curso eliminado exitosamente');
+        this.obtenerCursos();
+      },
+      (error) => {
+        console.error('Error al eliminar el curso:', error);
+      }
+    );
   }
 
-  verNiveles(cursoId: number): void {
-    this.router.navigate([`niveladmin/${cursoId}`]);
+  verNiveles(curso: any): void {
+    this.router.navigate([`niveladmin/${curso.id}`]);
   }
 
-
-
-  cerrarSesion(): void {
-    this.router.navigate(['/cerrar']);
+  volver(): void {
+    window.history.back();
   }
 }
-

@@ -1,31 +1,26 @@
-import { CursoComponent } from './velarys/curso/curso.component';
+import { AdminModule } from './velarys/admin/admin.module';
 // src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Nivel1Component } from './velarys/niveles/nivel1/nivel1.component';
-import { Nivel2Component } from './velarys/niveles/nivel2/nivel2.component';
-import { Nivel3Component } from './velarys/niveles/nivel3/nivel3.component';
-import { PagoComponent } from './velarys/niveles/pago/pago.component';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
-import { InicioSecionComponent } from './auth/inicio-secion/inicio-secion.component';
-import { RegistroComponent } from './auth/registro/registro.component';
-import { CerrarSecionComponent } from './auth/cerrar-secion/cerrar-secion.component';
-import { IdiomasComponent } from './velarys/curso/idiomas/idiomas.component';
+import path from 'path';
 
 
 const routes: Routes = [
-  { path: 'curso/:idiomaId', component: CursoComponent },
-  { path: 'nivel/1', component: Nivel1Component },
-  { path: 'nivel/2', component: Nivel2Component },
-  { path: 'nivel/3', component: Nivel3Component },
-  { path: 'pago/:id', component: PagoComponent },
-  { path: 'bienvenida', component: BienvenidaComponent},
-  { path: 'inicio', component: InicioSecionComponent},
-  { path: 'registro', component: RegistroComponent},
-  { path: 'cerrar', component: CerrarSecionComponent},
-  { path: 'idiomas', component: IdiomasComponent},
-  { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
-
+  { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
+  { path: 'bienvenida', component: BienvenidaComponent },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./velarys/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./velarys/user/user.module').then(m => m.UserModule)
+  },
 ];
 
 @NgModule({

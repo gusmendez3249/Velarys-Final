@@ -3,7 +3,7 @@
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Velarys - Administrador</h1>
+    <h1>Lecciones del Nivel</h1>
   </div>
   <div class="actions">
     <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
@@ -11,26 +11,44 @@
 </div>
 
 <div class="admin-content">
-  <h2>Administrar Lecciones</h2>
+  <h2>Agregar Lección</h2>
+  <div class="agregar-leccion">
+    <label for="titulo">Título:</label>
+    <input id="titulo" [(ngModel)]="nuevaLeccion.nombre" type="text">
 
-  <div *ngFor="let leccion of lecciones">
-    <div class="leccion">
-      <label>Nombre:</label>
-      <input [(ngModel)]="leccion.nombre" type="text">
+    <label for="contenido">Contenido:</label>
+    <textarea id="contenido" [(ngModel)]="nuevaLeccion.contenido"></textarea>
+
+    <label for="nivelId">Nivel:</label>
+    <input id="nivelId" [(ngModel)]="nivelId" type="hidden">
+
+    <button (click)="crearLeccion()">Agregar Lección</button>
+  </div>
+
+  <h2>Lista de Lecciones</h2>
+  <div *ngFor="let leccion of lecciones" class="leccion-card">
+    <div class="leccion-details">
+      <label>Título:</label>
+      <span>{{ leccion.nombre }}</span>
+
       <label>Contenido:</label>
-      <textarea [(ngModel)]="leccion.contenido"></textarea>
-      <button (click)="guardarCambios(leccion)">Guardar Cambios</button>
-      <button (click)="eliminarLeccion(leccion.id)">Eliminar Lección</button>
-      <button (click)="verJuegos(leccion.id)">Ver Juegos</button>
+      <span>{{ leccion.contenido }}</span>
+    </div>
+    <div class="leccion-actions">
+      <button (click)="seleccionarLeccion(leccion)">Editar</button>
+      <button (click)="eliminarLeccion(leccion.id!)">Eliminar</button>
+      <button (click)="verJuegos(leccion)">Ver juegos</button>
     </div>
   </div>
 
-  <div class="agregar-leccion">
-    <h3>Agregar Nueva Lección</h3>
-    <label>Nombre:</label>
-    <input [(ngModel)]="nuevoLeccion.nombre" placeholder="Nombre">
-    <label>Contenido:</label>
-    <textarea [(ngModel)]="nuevoLeccion.contenido" placeholder="Contenido"></textarea>
-    <button (click)="agregarLeccion()">Agregar Lección</button>
+  <div *ngIf="leccionEditada" class="agregar-leccion">
+    <h3>Editar Lección</h3>
+    <label for="nombreEditado">Título:</label>
+    <input id="nombreEditado" [(ngModel)]="leccionEditada.nombre" type="text">
+
+    <label for="contenidoEditado">Contenido:</label>
+    <textarea id="contenidoEditado" [(ngModel)]="leccionEditada.contenido"></textarea>
+
+    <button (click)="editarLeccion()">Guardar Cambios</button>
   </div>
 </div>

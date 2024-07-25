@@ -1,10 +1,9 @@
-
 <div class="header">
   <div class="logo">
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Velarys - Administrador</h1>
+    <h1>Juegos del Nivel</h1>
   </div>
   <div class="actions">
     <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
@@ -12,8 +11,21 @@
 </div>
 
 <div class="admin-content">
-  <h2>Administrar Juegos</h2>
+  <h2>Agregar Juego</h2>
+  <div class="agregar-juego">
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" [(ngModel)]="nuevoJuego.tipo">
+      <option value="preguntas">Preguntas</option>
+      <option value="memoramas">Memoramas</option>
+    </select>
 
+    <label for="contenido">Contenido:</label>
+    <textarea id="contenido" [(ngModel)]="nuevoJuego.contenido"></textarea>
+
+    <button (click)="crearJuego()">Agregar Juego</button>
+  </div>
+
+  <h2>Lista de Juegos</h2>
   <div *ngFor="let juego of juegos" class="juego-card">
     <div class="juego-details">
       <label>Tipo:</label>
@@ -21,24 +33,13 @@
         <option value="preguntas">Preguntas</option>
         <option value="memoramas">Memoramas</option>
       </select>
+
       <label>Contenido:</label>
       <textarea [(ngModel)]="juego.contenido"></textarea>
     </div>
     <div class="juego-actions">
       <button (click)="guardarCambios(juego)">Guardar Cambios</button>
-      <button (click)="eliminarJuego(juego.id)">Eliminar Juego</button>
+      <button (click)="eliminarJuego(juego.id!)">Eliminar Juego</button>
     </div>
-  </div>
-
-  <div class="agregar-juego">
-    <h3>Agregar Nuevo Juego</h3>
-    <label>Tipo:</label>
-    <select [(ngModel)]="nuevoJuego.tipo">
-      <option value="preguntas">Preguntas</option>
-      <option value="memoramas">Memoramas</option>
-    </select>
-    <label>Contenido:</label>
-    <textarea [(ngModel)]="nuevoJuego.contenido" placeholder="Contenido"></textarea>
-    <button (click)="agregarJuego()">Agregar Juego</button>
   </div>
 </div>

@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-interface Juego {
-  id: number;
-  tipo: string; // 'preguntas' o 'memoramas'
-  contenido: any; // Puede ser un array de preguntas o detalles del memorama
-}
+import { JuegoService } from '../../services/juego.service';
+import { Juego } from '../../models/juego.model';
 
 @Component({
   selector: 'app-juegos',
@@ -14,58 +10,74 @@ interface Juego {
 })
 export class JuegosAdmin implements OnInit {
   juegos: Juego[] = [];
-  nuevoJuego: Juego = { id: 0, tipo: '', contenido: '' };
-  leccionId: number | null = null;
+  nuevoJuego: Juego = {leccionId: 0, tipo: 'preguntas', contenido: ''};
+  leccionId: number = 0;
 
-  juegosPorLeccion: { [leccionId: number]: Juego[] } = {
-    1: [
-      { id: 1, tipo: 'preguntas', contenido: [{ pregunta: '¿Qué es Angular?', respuesta: 'Un framework de JavaScript' }] },
-      { id: 2, tipo: 'memoramas', contenido: [{ pareja: 'palabra1', pareja1: 'palabra2' }] }
-    ],
-    2: [
-      { id: 3, tipo: 'preguntas', contenido: [{ pregunta: '¿Qué es TypeScript?', respuesta: 'Un superset de JavaScript' }] }
-    ]
-  };
+  constructor(
+    private juegoService: JuegoService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  private juegoIdCounter: number = 4;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.leccionId = +this.route.snapshot.paramMap.get('leccionId')!;
-    this.cargarJuegos();
+    this.obtenerJuegos();
   }
 
-  cargarJuegos(): void {
-    if (this.leccionId) {
-      this.juegos = this.juegosPorLeccion[this.leccionId] || [];
+  obtenerJuegos(): void {
+    if (this.leccionId !== null) {
+      this.juegoService.obtenerJuegosPorLeccionId(this.leccionId).subscribe(
+        response => {
+          this.juegos = response;
+        },
+        error => {
+          console.error('Error al obtener los juegos:', error);
+        }
+      );
     }
   }
 
-  agregarJuego(): void {
-    if (this.nuevoJuego.tipo && this.nuevoJuego.contenido) {
-      this.nuevoJuego.id = this.juegoIdCounter++;
-      if (this.leccionId) {
-        if (!this.juegosPorLeccion[this.leccionId]) {
-          this.juegosPorLeccion[this.leccionId] = [];
+  crearJuego(): void {
+    if (this.leccionId !== null) {
+      this.nuevoJuego.leccionId = this.leccionId;
+      this.juegoService.crearJuego(this.nuevoJuego).subscribe(
+        response => {
+          alert('Juego creado exitosamente');
+          this.obtenerJuegos();
+          this.nuevoJuego = { tipo: 'preguntas', contenido: '', leccionId: this.leccionId };
+        },
+        error => {
+          console.error('Error al crear el juego:', error);
         }
-        this.juegosPorLeccion[this.leccionId].push({ ...this.nuevoJuego });
-        this.cargarJuegos();
-      }
-      this.nuevoJuego = { id: 0, tipo: '', contenido: '' };
+      );
     }
   }
 
   guardarCambios(juego: Juego): void {
-    console.log('Juego guardado:', juego);
+    if (juego.id) {
+      this.juegoService.actualizarJuego(juego.id, juego).subscribe(
+        response => {
+          alert('Juego actualizado exitosamente');
+          this.obtenerJuegos();
+        },
+        error => {
+          console.error('Error al actualizar el juego:', error);
+        }
+      );
+    }
   }
 
   eliminarJuego(id: number): void {
-    if (this.leccionId) {
-      this.juegos = this.juegos.filter(juego => juego.id !== id);
-      this.juegosPorLeccion[this.leccionId] = this.juegos;
-    }
-    console.log('Juego eliminado con ID:', id);
+    this.juegoService.eliminarJuego(id).subscribe(
+      response => {
+        alert('Juego eliminado exitosamente');
+        this.obtenerJuegos();
+      },
+      error => {
+        console.error('Error al eliminar el juego:', error);
+      }
+    );
   }
 
   volver(): void {

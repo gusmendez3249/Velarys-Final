@@ -1,11 +1,7 @@
+import { Leccion } from './../../models/leccion.model';
+import { LeccionService } from './../../services/leccion.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-interface Leccion {
-  id: number;
-  nombre: string;
-  contenido: string;
-}
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lecciones',
@@ -14,57 +10,95 @@ interface Leccion {
 })
 export class LeccionesAdmin implements OnInit {
   lecciones: Leccion[] = [];
-  nuevoLeccion: Leccion = { id: 0, nombre: '', contenido: '' };
+  nuevaLeccion: Leccion = { nombre: '', contenido: '', nivelId: 0 }; // Valor inicial
+  leccionEditada: Leccion | null = null;
+  nivelId: number = 0;
   cursoId: number | null = null;
-  nivelId: number | null = null;
 
-  leccionesPorNivel: { [nivelId: number]: Leccion[] } = {
-    1: [
-      { id: 1, nombre: 'Lección 1', contenido: 'Contenido de la Lección 1' },
-      { id: 2, nombre: 'Lección 2', contenido: 'Contenido de la Lección 2' }
-    ],
-    2: [
-      { id: 3, nombre: 'Lección 3', contenido: 'Contenido de la Lección 3' },
-      { id: 4, nombre: 'Lección 4', contenido: 'Contenido de la Lección 4' }
-    ]
-  };
-
-  private leccionIdCounter: number = 5;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private leccionService: LeccionService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.cursoId = +this.route.snapshot.paramMap.get('cursoId')!;
     this.nivelId = +this.route.snapshot.paramMap.get('nivelId')!;
-    this.cargarLecciones();
+    this.obtenerLecciones();
   }
 
-  cargarLecciones(): void {
-    this.lecciones = this.leccionesPorNivel[this.nivelId!] || [];
-  }
 
-  guardarCambios(leccion: Leccion): void {
-    console.log('Cambios guardados para la lección:', leccion);
-  }
-
-  eliminarLeccion(id: number): void {
-    this.lecciones = this.lecciones.filter(leccion => leccion.id !== id);
-    console.log('Lección eliminada con ID:', id);
-  }
-
-  agregarLeccion(): void {
-    if (this.nuevoLeccion.nombre && this.nuevoLeccion.contenido) {
-      this.nuevoLeccion.id = this.leccionIdCounter++;
-      this.lecciones.push({ ...this.nuevoLeccion });
-      this.nuevoLeccion = { id: 0, nombre: '', contenido: '' };
+  obtenerLecciones(): void {
+    if (this.nivelId !== null) {
+      this.leccionService.obtenerLeccionesPorNivelId(this.nivelId).subscribe(
+        response => {
+          this.lecciones = response;
+        },
+        error => {
+          console.error('Error al obtener las lecciones:', error);
+        }
+      );
     }
   }
 
-  verJuegos(leccionId: number): void {
-    this.router.navigate([`juegos/${this.cursoId}/${this.nivelId}/${leccionId}`]);
+  crearLeccion(): void {
+    if (this.nivelId !== null) {
+      const leccionConNivelId: Leccion = { ...this.nuevaLeccion, nivelId: this.nivelId };
+      this.leccionService.crearLeccion(leccionConNivelId).subscribe(
+        response => {
+          alert('Lección creada exitosamente');
+          this.obtenerLecciones();
+          this.nuevaLeccion = { nombre: '', contenido: '', nivelId: this.nivelId };
+        },
+        error => {
+          console.error('Error al crear la lección:', error);
+        }
+      );
+    } else {
+      console.error('Nivel ID no disponible para crear la lección');
+    }
+  }
+
+
+
+  seleccionarLeccion(leccion: Leccion): void {
+    this.leccionEditada = { ...leccion };
+  }
+
+  editarLeccion(): void {
+    if (this.leccionEditada && this.leccionEditada.id !== undefined) {
+      this.leccionService.actualizarLeccion(this.leccionEditada.id, this.leccionEditada).subscribe(
+        response => {
+          alert('Lección editada exitosamente');
+          this.obtenerLecciones();
+          this.leccionEditada = null;
+        },
+        error => {
+          console.error('Error al editar la lección:', error);
+        }
+      );
+    } else {
+      console.error('Lección no seleccionada o ID no disponible');
+    }
+  }
+
+  eliminarLeccion(id: number): void {
+    this.leccionService.eliminarLeccion(id).subscribe(
+      () => {
+        alert('Lección eliminada exitosamente');
+        this.obtenerLecciones();
+      },
+      error => {
+        console.error('Error al eliminar la lección:', error);
+      }
+    );
   }
 
   volver(): void {
-    window.history.back();
+    this.router.navigate(['/niveles']);
+  }
+
+  verJuegos(leccion: any):void{
+    this.router.navigate([`juegosadmin/${this.cursoId}/${this.nivelId}/${leccion.id}`]);
   }
 }
+

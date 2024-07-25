@@ -4,12 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { CursosComponent } from './cursos/cursos.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { LeccionesComponent } from './lecciones/lecciones.component';
+import { JuegosComponent } from './juegos/juegos.component';
 
 const routes: Routes = [
   { path: 'cursos', component: CursosComponent },
   { path: 'niveles/:cursoId', component: NivelesComponent },
   { path: 'lecciones/:cursoId/:nivelId', component: LeccionesComponent },
-  { path: '', redirectTo: '/cursos', pathMatch: 'full' }
+  { path: 'juegos/:cursoId/:nivelId/:leccionId', component: JuegosComponent },
+
 ];
 
 @NgModule({

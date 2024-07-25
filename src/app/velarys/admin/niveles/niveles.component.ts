@@ -1,78 +1,103 @@
+
+
+import { Nivel } from './../../models/nivel.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-interface Nivel {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  precio: number;
-  esDePaga: boolean;
-  acceso: boolean;
-}
-
+import { NivelService } from '../../services/nivel.service';
+import { CursosAdmin } from '../cursos/cursos.component';
 @Component({
   selector: 'app-niveles',
   templateUrl: './niveles.component.html',
   styleUrls: ['./niveles.component.css']
 })
 export class NivelesAdmin implements OnInit {
+  cursoSeleccionado: number = 0;
+  cursoId: number = 0;
   niveles: Nivel[] = [];
-  cursoSeleccionado: number = 0; // Valor inicial
   nuevoNivel: Nivel = {
-    id: 0,
     nombre: '',
     descripcion: '',
-    precio: 0,
     esDePaga: false,
     acceso: false
   };
+  nivelEditado: Nivel | null = null;
 
-  nivelesPorCurso: { [cursoId: number]: Nivel[] } = {
-    1: [
-      { id: 1, nombre: 'Nivel 1', descripcion: 'Descripción del Nivel 1', precio: 10, esDePaga: false, acceso: true },
-      { id: 2, nombre: 'Nivel 2', descripcion: 'Descripción del Nivel 2', precio: 20, esDePaga: true, acceso: false }
-    ],
-    2: [
-      { id: 3, nombre: 'Nivel 3', descripcion: 'Descripción del Nivel 3', precio: 30, esDePaga: false, acceso: true }
-    ]
-  };
-
-  private nivelIdCounter: number = 4;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private nivelService: NivelService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.cursoSeleccionado = +params.get('cursoId')!;
-      this.cargarNiveles();
-    });
+    this.cursoId = +this.route.snapshot.paramMap.get('cursoId')!;
+    this.obtenerNiveles();
   }
 
-  cargarNiveles(): void {
-    this.niveles = this.nivelesPorCurso[this.cursoSeleccionado] || [];
+  obtenerNiveles(): void {
+    this.nivelService.obtenerNivelesPorCurso(this.cursoId).subscribe(
+      (niveles) => {
+        this.niveles = niveles;
+      },
+      (error) => {
+        console.error('Error al obtener los niveles:', error);
+      }
+    );
   }
 
-  agregarNivel(): void {
-    if (this.nuevoNivel.nombre && this.nuevoNivel.descripcion) {
-      this.nuevoNivel.id = this.nivelIdCounter++;
-      this.niveles.push({ ...this.nuevoNivel });
-      this.nuevoNivel = { id: 0, nombre: '', descripcion: '', precio: 0, esDePaga: false, acceso: false };
+  crearNivel(): void {
+    this.nuevoNivel = { ...this.nuevoNivel, cursoId: this.cursoId };
+    this.nivelService.crearNivel(this.nuevoNivel).subscribe(
+      (response) => {
+        alert('Nivel creado exitosamente');
+        this.obtenerNiveles();
+        this.nuevoNivel = {
+          cursoId: this.cursoId,
+          nombre: '',
+          descripcion: '',
+          esDePaga: false,
+          acceso: false
+
+        };
+      },
+      (error) => {
+        console.error('Error al crear el nivel:', error);
+      }
+    );
+  }
+
+  editarNivel(): void {
+    if (this.nivelEditado) {
+      this.nivelService.editarNivel(this.nivelEditado.id!, this.nivelEditado).subscribe(
+        (response) => {
+          alert('Nivel editado exitosamente');
+          this.obtenerNiveles();
+          this.nivelEditado = null;
+        },
+        (error) => {
+          console.error('Error al editar el nivel:', error);
+        }
+      );
     }
   }
 
   eliminarNivel(id: number): void {
-    this.niveles = this.niveles.filter(nivel => nivel.id !== id);
+    this.nivelService.eliminarNivel(id).subscribe(
+      (response) => {
+        alert('Nivel eliminado exitosamente');
+        this.obtenerNiveles();
+      },
+      (error) => {
+        console.error('Error al eliminar el nivel:', error);
+      }
+    );
   }
 
-  guardarCambios(nivel: Nivel): void {
-    console.log('Nivel guardado:', nivel);
+  seleccionarNivel(nivel: Nivel): void {
+    this.nivelEditado = { ...nivel };
   }
 
-  volver(): void {
-    this.router.navigate(['/cursoadmin']);
+  verLecciones(nivel: any): void {
+    this.router.navigate([`leccionesadmin/${this.cursoSeleccionado}/${nivel.id}`]);
   }
 
-  verLecciones(nivelId: number): void {
-    this.router.navigate([`lecciones/${this.cursoSeleccionado}/${nivelId}`]);
+  volver():void{
+    window.history.back();
   }
 }
+

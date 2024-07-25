@@ -3,34 +3,71 @@
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Cursos - Administrador</h1>
+    <h1>Velarys - Administrador</h1>
   </div>
   <div class="actions">
-    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
   </div>
 </div>
 
 <div class="admin-content">
-  <h2>Administrar Cursos</h2>
+  <h2>Gestión de Cursos</h2>
 
-  <div *ngFor="let curso of cursos">
-    <div class="curso">
-      <label>Nombre:</label>
-      <input [(ngModel)]="curso.nombre" type="text">
-      <label>Descripción:</label>
-      <input [(ngModel)]="curso.descripcion" type="text">
-      <button (click)="guardarCambios(curso)">Guardar Cambios</button>
-      <button (click)="eliminarCurso(curso.id)">Eliminar Curso</button>
-      <button (click)="verNiveles(curso.id)">Ver Niveles</button>
+  <!-- Mostrar los cursos existentes -->
+  <div class="curso-card" *ngFor="let curso of cursos">
+    <h3>{{ curso.nombre }}</h3>
+    <p>{{ curso.descripcion }}</p>
+    <p>Precio: {{ curso.precio | currency }}</p>
+    <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
+    <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
+
+    <div class="curso-actions">
+      <button (click)="verNiveles(curso)">Ver Niveles</button>
+      <button (click)="editarCurso(curso)">Editar</button>
+      <button (click)="eliminarCurso(curso.id)">Eliminar</button>
     </div>
   </div>
 
-  <div class="agregar-curso">
+  <!-- Formulario para agregar nuevo curso -->
+  <div class="agregar-curso" *ngIf="!cursoEditado">
     <h3>Agregar Nuevo Curso</h3>
-    <label>Nombre:</label>
-    <input [(ngModel)]="nuevoCurso.nombre" placeholder="Nombre">
-    <label>Descripción:</label>
-    <input [(ngModel)]="nuevoCurso.descripcion" placeholder="Descripción">
-    <button (click)="agregarCurso()">Agregar Curso</button>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="nuevoCurso.nombre">
+
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="nuevoCurso.descripcion"></textarea>
+
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" [(ngModel)]="nuevoCurso.precio">
+
+    <label for="esDePaga">Es de paga:</label>
+    <input type="checkbox" id="esDePaga" [(ngModel)]="nuevoCurso.esDePaga">
+
+    <label for="acceso">Acceso:</label>
+    <input type="checkbox" id="acceso" [(ngModel)]="nuevoCurso.acceso">
+
+    <button (click)="crearCurso()">Crear Curso</button>
+  </div>
+
+  <!-- Formulario para editar un curso -->
+  <div class="editar-curso" *ngIf="cursoEditado">
+    <h3>Editar Curso</h3>
+    <label for="edit-nombre">Nombre:</label>
+    <input type="text" id="edit-nombre" [(ngModel)]="cursoEditado.nombre">
+
+    <label for="edit-descripcion">Descripción:</label>
+    <textarea id="edit-descripcion" [(ngModel)]="cursoEditado.descripcion"></textarea>
+
+    <label for="edit-precio">Precio:</label>
+    <input type="number" id="edit-precio" [(ngModel)]="cursoEditado.precio">
+
+    <label for="edit-esDePaga">Es de paga:</label>
+    <input type="checkbox" id="edit-esDePaga" [(ngModel)]="cursoEditado.esDePaga">
+
+    <label for="edit-acceso">Acceso:</label>
+    <input type="checkbox" id="edit-acceso" [(ngModel)]="cursoEditado.acceso">
+
+    <button (click)="actualizarCurso()">Actualizar Curso</button>
+    <button (click)="cancelarEdicion()">Cancelar</button>
   </div>
 </div>
