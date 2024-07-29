@@ -1,20 +1,35 @@
+import { AuthService } from './../auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-inicio-secion',
   templateUrl: './inicio-secion.component.html',
-  styleUrl: './inicio-secion.component.css'
+  styleUrls: ['./inicio-secion.component.css'] // Corrige la propiedad de estilo
 })
 export class InicioSecionComponent {
-  constructor(private router: Router) { }
+  email: string = '';
+  password: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
   ingresar(): void {
-    this.router.navigate(['user/cursos']);
+    this.authService.login(this.email, this.password).subscribe(
+      (response: any) => {
+        if (response.role === 'admin') {
+          this.router.navigate(['/cursoadmin']); // Redirige al panel de administración
+        } else {
+          this.router.navigate(['/user/cursos']); // Redirige al panel de usuario
+        }
+      },
+      (error) => {
+        console.error('Error al iniciar sesión:', error);
+        // Puedes agregar un mensaje de error para el usuario aquí
+      }
+    );
   }
 
-  ingresaAdmin(): void {
-    this.router.navigate(['/cursoadmin']);
-  }
-  volver():void {
+  volver(): void {
     this.router.navigate(['/bienvenida']);
   }
 }

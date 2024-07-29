@@ -72,28 +72,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Estilos para los botones de administración */
-.botonAdmin {
-  background-color: #1CC5AE; /* Color turquesa */
-  color: #ffffff;
-  padding: 14px 24px; /* Aumentar padding en los botones de admin */
-  border: none;
-  border-radius: 30px; /* Botón ovalado */
-  cursor: pointer;
-  font-size: 1em;
-  margin-bottom: 20px; /* Aumentar margen inferior para separación */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: block;
-  width: 100%;
-  margin-top: 10px; /* Separar los botones */
-}
-
-.botonAdmin:hover {
-  background-color: #1a9e84; /* Un tono más oscuro para el hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
-  transform: scale(1.05);
-}
 
 /* Estilos para el botón de volver */
 .botonVolver {
