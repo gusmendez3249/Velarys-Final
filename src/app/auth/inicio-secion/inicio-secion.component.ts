@@ -1,30 +1,35 @@
-import { AuthService } from './../auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-inicio-secion',
   templateUrl: './inicio-secion.component.html',
-  styleUrls: ['./inicio-secion.component.css'] // Corrige la propiedad de estilo
+  styleUrls: ['./inicio-secion.component.css']
 })
 export class InicioSecionComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ingresar(): void {
     this.authService.login(this.email, this.password).subscribe(
       (response: any) => {
-        if (response.role === 'admin') {
-          this.router.navigate(['/cursoadmin']); // Redirige al panel de administración
+        if (response) {
+          if (response.role === 'admin') {
+            this.router.navigate(['/cursoadmin']);
+          } else {
+            this.router.navigate(['/cursos']);
+          }
         } else {
-          this.router.navigate(['/user/cursos']); // Redirige al panel de usuario
+          this.errorMessage = 'Respuesta inesperada del servidor.';
         }
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);
-        // Puedes agregar un mensaje de error para el usuario aquí
+        this.errorMessage = 'Usuario o contraseña incorrectos. Inténtalo de nuevo.';
       }
     );
   }

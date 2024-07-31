@@ -4,6 +4,8 @@
 
   <h1 class="form_titulo">Registro</h1>
 
+  <!-- Mensaje de éxito o error -->
+
   <input type="text" class="form_input" placeholder="Nombres" [(ngModel)]="user.nombres" name="nombres" required>
   <label class="form_label">Nombres</label>
 
@@ -31,6 +33,11 @@
 
   <input type="password" class="form_input" placeholder="Confirmar Contraseña" [(ngModel)]="user.confirmarContrasena" name="confirmarContrasena" required>
   <label class="form_label">Confirmar Contraseña</label>
+
+   <!-- Mensaje de éxito o error -->
+  <div *ngIf="mensaje" class="mensaje" [ngClass]="{'mensaje-exito': mensaje.includes('Registro exitoso'), 'mensaje-error': mensaje.includes('Error')}">
+    {{ mensaje }}
+  </div>
 
   <button type="submit" class="form_boton">Registrar</button>
 </form>

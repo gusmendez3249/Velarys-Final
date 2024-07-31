@@ -1,4 +1,3 @@
-// controllers/curso.controller.js
 const Curso = require('../models/curso.model');
 
 exports.getAllCursos = (req, res) => {
@@ -31,7 +30,15 @@ exports.updateCurso = (req, res) => {
 
 exports.deleteCurso = (req, res) => {
   Curso.delete(req.params.id, (err, results) => {
-    if (err) res.status(500).send(err);
-    else res.status(204).send();
+    if (err) {
+      // Verifica si el error es una restricción de clave foránea
+      if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+        res.status(400).send('No se puede eliminar el curso porque existen registros relacionados en otras tablas.');
+      } else {
+        res.status(500).send('Error al eliminar el curso.');
+      }
+    } else {
+      res.status(204).send();
+    }
   });
 };

@@ -1,6 +1,7 @@
 <div class="container">
   <button type="button" class="botonVolver" (click)="volver()"> &#9664; Volver </button>
   <h1>¡Inicia Sesión!</h1>
+
   <form (ngSubmit)="ingresar()">
     <div class="form-group">
       <label for="email">Correo:</label>
@@ -12,11 +13,18 @@
     </div>
     <button class="boton" type="submit">Iniciar Sesión</button>
   </form>
+
+  <!-- Sección para mostrar el mensaje de error -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <div class="social-media">
     <a href="https://x.com/?lang=es"><img src="assets/twitter.png" alt="Twitter"></a>
     <a href="https://www.facebook.com/?locale=es_LA"><img src="assets/facebo.png" alt="Facebook"></a>
     <a href="https://www.instagram.com"><img src="assets/instagram.png" alt="Instagram"></a>
   </div>
+
   <p>¿Aún no tienes una cuenta? Crea una <a href="/registro" class="registro">Aquí</a>.</p>
 </div>
 

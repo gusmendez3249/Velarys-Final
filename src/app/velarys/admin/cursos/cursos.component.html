@@ -6,25 +6,27 @@
     <h1>Velarys - Administrador</h1>
   </div>
   <div class="actions">
-    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
+    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesion</button>
   </div>
 </div>
-
 <div class="admin-content">
   <h2>Gestión de Cursos</h2>
 
-  <!-- Mostrar los cursos existentes -->
-  <div class="curso-card" *ngFor="let curso of cursos">
-    <h3>{{ curso.nombre }}</h3>
-    <p>{{ curso.descripcion }}</p>
-    <p>Precio: {{ curso.precio | currency }}</p>
-    <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
-    <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
+  <!-- Contenedor de cursos -->
+  <div class="cursos-container">
+    <!-- Mostrar los cursos existentes -->
+    <div class="curso-card" *ngFor="let curso of cursos">
+      <h3>{{ curso.nombre }}</h3>
+      <p>{{ curso.descripcion }}</p>
+      <p>Precio: {{ curso.precio | currency }}</p>
+      <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
+      <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
 
-    <div class="curso-actions">
-      <button (click)="verNiveles(curso)">Ver Niveles</button>
-      <button (click)="editarCurso(curso)">Editar</button>
-      <button (click)="eliminarCurso(curso.id)">Eliminar</button>
+      <div class="curso-actions">
+        <button (click)="verNiveles(curso)">Ver Niveles</button>
+        <button (click)="editarCurso(curso)">Editar</button>
+        <button (click)="eliminarCurso(curso.id)">Eliminar</button>
+      </div>
     </div>
   </div>
 
@@ -69,5 +71,15 @@
 
     <button (click)="actualizarCurso()">Actualizar Curso</button>
     <button (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="mostrarModal" class="modal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <p>{{ mensajeModal }}</p>
+    <button (click)="confirmarAccion()">Confirmar</button>
+    <button (click)="cerrarModal()">Cancelar</button>
   </div>
 </div>

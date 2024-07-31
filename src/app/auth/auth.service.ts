@@ -6,22 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; // URL base del API
+  private apiUrl = 'http://localhost:3000/api/auth'; // URL base del API
 
   constructor(private http: HttpClient) {}
 
-  register(nombres: string, apellidos: string, correo: string, edad: number, sexo: string, contrasena: string): Observable<any> {
+  register(nombres: string, apellidos: string, email: string, edad: number, sexo: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, {
       nombres,
       apellidos,
-      correo,
+      email, // Asegúrate de que este nombre coincida con el backend
       edad,
       sexo,
-      contrasena
+      password // Asegúrate de que este nombre coincida con el backend
     });
   }
 
-  login(correo: string, contrasena: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { correo, contrasena });
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
   }
 }

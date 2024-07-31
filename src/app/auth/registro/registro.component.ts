@@ -18,21 +18,28 @@ export class RegistroComponent {
     confirmarContrasena: ''
   };
 
+  mensaje: string = ''; // Variable para mensajes de error o éxito
+
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
     if (this.validateInputs()) {
       this.authService.register(this.user.nombres, this.user.apellidos, this.user.correo, this.user.edad, this.user.sexo, this.user.contrasena).subscribe({
-        next: () => this.router.navigate(['/idiomas']),
-        error: (err) => alert(err.error.error || 'Error en el registro'),
+        next: () => {
+          this.mensaje = 'Registro exitoso. Redirigiendo...';
+          setTimeout(() => this.router.navigate(['/inicio']), 2000); // Redirige después de 2 segundos
+        },
+        error: (err) => {
+          this.mensaje = 'Error en el registro: ' + (err.error.message || 'Ocurrió un error inesperado');
+        }
       });
     } else {
-      alert('Por favor, complete todos los campos correctamente.');
+      this.mensaje = 'Por favor, complete todos los campos correctamente.';
     }
   }
 
   onVolver() {
-    this.router.navigate(['/inicio']); // Navega a la pantalla de inicio o a donde quieras regresar
+    this.router.navigate(['/inicio']);
   }
 
   validateInputs(): boolean {
@@ -43,7 +50,7 @@ export class RegistroComponent {
            edad > 0 &&
            sexo.trim() !== '' &&
            contrasena.trim() !== '' &&
-           contrasena === confirmarContrasena; // Validación para que la contraseña y la confirmación coincidan
+           contrasena === confirmarContrasena;
   }
 
   validateEmail(email: string): boolean {

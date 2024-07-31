@@ -101,3 +101,21 @@
   background-color: #17a2b8;
   transform: scale(1.05);
 }
+
+.mensaje {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mensaje-exito {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.mensaje-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

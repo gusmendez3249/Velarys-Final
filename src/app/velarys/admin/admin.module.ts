@@ -14,7 +14,7 @@ import { JuegosAdmin } from './juegos/juegos.component';
     CursosAdmin,
     NivelesAdmin,
     LeccionesAdmin,
-    JuegosAdmin
+    JuegosAdmin,
   ],
   imports: [
     CommonModule,

@@ -127,5 +127,18 @@ button:hover {
   font-family: 'Roboto', cursive;
 }
 
+/* Estilos para el mensaje de error */
+.error-message {
+  color: #d9534f; /* Color rojo para el texto de error */
+  background-color: #f8d7da; /* Fondo ligeramente rosado */
+  border: 1px solid #d9534f; /* Borde rojo */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  margin-top: 15px; /* Espaciado superior */
+  font-size: 14px; /* Tamaño del texto */
+  font-weight: bold; /* Texto en negrita */
+  text-align: center; /* Centra el texto */
+}
+
 
 
