@@ -7,6 +7,7 @@ import { CursosAdmin } from './cursos/cursos.component';
 import { NivelesAdmin } from './niveles/niveles.component';
 import { LeccionesAdmin } from './lecciones/lecciones.component';
 import { JuegosAdmin } from './juegos/juegos.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { JuegosAdmin } from './juegos/juegos.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

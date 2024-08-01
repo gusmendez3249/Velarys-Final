@@ -1,3 +1,4 @@
+<!-- Header -->
 <div class="header">
   <div class="logo">
     <img src="assets/logo.jpg" alt="Logo">
@@ -6,9 +7,11 @@
     <h1>Velarys - Administrador</h1>
   </div>
   <div class="actions">
-    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesion</button>
+    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
   </div>
 </div>
+
+<!-- Main content -->
 <div class="admin-content">
   <h2>Gestión de Cursos</h2>
 
@@ -21,7 +24,8 @@
       <p>Precio: {{ curso.precio | currency }}</p>
       <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
       <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
-
+      <p>ID: {{ curso.id }}</p> <!-- Mostrar ID del curso -->
+      
       <div class="curso-actions">
         <button (click)="verNiveles(curso)">Ver Niveles</button>
         <button (click)="editarCurso(curso)">Editar</button>
@@ -33,44 +37,117 @@
   <!-- Formulario para agregar nuevo curso -->
   <div class="agregar-curso" *ngIf="!cursoEditado">
     <h3>Agregar Nuevo Curso</h3>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" [(ngModel)]="nuevoCurso.nombre">
+    <form [formGroup]="nuevoCursoForm" (ngSubmit)="crearCurso()">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre">
+      <div *ngIf="nuevoCursoForm.controls['nombre'].invalid && nuevoCursoForm.controls['nombre'].touched" class="error">
+        Nombre es obligatorio
+      </div>
 
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" [(ngModel)]="nuevoCurso.descripcion"></textarea>
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" formControlName="descripcion"></textarea>
+      <div *ngIf="nuevoCursoForm.controls['descripcion'].invalid && nuevoCursoForm.controls['descripcion'].touched" class="error">
+        Descripción es obligatoria
+      </div>
 
-    <label for="precio">Precio:</label>
-    <input type="number" id="precio" [(ngModel)]="nuevoCurso.precio">
+      <label for="precio">Precio:</label>
+      <input type="number" id="precio" formControlName="precio">
+      <div *ngIf="nuevoCursoForm.controls['precio'].invalid && nuevoCursoForm.controls['precio'].touched" class="error">
+        Precio es obligatorio y debe ser mayor o igual a 0
+      </div>
+      <div *ngIf="nuevoCursoForm.errors?.['precioInvalido']" class="error">
+        Si el curso es de paga, el precio debe ser mayor a 0.
+      </div>
 
-    <label for="esDePaga">Es de paga:</label>
-    <input type="checkbox" id="esDePaga" [(ngModel)]="nuevoCurso.esDePaga">
+      <label for="esDePaga">Es de paga:</label>
+      <div class="radio-group">
+        <input type="radio" id="esDePaga-si" formControlName="esDePaga" [value]="true">
+        <label for="esDePaga-si">Sí</label>
+      </div>
+      <div class ="radio-group">
+        <input type="radio" id="esDePaga-no" formControlName="esDePaga" [value]="false">
+        <label for="esDePaga-no">No</label>
+      </div>
+      <div *ngIf="nuevoCursoForm.get('precio')?.value > 0 && !nuevoCursoForm.get('esDePaga')?.value" class="info">
+        El precio es mayor a 0, por lo que el curso debería ser marcado como "Es de paga".
+      </div>
 
-    <label for="acceso">Acceso:</label>
-    <input type="checkbox" id="acceso" [(ngModel)]="nuevoCurso.acceso">
+      <label for="acceso">Acceso:</label>
+      <div class = "radio-group">
+        <input type="radio" id="acceso-publico" formControlName="acceso" [value]="true">
+        <label for="acceso-publico">Público</label>
+      </div>
+      <div class = "radio-group">
+        <input type="radio" id="acceso-privado" formControlName="acceso" [value]="false">
+        <label for="acceso-privado">Privado</label>
+      </div>
 
-    <button (click)="crearCurso()">Crear Curso</button>
+      <button type="submit">Crear Curso</button>
+      <div *ngIf="errorMensaje && !cursoEditado" class="error">
+        {{ errorMensaje }}
+      </div>
+    </form>
   </div>
 
   <!-- Formulario para editar un curso -->
   <div class="editar-curso" *ngIf="cursoEditado">
     <h3>Editar Curso</h3>
-    <label for="edit-nombre">Nombre:</label>
-    <input type="text" id="edit-nombre" [(ngModel)]="cursoEditado.nombre">
+    <form [formGroup]="cursoEditadoForm" (ngSubmit)="actualizarCurso()">
+      <label for="edit-nombre">Nombre:</label>
+      <input type="text" id="edit-nombre" formControlName="nombre">
+      <div *ngIf="cursoEditadoForm.controls['nombre'].invalid && cursoEditadoForm.controls['nombre'].touched" class="error">
+        Nombre es obligatorio
+      </div>
 
-    <label for="edit-descripcion">Descripción:</label>
-    <textarea id="edit-descripcion" [(ngModel)]="cursoEditado.descripcion"></textarea>
+      <label for="edit-descripcion">Descripción:</label>
+      <textarea id="edit-descripcion" formControlName="descripcion"></textarea>
+      <div *ngIf="cursoEditadoForm.controls['descripcion'].invalid && cursoEditadoForm.controls['descripcion'].touched" class="error">
+        Descripción es obligatoria
+      </div>
 
-    <label for="edit-precio">Precio:</label>
-    <input type="number" id="edit-precio" [(ngModel)]="cursoEditado.precio">
+      <label for="edit-precio">Precio:</label>
+      <input type="number" id="edit-precio" formControlName="precio">
+      <div *ngIf="cursoEditadoForm.controls['precio'].invalid && cursoEditadoForm.controls['precio'].touched" class="error">
+        Precio es obligatorio y debe ser mayor o igual a 0
+      </div>
+      <div *ngIf="cursoEditadoForm.errors?.['precioInvalido']" class="error">
+        Si el curso es de paga, el precio debe ser mayor a 0.
+      </div>
 
-    <label for="edit-esDePaga">Es de paga:</label>
-    <input type="checkbox" id="edit-esDePaga" [(ngModel)]="cursoEditado.esDePaga">
+      <label for="edit-esDePaga">Es de paga:</label>
+      <div class="radio-group">
+        <div>
+          <input type="radio" id="edit-esDePaga-si" formControlName="esDePaga" [value]="true">
+          <label for="edit-esDePaga-si">Sí</label>
+        </div>
+        <div>
+          <input type="radio" id="edit-esDePaga-no" formControlName="esDePaga" [value]="false">
+          <label for="edit-esDePaga-no">No</label>
+        </div>
+      </div>
 
-    <label for="edit-acceso">Acceso:</label>
-    <input type="checkbox" id="edit-acceso" [(ngModel)]="cursoEditado.acceso">
 
-    <button (click)="actualizarCurso()">Actualizar Curso</button>
-    <button (click)="cancelarEdicion()">Cancelar</button>
+      <div *ngIf="cursoEditadoForm.get('precio')?.value > 0 && !cursoEditadoForm.get('esDePaga')?.value" class="info">
+        El precio es mayor a 0, por lo que el curso debería ser marcado como "Es de paga".
+      </div>
+
+      <label for="edit-acceso">Acceso:</label>
+      <div class="radio-group">
+        <input type="radio" id="edit-acceso-publico" formControlName="acceso" [value]="true">
+        <label for="edit-acceso-publico">Público</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="edit-acceso-privado" formControlName="acceso" [value]="false">
+        <label for="edit-acceso-privado">Privado</label>
+      </div>
+      <div class="curso-actions">
+      <button type="submit">Actualizar Curso</button>
+      <button (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+      <div *ngIf="errorMensaje && cursoEditado" class="error">
+        {{ errorMensaje }}
+      </div>
+    </form>
   </div>
 </div>
 

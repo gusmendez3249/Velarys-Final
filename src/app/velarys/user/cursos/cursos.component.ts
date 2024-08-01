@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface Curso {
-  id: number;
-  nombre: string;
-  descripcion: string;
-}
+import { CursoService } from '../../services/curso.service';
 
 @Component({
   selector: 'app-cursos',
@@ -13,24 +8,38 @@ interface Curso {
   styleUrls: ['./cursos.component.css']
 })
 export class CursosComponent implements OnInit {
-  cursos: Curso[] = [];
+  cursos: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private cursoService: CursoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.cargarCursos();
+    this.obtenerCursos();
   }
 
-  cargarCursos(): void {
-    // Aquí puedes cargar los cursos desde una API o servicio.
-    // Este es un ejemplo de datos estáticos:
-    this.cursos = [
-      { id: 1, nombre: 'Curso 1', descripcion: 'Descripción del Curso 1' },
-      { id: 2, nombre: 'Curso 2', descripcion: 'Descripción del Curso 2' }
-    ];
+  obtenerCursos(): void {
+    this.cursoService.getCursos().subscribe(
+      (response) => {
+        this.cursos = response;
+      },
+      (error) => {
+        console.error('Error al obtener los cursos:', error);
+      }
+    );
   }
 
-  verNiveles(cursoId: number): void {
-    this.router.navigate([`niveles/${cursoId}`]);
+  verNiveles(curso: any): void {
+    if (curso.acceso) {
+      this.router.navigate([`niveles/${curso.id}`]);
+    }
+  }
+
+  pagarCurso(curso: any): void {
+    // Implementar lógica para el pago del curso
+    console.log(`Pago del curso ${curso.id}`);
+    // Redirigir a la página de pago o realizar el pago aquí
+  }
+
+  cerrarSesion(): void {
+    this.router.navigate(['/cerrar']);
   }
 }

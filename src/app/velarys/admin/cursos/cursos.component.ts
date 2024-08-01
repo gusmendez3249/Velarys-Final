@@ -1,125 +1,182 @@
-  import { CursoService } from './../../services/curso.service';
-  import { Component, OnInit } from '@angular/core';
-  import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CursoService } from './../../services/curso.service';
 
-  @Component({
-    selector: 'app-cursos',
-    templateUrl: './cursos.component.html',
-    styleUrls: ['./cursos.component.css']
-  })
-  export class CursosAdmin implements OnInit {
-    cursos: any[] = [];
-    nuevoCurso = { nombre: '', descripcion: '', precio: 0, esDePaga: false, acceso: false };
-    cursoEditado: any = null;
-    mostrarModal: boolean = false;
-    mensajeModal: string = '';
-    callbackConfirm: () => void = () => {};
+// Validador personalizado para verificar el precio si esDePaga es verdadero
+function precioRequeridoSiEsDePaga(): ValidatorFn {
+  return (formGroup: AbstractControl): { [key: string]: any } | null => {
+    const precio = formGroup.get('precio')?.value;
+    const esDePaga = formGroup.get('esDePaga')?.value;
 
-    constructor(
-      private cursoService: CursoService,
-      private router: Router
-    ) { }
-
-    ngOnInit(): void {
-      this.obtenerCursos();
+    if (esDePaga && (precio === null || precio <= 0)) {
+      return { precioInvalido: true }; // Error si el precio es inválido
     }
+    return null; // No hay error
+  };
+}
 
-    obtenerCursos(): void {
-      this.cursoService.getCursos().subscribe(
-        (response) => {
-          this.cursos = response;
-        },
-        (error) => {
-          console.error('Error al obtener los cursos:', error);
-        }
-      );
-    }
+@Component({
+  selector: 'app-cursos',
+  templateUrl: './cursos.component.html',
+  styleUrls: ['./cursos.component.css']
+})
+export class CursosAdmin implements OnInit {
+  cursos: any[] = [];
+  nuevoCursoForm: FormGroup;
+  cursoEditadoForm: FormGroup;
+  cursoEditado: any = null;
+  mostrarModal: boolean = false;
+  mensajeModal: string = '';
+  callbackConfirm: () => void = () => {};
+  errorMensaje: string = ''; // Mensaje de error
 
-    crearCurso(): void {
+  constructor(
+    private fb: FormBuilder,
+    private cursoService: CursoService,
+    private router: Router
+  ) {
+    this.nuevoCursoForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      precio: [0, [Validators.required, Validators.min(0)]],
+      esDePaga: [false],
+      acceso: [false]
+    }, { validator: precioRequeridoSiEsDePaga() }); // Aplicar validador personalizado
+
+    this.cursoEditadoForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      precio: [0, [Validators.required, Validators.min(0)]],
+      esDePaga: [false],
+      acceso: [false]
+    }, { validator: precioRequeridoSiEsDePaga() }); // Aplicar validador personalizado
+
+    // Suscribirse a los cambios en el campo precio para actualizar el campo esDePaga
+    this.nuevoCursoForm.get('precio')?.valueChanges.subscribe(precio => {
+      this.actualizarEsDePaga(precio, this.nuevoCursoForm.get('esDePaga'));
+    });
+
+    this.cursoEditadoForm.get('precio')?.valueChanges.subscribe(precio => {
+      this.actualizarEsDePaga(precio, this.cursoEditadoForm.get('esDePaga'));
+    });
+  }
+
+  ngOnInit(): void {
+    this.obtenerCursos();
+  }
+
+  obtenerCursos(): void {
+    this.cursoService.getCursos().subscribe(
+      (response) => {
+        this.cursos = response;
+      },
+      (error) => {
+        console.error('Error al obtener los cursos:', error);
+      }
+    );
+  }
+
+  crearCurso(): void {
+    if (this.nuevoCursoForm.valid) {
       this.mostrarConfirmacion('¿Estás seguro de que deseas crear este curso?', () => {
-        this.cursoService.createCurso(this.nuevoCurso).subscribe(
+        this.cursoService.createCurso(this.nuevoCursoForm.value).subscribe(
           (response) => {
-            alert('Curso creado exitosamente');
+            this.errorMensaje = ''; // Limpiar mensaje de error
             this.obtenerCursos();
-            this.nuevoCurso = { nombre: '', descripcion: '', precio: 0, esDePaga: false, acceso: false };
+            this.nuevoCursoForm.reset();
           },
           (error) => {
             console.error('Error al crear el curso:', error);
+            this.errorMensaje = 'Hubo un error al crear el curso. Inténtalo nuevamente.';
           }
         );
       });
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
     }
-
-    editarCurso(curso: any): void {
-      this.cursoEditado = { ...curso };
-    }
-
-    actualizarCurso(): void {
-      if (this.cursoEditado) {
-        this.mostrarConfirmacion('¿Estás seguro de que deseas actualizar este curso?', () => {
-          this.cursoService.updateCurso(this.cursoEditado.id, this.cursoEditado).subscribe(
-            (response) => {
-              alert('Curso actualizado exitosamente');
-              this.obtenerCursos();
-              this.cursoEditado = null;
-            },
-            (error) => {
-              console.error('Error al actualizar el curso:', error);
-            }
-          );
-        });
-      }
-    }
-
-    cancelarEdicion(): void {
-      this.cursoEditado = null;
-    }
-
-    eliminarCurso(id: number): void {
-      this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar este curso?', () => {
-        this.cursoService.deleteCurso(id).subscribe(
-          () => {
-            alert('Curso eliminado exitosamente');
-            this.obtenerCursos();
-          },
-          (error) => {
-            console.error('Error al eliminar el curso:', error);
-
-            if (error.status === 400 && error.error === 'No se puede eliminar el curso porque existen registros relacionados en otras tablas.') {
-              alert('No se puede eliminar el curso porque existen registros relacionados en otras tablas.');
-            } else {
-              alert('No se pudo eliminar el curso. Elimine primero los niveles de este curso.');
-            }
-          }
-        );
-      });
-    }
-
-
-    verNiveles(curso: any): void {
-      this.router.navigate([`niveladmin/${curso.id}`]);
-    }
-
-    cerrarSesion(): void {
-      this.router.navigate(['/cerrar']);
-    }
-
-   mostrarConfirmacion(mensaje: string, callback: () => void): void {
-  this.mensajeModal = mensaje;
-  this.callbackConfirm = callback;
-  this.mostrarModal = true;
-}
-
-    cerrarModal(): void {
-      this.mostrarModal = false;
-    }
-
-    confirmarAccion(): void {
-      if (this.callbackConfirm) {
-        this.callbackConfirm();
-      }
-      this.cerrarModal();
-    }
-
   }
 
+  editarCurso(curso: any): void {
+    this.cursoEditado = { ...curso };
+    this.cursoEditadoForm.patchValue(curso);
+
+    // Asegurarse de que esDePaga esté correctamente ajustado
+    this.actualizarEsDePaga(curso.precio, this.cursoEditadoForm.get('esDePaga'));
+  }
+
+  actualizarCurso(): void {
+    if (this.cursoEditadoForm.valid) {
+      this.mostrarConfirmacion('¿Estás seguro de que deseas actualizar este curso?', () => {
+        this.cursoService.updateCurso(this.cursoEditado.id, this.cursoEditadoForm.value).subscribe(
+          (response) => {
+            this.errorMensaje = ''; // Limpiar mensaje de error
+            this.obtenerCursos();
+            this.cursoEditado = null;
+          },
+          (error) => {
+            console.error('Error al actualizar el curso:', error);
+            this.errorMensaje = 'Hubo un error al actualizar el curso. Inténtalo nuevamente.';
+          }
+        );
+      });
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
+    }
+  }
+
+  cancelarEdicion(): void {
+    this.cursoEditado = null;
+  }
+
+  eliminarCurso(id: number): void {
+    this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar este curso?', () => {
+      this.cursoService.deleteCurso(id).subscribe(
+        () => {
+          this.errorMensaje = ''; // Limpiar mensaje de error
+          this.obtenerCursos();
+        },
+        (error) => {
+          console.error('Error al eliminar el curso:', error);
+          this.errorMensaje = 'Hubo un error al eliminar el curso. Inténtalo nuevamente.';
+        }
+      );
+    });
+  }
+
+  verNiveles(curso: any): void {
+    this.router.navigate([`niveladmin/${curso.id}`]);
+  }
+
+  cerrarSesion(): void {
+    this.router.navigate(['/cerrar']);
+  }
+
+  mostrarConfirmacion(mensaje: string, callback: () => void): void {
+    this.mensajeModal = mensaje;
+    this.callbackConfirm = callback;
+    this.mostrarModal = true;
+  }
+
+  cerrarModal(): void {
+    this.mostrarModal = false;
+  }
+
+  confirmarAccion(): void {
+    if (this.callbackConfirm) {
+      this.callbackConfirm();
+    }
+    this.cerrarModal();
+  }
+
+  // Método para actualizar el campo esDePaga basado en el valor de precio
+  private actualizarEsDePaga(precio: number, esDePagaControl: AbstractControl | null): void {
+    if (esDePagaControl) {
+      if (precio > 0) {
+        esDePagaControl.setValue(true, { emitEvent: false });
+      } else {
+        esDePagaControl.setValue(false, { emitEvent: false });
+      }
+    }
+  }
+}

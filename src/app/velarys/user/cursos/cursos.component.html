@@ -1,17 +1,43 @@
+<!-- Header -->
 <div class="header">
   <div class="logo">
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Velarys - Cursos</h1>
+    <h1>Velarys - Administrador</h1>
+  </div>
+  <div class="actions">
+    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
   </div>
 </div>
 
-<div class="courses-content">
-  <h2>Cursos Disponibles</h2>
-  <div *ngFor="let curso of cursos" class="curso">
+<!-- Contenedor de cursos -->
+<div class="cursos-container">
+  <div class="curso-card" *ngFor="let curso of cursos">
     <h3>{{ curso.nombre }}</h3>
     <p>{{ curso.descripcion }}</p>
-    <button (click)="verNiveles(curso.id)">Ver Niveles</button>
+    <p>Precio: {{ curso.precio | currency }}</p>
+    <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
+    <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
+
+    <div class="curso-actions">
+      <!-- Botón Ver Niveles -->
+      <button
+        (click)="verNiveles(curso)"
+        [disabled]="!curso.acceso"
+        [class.disabled]="!curso.acceso"
+      >
+        Ver Niveles
+      </button>
+
+      <!-- Botón Pagar -->
+      <button
+        *ngIf="curso.esDePaga"
+        (click)="pagarCurso(curso)"
+        class="btn-pagar"
+      >
+        Pagar
+      </button>
+    </div>
   </div>
 </div>
