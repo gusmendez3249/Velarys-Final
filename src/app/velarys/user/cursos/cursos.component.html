@@ -4,12 +4,18 @@
     <img src="assets/logo.jpg" alt="Logo">
   </div>
   <div class="title">
-    <h1>Velarys - Administrador</h1>
+    <h1>Cursos Velarys</h1>
   </div>
   <div class="actions">
     <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
   </div>
 </div>
+<!-- Encabezado -->
+<div class="encabezado">
+  <h2>Bienvenido a los cursos de Velarys</h2>
+  <p>¡Gracias por unirte a nuestra plataforma!</p>
+</div>
+
 
 <!-- Contenedor de cursos -->
 <div class="cursos-container">
@@ -26,6 +32,7 @@
         (click)="verNiveles(curso)"
         [disabled]="!curso.acceso"
         [class.disabled]="!curso.acceso"
+        class="btn-leccion"
       >
         Ver Niveles
       </button>

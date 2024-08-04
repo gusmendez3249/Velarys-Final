@@ -11,59 +11,107 @@
 </div>
 
 <div class="admin-content">
-  <h2>Agregar Nivel</h2>
-  <div class="agregar-nivel">
-    <label for="nombre">Nombre:</label>
-    <input id="nombre" [(ngModel)]="nuevoNivel.nombre" type="text">
+  <h2>Gestión de Niveles</h2>
 
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" [(ngModel)]="nuevoNivel.descripcion"></textarea>
-
-    <label for="esDePaga">Es de Paga:</label>
-    <input id="esDePaga" [(ngModel)]="nuevoNivel.esDePaga" type="checkbox">
-
-    <label for="acceso">Acceso:</label>
-    <input id="acceso" [(ngModel)]="nuevoNivel.acceso" type="checkbox">
-
-    <button (click)="crearNivel()">Agregar Nivel</button>
-  </div>
-
-  <h2>Lista de Niveles</h2>
-  <div *ngFor="let nivel of niveles" class="nivel-card">
-    <div class="nivel-details">
-      <label>Nombre:</label>
-      <span>{{ nivel.nombre }}</span>
-
-      <label>Descripción:</label>
-      <span>{{ nivel.descripcion }}</span>
-
-      <label>Es de Paga:</label>
-      <span>{{ nivel.esDePaga ? 'Sí' : 'No' }}</span>
-
-      <label>Acceso:</label>
-      <span>{{ nivel.acceso ? 'Sí' : 'No' }}</span>
-    </div>
-    <div class="nivel-actions">
-      <button (click)="seleccionarNivel(nivel)">Editar</button>
-      <button (click)="eliminarNivel(nivel.id!)">Eliminar</button>
-      <button (click)="verLecciones(nivel)">Ver Lecciones</button>
+  <!-- Lista de Niveles -->
+  <div class="nivel-container">
+    <div *ngFor="let nivel of niveles" class="nivel-card">
+      <div class="nivel-details">
+        <h3>{{ nivel.nombre }}</h3>
+        <p>{{ nivel.descripcion }}</p>
+        <p>Precio: {{ nivel.precio | currency:'USD' }}</p>
+        <p>Acceso: {{ nivel.acceso ? 'Sí' : 'No' }}</p>
+        <p>ID: {{ nivel.id }}</p>
+      </div>
+      <div class="nivel-actions">
+        <button (click)="verLecciones(nivel)">Ver Lecciones</button>
+        <button (click)="seleccionarNivel(nivel)">Editar</button>
+        <button (click)="confirmarEliminarNivel(nivel.id!)">Eliminar</button>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="nivelEditado" class="agregar-nivel">
+  <!-- Formulario de agregar niveles -->
+  <div *ngIf="!esEdicion" class="agregar-nivel">
+    <h3>Agregar Nuevo Nivel</h3>
+    <form [formGroup]="nuevoNivelForm" (ngSubmit)="crearNivel()">
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" formControlName="nombre" type="text">
+      <div *ngIf="nuevoNivelForm.get('nombre')?.invalid && nuevoNivelForm.get('nombre')?.touched" class="error-message">
+        Nombre es obligatorio.
+      </div>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" formControlName="descripcion"></textarea>
+      <div *ngIf="nuevoNivelForm.get('descripcion')?.invalid && nuevoNivelForm.get('descripcion')?.touched" class="error-message">
+        Descripción es obligatoria.
+      </div>
+
+      <label for="esDePaga">Es de Paga:</label>
+      <input id="esDePaga" formControlName="esDePaga" type="checkbox" (change)="onEsDePagaChange()">
+
+      <div *ngIf="nuevoNivelForm.get('esDePaga')?.value">
+        <label for="precio">Precio:</label>
+        <input id="precio" formControlName="precio" type="number" step="0.01">
+        <div *ngIf="nuevoNivelForm.get('precio')?.invalid && nuevoNivelForm.get('precio')?.touched" class="error-message">
+          Precio debe ser mayor a 0.
+        </div>
+      </div>
+
+      <label for="acceso">Acceso:</label>
+      <input id="acceso" formControlName="acceso" type="checkbox">
+
+      <button type="submit">Agregar Nivel</button>
+      <div *ngIf="errorMensaje && !nivelEditado" class="error">
+        {{ errorMensaje }}
+      </div>
+    </form>
+  </div>
+
+  <!-- Formulario para Editar Nivel -->
+  <div *ngIf="esEdicion && nivelEditado" class="agregar-nivel">
     <h3>Editar Nivel</h3>
-    <label for="nombreEditado">Nombre:</label>
-    <input id="nombreEditado" [(ngModel)]="nivelEditado.nombre" type="text">
+    <form [formGroup]="nivelEditadoForm" (ngSubmit)="actualizarNivel()">
+      <label for="nombreEditado">Nombre:</label>
+      <input id="nombreEditado" formControlName="nombre" type="text">
+      <div *ngIf="nivelEditadoForm.get('nombre')?.invalid && nivelEditadoForm.get('nombre')?.touched" class="error-message">
+        Nombre es obligatorio.
+      </div>
 
-    <label for="descripcionEditado">Descripción:</label>
-    <textarea id="descripcionEditado" [(ngModel)]="nivelEditado.descripcion"></textarea>
+      <label for="descripcionEditado">Descripción:</label>
+      <textarea id="descripcionEditado" formControlName="descripcion"></textarea>
+      <div *ngIf="nivelEditadoForm.get('descripcion')?.invalid && nivelEditadoForm.get('descripcion')?.touched" class="error-message">
+        Descripción es obligatoria.
+      </div>
 
-    <label for="esDePagaEditado">Es de Paga:</label>
-    <input id="esDePagaEditado" [(ngModel)]="nivelEditado.esDePaga" type="checkbox">
+      <label for="esDePagaEditado">Es de Paga:</label>
+      <input id="esDePagaEditado" formControlName="esDePaga" type="checkbox" (change)="onEsDePagaChangeEditado()">
 
-    <label for="accesoEditado">Acceso:</label>
-    <input id="accesoEditado" [(ngModel)]="nivelEditado.acceso" type="checkbox">
+      <div *ngIf="nivelEditadoForm.get('esDePaga')?.value">
+        <label for="precioEditado">Precio:</label>
+        <input id="precioEditado" formControlName="precio" type="number" step="0.01">
+        <div *ngIf="nivelEditadoForm.get('precio')?.invalid && nivelEditadoForm.get('precio')?.touched" class="error-message">
+          Precio debe ser mayor a 0.
+        </div>
+      </div>
 
-    <button (click)="editarNivel()">Guardar Cambios</button>
+      <label for="accesoEditado">Acceso:</label>
+      <input id="accesoEditado" formControlName="acceso" type="checkbox">
+
+      <button type="submit">Guardar Cambios</button>
+
+      <div *ngIf="errorMensaje && nivelEditado" class="error">
+        {{ errorMensaje }}
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal de Confirmación -->
+  <div *ngIf="mostrarModal" class="modal">
+    <div class="modal-content">
+      <p>{{ mensajeModal }}</p>
+      <button (click)="confirmarAccion()">Sí</button>
+      <button (click)="cerrarModal()">No</button>
+    </div>
   </div>
 </div>

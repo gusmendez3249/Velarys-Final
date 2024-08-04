@@ -1,0 +1,108 @@
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4b0082; /* Color morado oscuro */
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.actions .btn-cerrar-sesion {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.actions .btn-cerrar-sesion:hover {
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
+}
+
+/* Estilos para el contenedor de niveles */
+.niveles-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+  gap: 20px; /* Espacio entre tarjetas */
+  margin: 20px 0; /* Espacio superior e inferior */
+}
+
+/* Estilo para las tarjetas de nivel */
+.nivel-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f3e6f7; /* Color morado claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.nivel-card h3 {
+  margin-top: 0;
+}
+
+.nivel-card p {
+  margin: 5px 0;
+}
+
+/* Estilo para los botones dentro de cada tarjeta */
+.nivel-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.nivel-actions button {
+  padding: 8px 16px;
+  background-color: #6c5b7b; /* Color morado más oscuro */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
+.nivel-actions button:hover {
+  background-color: #8d4c8c; /* Color morado más claro para hover */
+}
+
+/* Estilo para el botón de pagar */
+.btn-pagar {
+  background-color: #4b0082; /* Color morado más oscuro para pagar */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Espacio superior para separar el botón del mensaje */
+}
+
+.btn-pagar:hover {
+  background-color: #6a0dad; /* Color morado más claro para hover en pagar */
+}
+/* Estilo para el botón deshabilitado */
+.nivel-actions .disabled {
+  background-color: #ccc; /* Color gris claro para botones deshabilitados */
+  cursor: not-allowed;
+}
+
+
+
+/* Mensaje de error */
+.error {
+  color: #ff4d4d; /* Color rojo para mensajes de error */
+  margin-top: 20px;
+}

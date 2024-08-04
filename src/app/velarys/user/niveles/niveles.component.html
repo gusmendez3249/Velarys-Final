@@ -1,1 +1,54 @@
-<p>niveles works!</p>
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Logo">
+  </div>
+  <div class="title">
+    <h1>Niveles Velarys</h1>
+  </div>
+  <div class="actions">
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
+  </div>
+</div>
+
+<!-- Encabezado -->
+<div class="encabezado">
+  <h5>Bienvenido a los cursos de Velarys</h5>
+  <h2>¡Gracias por unirte a nuestra plataforma!</h2>
+</div>
+
+<!-- Contenedor de niveles -->
+<div class="niveles-container">
+  <div class="nivel-card" *ngFor="let nivel of niveles">
+    <h3>{{ nivel.nombre }}</h3>
+    <p>{{ nivel.descripcion }}</p>
+    <p>Precio: {{ nivel.precio | currency:'USD' }}</p>
+    <p>Es de paga: {{ nivel.esDePaga ? 'Sí' : 'No' }}</p>
+    <p>Acceso: {{ nivel.acceso ? 'Sí' : 'No' }}</p>
+
+    <div class="nivel-actions">
+      <!-- Botón Ver Lecciones -->
+      <button
+        (click)="verLecciones(nivel)"
+        [disabled]="!nivel.acceso"
+        [class.disabled]="!nivel.acceso"
+      >
+        Ver Lecciones
+      </button>
+
+      <!-- Botón Pagar si el nivel es de paga y no tienes acceso -->
+      <button
+        *ngIf="!nivel.acceso && nivel.esDePaga"
+        (click)="pagarNivel(nivel)"
+        class="btn-pagar"
+      >
+        Pagar
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMensaje" class="error">
+    {{ errorMensaje }}
+  </div>
+</div>

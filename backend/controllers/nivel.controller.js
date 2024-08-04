@@ -15,10 +15,22 @@ exports.getNivelById = (req, res) => {
   });
 };
 
+
+// Controlador para obtener niveles por cursoId
 exports.getNivelesByCursoId = (req, res) => {
-  Nivel.getByCursoId(req.params.cursoId, (err, results) => {
-    if (err) res.status(500).send(err);
-    else res.json(results);
+  const cursoId = parseInt(req.params.cursoId, 10); // Obtener cursoId de los parámetros de la ruta
+
+  if (isNaN(cursoId)) {
+    return res.status(400).json({ error: 'Invalid cursoId' });
+  }
+
+  Nivel.getByCursoId(cursoId, (err, niveles) => {
+    if (err) {
+      console.error('Error al obtener niveles por curso:', err);
+      return res.status(500).json({ error: 'Error al obtener niveles' });
+    }
+
+    res.status(200).json(niveles);
   });
 };
 

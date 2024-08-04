@@ -1,3 +1,4 @@
+import { Nivel } from './../models/nivel.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,8 +11,9 @@ export class NivelService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerNivelesPorCurso(cursoId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}?cursoId=${cursoId}`);
+  // Adaptar la URL para que coincida con la nueva ruta del backend
+  obtenerNivelesPorCurso(cursoId: number): Observable<Nivel[]> {
+    return this.http.get<Nivel[]>(`${this.apiUrl}/curso/${cursoId}`);
   }
 
   crearNivel(nivel: any): Observable<any> {
@@ -26,3 +28,4 @@ export class NivelService {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -22,81 +22,37 @@
   color: white;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .header .actions button:hover {
-  background-color: white;
-  color: #4b0082;
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
 }
 
 /* Estilos para el contenido de administración */
 .admin-content {
-  max-width: 800px;
-  margin: 20px auto;
   padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .admin-content h2 {
-  color: #4b0082;
-  margin-bottom: 20px;
-}
-
-/* Estilos para cada nivel */
-.nivel {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f7f7f7;
-}
-
-.nivel label {
-  display: block;
-  margin-top: 10px;
-}
-
-.nivel input[type="text"],
-.nivel input[type="number"] {
-  width: calc(100% - 22px);
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-}
-
-.nivel input[type="checkbox"] {
-  margin: 0 10px 0 0;
-}
-
-.nivel button {
-  background-color: #4b0082;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.nivel button:hover {
-  background-color: #3a006b;
+  margin-top: 0;
 }
 
 /* Estilos para la sección de agregar nuevo nivel */
 .agregar-nivel {
-  margin-top: 30px;
-  padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f3e6f7; /* Color morado claro */
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
 
-.agregar-nivel h3 {
-  color: #4b0082;
-}
+
 
 .agregar-nivel label {
   display: block;
@@ -128,3 +84,180 @@
 .agregar-nivel button:hover {
   background-color: #3a006b;
 }
+
+/* Contenedor de los niveles en tres columnas */
+.nivel-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Tarjeta del nivel */
+.nivel-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f3e6f7; /* Color morado claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalles del nivel */
+.nivel-details {
+  margin-bottom: 10px;
+}
+
+.nivel-details label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.nivel-details span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Acciones del nivel */
+.nivel-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nivel-actions button {
+  padding: 8px 16px;
+  background-color: #6c5b7b; /* Color morado más oscuro */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
+.nivel-actions button:hover {
+  background-color: #8d4c8c; /* Color morado más oscuro para hover */
+}
+
+/* Ejemplo de estilos para los mensajes y el modal */
+.mensaje-error {
+  color: red;
+  margin-top: 10px;
+}
+
+.mensaje-exito {
+  color: green;
+  margin-top: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+/* Estilos del Modal */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro para el modal */
+  z-index: 1000;
+}
+
+/* Contenido del Modal */
+.modal-content {
+  background-color: #ffffff; /* Fondo blanco para el modal */
+  padding: 20px;
+  border-radius: 8px; /* Bordes más redondeados */
+  width: 90%;
+  max-width: 400px; /* Ancho máximo mayor para mejor visualización */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para profundidad */
+  position: relative;
+}
+
+/* Botón de Cierre */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333; /* Color gris oscuro */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves para hover */
+}
+
+.close:hover {
+  color: #ff5722; /* Color anaranjado claro para hover */
+  transform: scale(1.1); /* Aumento del tamaño para efecto de hover */
+}
+
+/* Contenido del Modal - Texto */
+.modal-content p {
+  margin: 0;
+  font-size: 16px;
+  color: #333; /* Color gris oscuro para el texto */
+}
+
+/* Botones en el Modal */
+.modal-content button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  font-weight: bold;
+  color: #fff;
+  margin: 5px; /* Espacio entre botones */
+}
+
+/* Botón Confirmar */
+.modal-content button:nth-of-type(1) {
+  background-color: #4caf50; /* Verde */
+}
+
+.modal-content button:nth-of-type(1):hover {
+  background-color: #388e3c; /* Verde más oscuro para hover */
+  transform: scale(1.03);
+}
+
+/* Botón Cancelar */
+.modal-content button:nth-of-type(2) {
+  background-color: #f44336; /* Rojo */
+}
+
+.modal-content button:nth-of-type(2):hover {
+  background-color: #d32f2f; /* Rojo más oscuro para hover */
+  transform: scale(1.03);
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+

@@ -108,6 +108,8 @@
   border-radius: 5px;
   text-align: center;
   font-weight: bold;
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 .mensaje-exito {
@@ -117,5 +119,5 @@
 
 .mensaje-error {
   background-color: #f8d7da;
-  color: #721c24;
+  color: #e20d23;
 }

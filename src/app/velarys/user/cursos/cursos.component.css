@@ -13,8 +13,25 @@
 
 .title h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 40px;
 }
+/* Estilos para el encabezado */
+.encabezado {
+  text-align: center; /* Centrar el texto */
+  margin: 20px 0; /* Espacio arriba y abajo del encabezado */
+}
+
+.encabezado h2 {
+  color: #8b1d99; /* Color morado específico para el h5 */
+  margin: 0; /* Eliminar el margen por defecto */
+  font-size: 40px; /* Tamaño de fuente para h5 */
+}
+
+.encabezado p {
+  margin: 10px 0; /* Espacio arriba y abajo del h2 */
+  font-size: 18px; /* Tamaño de fuente para h2 */
+}
+
 
 .actions .btn-cerrar-sesion {
   background-color: transparent;
@@ -22,69 +39,105 @@
   color: white;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 10px;
 }
 .actions .btn-cerrar-sesion:hover {
-  background-color: white;
-  color: #4b0082;
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
 }
-
 /* Estilos para el contenedor de cursos en tres columnas */
 .cursos-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
-  gap: 20px; /* Espacio entre tarjetas */
-  margin: 20px 0; /* Espacio superior e inferior */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta el número de columnas */
+  gap: 30px; /* Espacio entre tarjetas */
+  margin: 20px auto; /* Espacio superior e inferior y centrado horizontal */
+  max-width: 1200px; /* Ancho máximo del contenedor */
+  justify-content: center; /* Centra las columnas dentro del contenedor */
+  align-items: start; /* Alinea las tarjetas al inicio de la fila */
 }
 
 /* Estilo para las tarjetas de curso */
 .curso-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #f3e6f7; /* Color morado claro */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  border: 2px solid #79038b;
+  background-color: #fae1ff;
+  padding: 35px; /* Aumenta el padding para hacer la tarjeta más grande */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Corrección del box-shadow */
+  text-align: center; /* Centrar el texto y los elementos inline */
+  max-width: 300px; /* Ajusta el ancho máximo de cada tarjeta */
+  margin: 0 auto; /* Centrar cada tarjeta dentro de su celda de la rejilla */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transiciones suaves para hover */
+}
+
+/* Estilos para el hover en las tarjetas */
+.curso-card:hover {
+  background-color: #d7f3f2;
+  transform: scale(1.02); /* Pequeña escala para el efecto hover */
 }
 
 .curso-card h3 {
   margin-top: 0;
+  color: #6206a3;
+  font-size: 36px;
 }
 
 .curso-card p {
   margin: 5px 0;
+  font-size: 18px;
+}
+
+/* Estilo para los botones dentro de la tarjeta */
+.curso-card .btn {
+  display: inline-block; /* Asegura que el botón sea un elemento en línea bloqueable */
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.curso-card .btn:hover {
+  background-color: #79038b;
 }
 
 /* Estilo para los botones dentro de cada tarjeta */
 .curso-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Centrar los botones dentro de su contenedor */
 }
 
 .curso-actions button {
   padding: 8px 16px;
-  background-color: #6c5b7b; /* Color morado más oscuro */
   color: #fff;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
+  margin: 0 5px; /* Espacio entre botones */
   border-radius: 4px;
-}
-
-.curso-actions button:hover {
-  background-color: #8d4c8c; /* Color morado más claro para hover */
 }
 
 /* Estilo para el botón de pagar */
 .btn-pagar {
-  background-color: #4b0082; /* Color morado más oscuro para pagar */
+  background-color: #da9e14; /* Color morado más oscuro para pagar */
 }
 
 .btn-pagar:hover {
-  background-color: #6a0dad; /* Color morado más claro para hover en pagar */
+  background-color: #8829b5; /* Color morado más claro para hover en pagar */
+}
+
+.btn-leccion {
+  background-color: #345ee8;
+}
+.btn-leccion:hover {
+  background-color: #800cd2;
 }
 
 /* Estilo para el botón deshabilitado */
 .curso-actions .disabled {
-  background-color: #ccc; /* Color gris claro para botones deshabilitados */
+  background-color: #d78c8c; /* Color gris claro para botones deshabilitados */
   cursor: not-allowed;
 }

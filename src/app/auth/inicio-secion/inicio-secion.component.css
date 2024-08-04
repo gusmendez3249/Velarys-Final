@@ -107,8 +107,14 @@ button:hover {
   margin: 0 15px; /* Aumentar el margen entre los iconos */
 }
 
-.social-media:hover {
-  transform: scale(1.05);
+.x:hover {
+  transform: scale(1.1);
+}
+.face:hover {
+  transform: scale(1.1);
+}
+.insta:hover {
+  transform: scale(1.1);
 }
 
 .social-media img {

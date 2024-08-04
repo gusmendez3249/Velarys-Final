@@ -138,15 +138,17 @@ export class CursosAdmin implements OnInit {
         },
         (error) => {
           console.error('Error al eliminar el curso:', error);
-          this.errorMensaje = 'Hubo un error al eliminar el curso. Inténtalo nuevamente.';
+        alert('El curso contiene niveles, debes de eliminarlos primero.');
         }
       );
     });
   }
 
   verNiveles(curso: any): void {
+    // Redirige a la página de niveles para el curso específico
     this.router.navigate([`niveladmin/${curso.id}`]);
   }
+
 
   cerrarSesion(): void {
     this.router.navigate(['/cerrar']);

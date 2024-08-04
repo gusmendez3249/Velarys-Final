@@ -25,7 +25,7 @@
       <p>Es de paga: {{ curso.esDePaga ? 'Sí' : 'No' }}</p>
       <p>Acceso: {{ curso.acceso ? 'Sí' : 'No' }}</p>
       <p>ID: {{ curso.id }}</p> <!-- Mostrar ID del curso -->
-      
+
       <div class="curso-actions">
         <button (click)="verNiveles(curso)">Ver Niveles</button>
         <button (click)="editarCurso(curso)">Editar</button>
@@ -51,7 +51,7 @@
       </div>
 
       <label for="precio">Precio:</label>
-      <input type="number" id="precio" formControlName="precio">
+      <input type="number" id="precio" formControlName="precio" step="0.01">
       <div *ngIf="nuevoCursoForm.controls['precio'].invalid && nuevoCursoForm.controls['precio'].touched" class="error">
         Precio es obligatorio y debe ser mayor o igual a 0
       </div>
@@ -106,7 +106,7 @@
       </div>
 
       <label for="edit-precio">Precio:</label>
-      <input type="number" id="edit-precio" formControlName="precio">
+      <input type="number" id="edit-precio" formControlName="precio" step="0.01">
       <div *ngIf="cursoEditadoForm.controls['precio'].invalid && cursoEditadoForm.controls['precio'].touched" class="error">
         Precio es obligatorio y debe ser mayor o igual a 0
       </div>

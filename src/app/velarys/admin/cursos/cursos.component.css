@@ -16,16 +16,21 @@
   font-size: 24px;
 }
 
+
+
 .actions .btn-cerrar-sesion {
   background-color: transparent;
   border: 1px solid white;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 10px;
 }
 .actions .btn-cerrar-sesion:hover {
-  background-color: white;
-  color: #4b0082;
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
 }
 
 .admin-content {
