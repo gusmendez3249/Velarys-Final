@@ -94,7 +94,7 @@ export class LeccionesAdmin implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/niveles']);
+    window.history.back();
   }
 
   verJuegos(leccion: any):void{

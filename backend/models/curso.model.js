@@ -2,7 +2,15 @@
 const mysql = require('mysql2');
 const config = require('../config');
 
-const connection = mysql.createConnection(config.database);
+// Crear una conexión a la base de datos
+const connection = mysql.createConnection({
+  host: config.database.host,
+  user: config.database.user,
+  password: config.database.password,
+  database: config.database.database,
+  port: config.database.port
+});
+
 
 const Curso = {
   getAll: (callback) => {
