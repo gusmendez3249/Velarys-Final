@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6c5ce7, #3b3f54);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+#paypal-button-container {
+  background-color: #4a048b; /* Color de fondo más vibrante */
+  color: #ffffff; /* Texto blanco para buen contraste */
+  padding: 5px px; /* Mayor padding para un botón más grande */
+  border: none;
+  border-radius: 8px; /* Radio de borde más sutil */
+  cursor: pointer;
+  font-size: 18px; /* Tamaño de fuente ajustado */
+  font-weight: 600; /* Grosor de fuente mejorado */
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
+  display: block;
+  margin: 20px auto; /* Espaciado adicional alrededor del botón */
+  width: 350px; /* Ancho del botón ajustado */
+}
+
+#paypal-button-container:hover {
+  background-color: #005a8a; /* Color de fondo en hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+}
+
+#paypal-button-container:active {
+  transform: scale(2.98); /* Escalado más suave en click */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ajustada en click */
+}
+
+#paypal-button-container:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #009cde; /* Sombra de enfoque más prominente */
+}
+
+.cuadro-grande {
+  background-color: #ffffff; /* Fondo blanco más limpio */
+  padding: 40px; /* Padding ajustado para más espacio interno */
+  border: 8px solid #e1e1e1; /* Borde más suave */
+  border-radius: 12px; /* Radio de borde más sutil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más moderna */
+  text-align: center;
+  width: 80%; /* Ancho ajustado para adaptarse mejor a la pantalla */
+  max-width: 800px; /* Ancho máximo para mantener el diseño */
+  margin: 20px auto; /* Espaciado adicional alrededor del cuadro */
+}
+
+.cuadro-atractivo {
+  background-color: #ffffff; /* Fondo blanco para mantener consistencia */
+  padding: 30px; /* Padding ajustado */
+  border: 1px solid #e1e1e1; /* Borde más suave */
+  border-radius: 12px; /* Radio de borde más sutil */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra moderna */
+  text-align: center;
+  width: 90%; /* Ancho ajustado para mejor adaptabilidad */
+  max-width: 400px; /* Ancho máximo para mantener el diseño */
+  margin: 20px auto; /* Espaciado adicional alrededor del cuadro */
+}

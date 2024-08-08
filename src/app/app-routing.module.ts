@@ -3,6 +3,7 @@ import { AdminModule } from './velarys/admin/admin.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
+import { PagoComponent } from './pago/pago/pago.component';
 import path from 'path';
 
 
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./velarys/user/user.module').then(m => m.UserModule)
   },
+  {
+    path: 'pago', component: PagoComponent
+  },
+
 ];
 
 @NgModule({

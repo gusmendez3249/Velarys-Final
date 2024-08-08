@@ -35,7 +35,7 @@ export class CursosComponent implements OnInit {
 
   pagarCurso(curso: any): void {
     // Implementar lógica para el pago del curso
-    console.log(`Pago del curso ${curso.id}`);
+  this.router.navigate(['/pago'])
     // Redirigir a la página de pago o realizar el pago aquí
   }
 
