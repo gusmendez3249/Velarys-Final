@@ -1,15 +1,3 @@
-<div class="header">
-  <div class="logo">
-    <img src="assets/logo.jpg" alt="Logo">
-  </div>
-  <div class="title">
-    <h1>Juegos del Nivel</h1>
-  </div>
-  <div class="actions">
-    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
-  </div>
-</div>
-
 <div class="admin-content">
   <h2>Agregar Juego</h2>
   <div class="agregar-juego">
@@ -30,16 +18,4 @@
     <div class="juego-details">
       <label>Tipo:</label>
       <select [(ngModel)]="juego.tipo">
-        <option value="preguntas">Preguntas</option>
-        <option value="memoramas">Memoramas</option>
-      </select>
-
-      <label>Contenido:</label>
-      <textarea [(ngModel)]="juego.contenido"></textarea>
-    </div>
-    <div class="juego-actions">
-      <button (click)="guardarCambios(juego)">Guardar Cambios</button>
-      <button (click)="eliminarJuego(juego.id!)">Eliminar Juego</button>
-    </div>
-  </div>
-</div>
+        <option value="preguntas">Preguntas
