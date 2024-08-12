@@ -1,11 +1,8 @@
-import { AdminModule } from './velarys/admin/admin.module';
-// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { PagoComponent } from './pago/pago/pago.component';
-import path from 'path';
-
+import { AuthGuard } from './auth/auth.guard'; // Ajusta la ruta según tu estructura de carpetas
 
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
@@ -16,16 +13,19 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./velarys/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./velarys/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard] // Protege las rutas del módulo Admin
   },
   {
     path: 'user',
-    loadChildren: () => import('./velarys/user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./velarys/user/user.module').then(m => m.UserModule),
+    canActivate: [AuthGuard] // Protege las rutas del módulo User
   },
   {
-    path: 'pago', component: PagoComponent
+    path: 'pago',
+    component: PagoComponent,
+    canActivate: [AuthGuard] // Protege la ruta de Pago
   },
-
 ];
 
 @NgModule({
