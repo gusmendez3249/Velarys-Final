@@ -128,10 +128,11 @@ export class NivelesAdmin implements OnInit {
       this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
     }
   }
-
   cancelarEdicion(): void {
     this.nivelEditado = null;
     this.esEdicion = false; // Volver al modo de agregar
+    this.nuevoNivelForm.reset(); // Opcional: Limpiar el formulario de agregar niveles
+    this.errorMensaje = ''; // Limpiar mensaje de error
   }
 
   confirmarEliminarNivel(id: number): void {

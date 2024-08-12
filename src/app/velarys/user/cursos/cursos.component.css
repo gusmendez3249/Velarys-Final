@@ -59,28 +59,28 @@
 
 .cursos-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en cada fila */
+  gap: 40px; /* Aumenta el espacio entre las tarjetas */
   margin: 20px auto;
   max-width: 1200px;
   justify-content: center;
-  align-items: start;
 }
 
 .curso-card {
-  border: 2px solid #79038b;
-  background-color: #fae1ff;
+  border: 3.5px solid #79038b;
+  background-color: #ffffff; /* Fondo blanco */
   padding: 35px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 300px;
-  margin: 0 auto;
+  width: 100%; /* Asegura que ocupe todo el espacio disponible en la celda */
+  max-width: 300px; /* Tamaño máximo */
+  box-sizing: border-box; /* Incluye el padding y border en el width */
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .curso-card:hover {
-  background-color: #d7f3f2;
+  background-color: #e5d0f5; /* Cambio de color al pasar el mouse */
   transform: scale(1.02);
 }
 
@@ -95,21 +95,6 @@
   font-size: 18px;
 }
 
-.curso-card .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.curso-card .btn:hover {
-  background-color: #79038b;
-}
 
 .curso-actions {
   display: flex;

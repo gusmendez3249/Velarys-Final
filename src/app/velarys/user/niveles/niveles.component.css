@@ -14,7 +14,23 @@
 
 .title h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 40px; /* Tamaño del título */
+}
+
+.encabezado {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.encabezado h2 {
+  color: #8b1d99; /* Color morado claro */
+  margin: 0;
+  font-size: 40px;
+}
+
+.encabezado p {
+  margin: 10px 0;
+  font-size: 18px;
 }
 
 .actions .btn-cerrar-sesion {
@@ -25,54 +41,71 @@
   cursor: pointer;
   border-radius: 10px;
 }
+
 .actions .btn-cerrar-sesion:hover {
   background-color: rgb(184, 45, 230);
   color: #fff;
-  border:rgb(184, 45, 230);
+  border: rgb(184, 45, 230);
   transform: scale(1.05);
 }
 
 /* Estilos para el contenedor de niveles */
 .niveles-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
-  gap: 20px; /* Espacio entre tarjetas */
-  margin: 20px 0; /* Espacio superior e inferior */
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en cada fila */
+  gap: 40px; /* Espacio entre tarjetas */
+  margin: 20px auto; /* Espacio superior e inferior */
+  max-width: 1200px; /* Ancho máximo para alinear con el contenedor de cursos */
+  justify-content: center;
 }
 
 /* Estilo para las tarjetas de nivel */
 .nivel-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #f3e6f7; /* Color morado claro */
+  border: 3.5px solid #79038b; /* Borde morado */
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 35px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  text-align: center;
+  width: 100%; /* Asegura que ocupe todo el espacio disponible en la celda */
+  max-width: 300px; /* Tamaño máximo */
+  box-sizing: border-box; /* Incluye el padding y border en el width */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.nivel-card:hover {
+  background-color: #e5d0f5; /* Cambio de color al pasar el mouse */
+  transform: scale(1.02);
 }
 
 .nivel-card h3 {
   margin-top: 0;
+  color: #6206a3; /* Color morado para el título */
+  font-size: 36px;
 }
 
 .nivel-card p {
   margin: 5px 0;
+  font-size: 18px;
 }
 
 /* Estilo para los botones dentro de cada tarjeta */
 .nivel-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 10px;
 }
 
 .nivel-actions button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   background-color: #6c5b7b; /* Color morado más oscuro */
   color: #fff;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
-  border-radius: 4px;
+  margin: 0 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* Agregar transición para el hover */
 }
 
 .nivel-actions button:hover {
@@ -81,25 +114,25 @@
 
 /* Estilo para el botón de pagar */
 .btn-pagar {
-  background-color: #4b0082; /* Color morado más oscuro para pagar */
+  background-color: #da9e14; /* Color para el botón de pagar */
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   margin-top: 10px; /* Espacio superior para separar el botón del mensaje */
+  transition: background-color 0.3s ease; /* Agregar transición para el hover */
 }
 
 .btn-pagar:hover {
-  background-color: #6a0dad; /* Color morado más claro para hover en pagar */
+  background-color: #8829b5; /* Color morado para hover en pagar */
 }
+
 /* Estilo para el botón deshabilitado */
 .nivel-actions .disabled {
-  background-color: #ccc; /* Color gris claro para botones deshabilitados */
+  background-color: #d78c8c; /* Color gris claro para botones deshabilitados */
   cursor: not-allowed;
 }
-
-
 
 /* Mensaje de error */
 .error {

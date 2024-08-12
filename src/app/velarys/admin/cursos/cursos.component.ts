@@ -127,6 +127,10 @@ export class CursosAdmin implements OnInit {
 
   cancelarEdicion(): void {
     this.cursoEditado = null;
+    // Limpiar el formulario de edición
+    this.cursoEditadoForm.reset();
+    // Mostrar el formulario de agregar
+    this.errorMensaje = ''; // Limpiar cualquier mensaje de error
   }
 
   eliminarCurso(id: number): void {
