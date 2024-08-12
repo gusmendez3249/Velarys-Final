@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Juego, Memorama } from '../models/juego.model';
+import { TipoJuego } from '../models/tipo-juego.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JuegoService {
-  private apiUrl = 'http://localhost:3000/api/juegos'; // Cambia esta URL según sea necesario
+  private apiUrl = 'http://localhost:3000/api/juegos';
 
   constructor(private http: HttpClient) {}
 
@@ -36,11 +37,23 @@ export class JuegoService {
     return this.http.post<Memorama>(`${this.apiUrl}/memoramas`, memorama);
   }
 
-  actualizarMemorama(id: number, memorama: Memorama): Observable<Memorama> {
-    return this.http.put<Memorama>(`${this.apiUrl}/memoramas/${id}`, memorama);
+  actualizarMemorama(id: number, memorama: Memorama): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/memoramas/${id}`, memorama);
   }
 
   eliminarMemorama(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/memoramas/${id}`);
+  }
+
+  obtenerTiposJuegos(): Observable<TipoJuego[]> {
+    return this.http.get<TipoJuego[]>(`${this.apiUrl}/tipos`);
+  }
+
+  crearTipoJuego(tipoJuego: TipoJuego): Observable<TipoJuego> {
+    return this.http.post<TipoJuego>(`${this.apiUrl}/tipos`, tipoJuego);
+  }
+
+  eliminarTipoJuego(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/tipos/${id}`);
   }
 }

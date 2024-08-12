@@ -1,0 +1,84 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4b0082;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .admin-content {
+    padding: 20px;
+  }
+  
+  .admin-content h2 {
+    margin-top: 0;
+  }
+  
+  .agregar-memorama {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  
+  .agregar-memorama label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .agregar-memorama input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .agregar-memorama button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .agregar-memorama button:hover {
+    background-color: #0056b3;
+  }
+  
+  .memorama-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .memorama-card p {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .memorama-card button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .memorama-card button:hover {
+    background-color: #0056b3;
+  }
+  
