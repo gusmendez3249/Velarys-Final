@@ -4,6 +4,8 @@ import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { PagoComponent } from './pago/pago/pago.component';
 import { AuthGuard } from './auth/auth.guard'; // Ajusta la ruta según tu estructura de carpetas
 
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
   { path: 'bienvenida', component: BienvenidaComponent },
@@ -30,6 +32,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

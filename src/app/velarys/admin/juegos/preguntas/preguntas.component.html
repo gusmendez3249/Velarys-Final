@@ -1,0 +1,33 @@
+<div class="admin-content">
+    <h2>Administrar Preguntas</h2>
+    <form [formGroup]="preguntasForm" (ngSubmit)="editingIndex !== null ? actualizarPregunta() : agregarPregunta()">
+      <label for="texto">Texto de la Pregunta:</label>
+      <input id="texto" formControlName="texto" type="text">
+  
+      <label for="imagen">URL de la Imagen:</label>
+      <input id="imagen" formControlName="imagen" type="text">
+  
+      <!-- FormArray con el uso de formArrayName -->
+      <div formArrayName="opciones">
+        <div *ngFor="let opcion of opciones.controls; let i = index">
+          <label>
+            Opción {{ i + 1 }}:
+            <input [formControlName]="i" type="text">
+          </label>
+        </div>
+      </div>
+  
+      <button type="submit">{{ editingIndex !== null ? 'Actualizar' : 'Agregar' }} Pregunta</button>
+    </form>
+  
+    <div *ngFor="let pregunta of preguntas; let i = index">
+      <p>{{ pregunta.texto }}</p>
+      <img [src]="pregunta.imagen" alt="Imagen de la pregunta">
+      <ul>
+        <li *ngFor="let opcion of pregunta.opciones">{{ opcion }}</li>
+      </ul>
+      <button (click)="editarPregunta(i)">Editar</button>
+      <button (click)="eliminarPregunta(i)">Eliminar</button>
+    </div>
+  </div>
+  
