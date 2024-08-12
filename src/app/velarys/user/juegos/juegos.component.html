@@ -1,1 +1,25 @@
-<p>juegos works!</p>
+<div class="header">
+    <h1>Juegos</h1>
+  </div>
+  
+  <div class="game-content">
+    <div *ngIf="juegos.length > 0">
+      <div class="juegos-list">
+        <div *ngFor="let juego of juegos" class="juego-card" (click)="seleccionarJuego(juego)">
+          <h3>{{ juego.tipo }}</h3>
+          <p>{{ juego.contenido }}</p>
+        </div>
+      </div>
+  
+      <div *ngIf="juegoSeleccionado" class="juego-detalle">
+        <h2>{{ juegoSeleccionado.tipo }}</h2>
+        <p>{{ juegoSeleccionado.contenido }}</p>
+        <button (click)="reiniciarJuego()">Volver a la lista</button>
+      </div>
+    </div>
+    
+    <div *ngIf="juegos.length === 0">
+      <p>No hay juegos disponibles.</p>
+    </div>
+  </div>
+  

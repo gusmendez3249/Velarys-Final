@@ -1,0 +1,21 @@
+<div class="user-content" *ngIf="!isFinished">
+    <h2>{{ shuffledQuestions[currentIndex].texto }}</h2>
+    <img [src]="shuffledQuestions[currentIndex].imagen" alt="Imagen de la pregunta">
+    
+    <form [formGroup]="preguntasForm" (ngSubmit)="guardarRespuesta()">
+      <div formArrayName="opciones">
+        <div *ngFor="let opcionControl of opciones.controls; let i = index">
+          <label>
+            <input type="radio" [value]="opcionControl.value" formControlName="respuesta">
+            {{ opcionControl.value }}
+          </label>
+        </div>
+      </div>
+      <button type="submit">Siguiente</button>
+    </form>
+  </div>
+  
+  <div *ngIf="isFinished">
+    <h2>¡Has completado todas las preguntas!</h2>
+  </div>
+  

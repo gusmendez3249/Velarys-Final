@@ -1,10 +1,26 @@
+<div class="header">
+  <h1>Administración de Juegos</h1>
+</div>
+
 <div class="admin-content">
+  <h2>Agregar Tipo de Juego</h2>
+  <div class="agregar-tipo">
+    <label for="tipo-nombre">Nombre del Tipo:</label>
+    <input id="tipo-nombre" [(ngModel)]="nuevoTipoJuego.nombre" placeholder="Nombre del tipo de juego">
+    <button (click)="crearTipoJuego()">Agregar Tipo de Juego</button>
+  </div>
+
+  <h2>Tipos de Juegos</h2>
+  <div *ngFor="let tipo of tiposJuegos" class="tipo-card">
+    <p>{{ tipo.nombre }}</p>
+    <button (click)="eliminarTipoJuego(tipo.id!)">Eliminar Tipo de Juego</button>
+  </div>
+
   <h2>Agregar Juego</h2>
   <div class="agregar-juego">
     <label for="tipo">Tipo:</label>
     <select id="tipo" [(ngModel)]="nuevoJuego.tipo">
-      <option value="preguntas">Preguntas</option>
-      <option value="memoramas">Memoramas</option>
+      <option *ngFor="let tipo of tiposJuegos" [value]="tipo.nombre">{{ tipo.nombre }}</option>
     </select>
 
     <label for="contenido">Contenido:</label>
@@ -18,4 +34,15 @@
     <div class="juego-details">
       <label>Tipo:</label>
       <select [(ngModel)]="juego.tipo">
-        <option value="preguntas">Preguntas
+        <option *ngFor="let tipo of tiposJuegos" [value]="tipo.nombre">{{ tipo.nombre }}</option>
+      </select>
+
+      <label>Contenido:</label>
+      <textarea [(ngModel)]="juego.contenido"></textarea>
+    </div>
+    <div class="juego-actions">
+      <button (click)="guardarCambios(juego)">Guardar Cambios</button>
+      <button *ngIf="juego.id" (click)="eliminarJuego(juego.id)">Eliminar Juego</button>
+    </div>
+  </div>
+</div>

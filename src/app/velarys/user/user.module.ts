@@ -6,17 +6,23 @@ import { CursosComponent } from './cursos/cursos.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { LeccionesComponent } from './lecciones/lecciones.component';
 import { JuegosComponent } from './juegos/juegos.component';
+import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MemoramaComponent } from './juegos/user_memorama/memorama.componente';
 
 @NgModule({
   declarations: [
     CursosComponent,
     NivelesComponent,
     LeccionesComponent,
-    JuegosComponent
+    JuegosComponent,
+    PreguntasComponent,
+    MemoramaComponent
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class UserModule { }
