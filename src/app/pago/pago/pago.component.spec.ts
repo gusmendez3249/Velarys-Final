@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CerrarSecionComponent } from './cerrar-secion.component';
+import { PagoComponent } from './pago.component';
 
-describe('CerrarSecionComponent', () => {
-  let component: CerrarSecionComponent;
-  let fixture: ComponentFixture<CerrarSecionComponent>;
+describe('PagoComponent', () => {
+  let component: PagoComponent;
+  let fixture: ComponentFixture<PagoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CerrarSecionComponent]
+      declarations: [PagoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CerrarSecionComponent);
+    fixture = TestBed.createComponent(PagoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

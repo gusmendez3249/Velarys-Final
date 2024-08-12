@@ -89,7 +89,7 @@
     </form>
   </div>
 
-  <!-- Formulario para editar un curso -->
+    <!-- Formulario para editar un curso -->
   <div class="editar-curso" *ngIf="cursoEditado">
     <h3>Editar Curso</h3>
     <form [formGroup]="cursoEditadoForm" (ngSubmit)="actualizarCurso()">
@@ -126,7 +126,6 @@
         </div>
       </div>
 
-
       <div *ngIf="cursoEditadoForm.get('precio')?.value > 0 && !cursoEditadoForm.get('esDePaga')?.value" class="info">
         El precio es mayor a 0, por lo que el curso debería ser marcado como "Es de paga".
       </div>
@@ -140,15 +139,17 @@
         <input type="radio" id="edit-acceso-privado" formControlName="acceso" [value]="false">
         <label for="edit-acceso-privado">Privado</label>
       </div>
+
       <div class="curso-actions">
-      <button type="submit">Actualizar Curso</button>
-      <button (click)="cancelarEdicion()">Cancelar</button>
-    </div>
+        <button type="submit">Actualizar Curso</button>
+        <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
       <div *ngIf="errorMensaje && cursoEditado" class="error">
         {{ errorMensaje }}
       </div>
     </form>
   </div>
+
 </div>
 
 <!-- Modal -->

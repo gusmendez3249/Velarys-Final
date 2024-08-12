@@ -8,10 +8,12 @@ import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './velarys/admin/admin.module';
 import { UserModule } from './velarys/user/user.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { PagoComponent } from './pago/pago/pago.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PagoComponent,
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,6 @@ export class NivelesComponent implements OnInit {
   window.history.back();
   }
   pagarNivel(nivel: any): void {
-    
+    this.router.navigate(['/pago']);
   }
 }

@@ -1,23 +1,27 @@
+/* Tipografía general */
+body {
+  font-family: 'Roboto', sans-serif; /* Tipografía para el cuerpo del texto */
+}
+
 /* Estilo general del contenedor */
 .container {
-  /* Estilo general del contenedor */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 60vh; /* Mantener la altura mínima */
   max-width: 500px; /* Tamaño máximo del contenedor */
-  background: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+  background: rgba(75, 0, 130, 0.1); /* Fondo morado claro con opacidad */
   padding: 30px; /* Padding alrededor del contenido */
   border-radius: 10px; /* Borde redondeado */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
   text-align: center; /* Alinear el texto en el centro */
-
+  background-color: #b28ef6; /* Color morado medio */
 }
 
 /* Estilo de la tarjeta de cierre de sesión */
 .card {
-  background-color: #ffffff;
+  background-color: #e1bee7; /* Morado claro */
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
@@ -29,6 +33,7 @@
 
 /* Estilo del título */
 .card h2 {
+  font-family: 'Poppins', sans-serif; /* Tipografía para los encabezados */
   color: #4a4a4a; /* Color gris oscuro */
   font-size: 1.8em;
   margin-bottom: 15px;
@@ -53,24 +58,25 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   display: inline-block;
+  font-family: 'Roboto', sans-serif; /* Tipografía para los botones */
 }
 
 /* Estilo del botón de cerrar sesión */
 .btn-danger {
-  background-color: #dc3545; /* Rojo para el botón de cerrar sesión */
+  background-color: #0fc887; /* Morado para el botón de cerrar sesión */
 }
 
 .btn-danger:hover {
-  background-color: #c82333; /* Un tono más oscuro para el hover */
+  background-color: #67c6a5; /* Un tono más oscuro para el hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
 }
 
 /* Estilo del botón de cancelar */
 .btn-secondary {
-  background-color: #6c757d; /* Gris para el botón de cancelar */
+  background-color: #ee4337; /* Morado para el botón de cancelar */
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268; /* Un tono más oscuro para el hover */
+  background-color: #d06969; /* Un tono más oscuro para el hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
 }
