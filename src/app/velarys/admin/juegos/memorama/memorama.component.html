@@ -1,20 +1,4 @@
-<div class="header">
-    <h1>Administración de Memoramas</h1>
-  </div>
-  
-  <div class="admin-content">
-    <h2>Agregar o Editar Memorama</h2>
-    <div class="agregar-memorama">
-      <label for="memorama-nombre">Nombre del Memorama:</label>
-      <input id="memorama-nombre" [(ngModel)]="memoramaForm.nombre" placeholder="Nombre del memorama" />
-      <button (click)="guardarMemorama()">{{ isEdit ? 'Guardar Cambios' : 'Agregar Memorama' }}</button>
-    </div>
-  
-    <h2>Lista de Memoramas</h2>
-    <div *ngFor="let memorama of memoramas" class="memorama-card">
-      <p>{{ memorama.nombre }}</p>
-      <button (click)="editarMemorama(memorama)">Editar</button>
-      <button (click)="eliminarMemorama(memorama.id!)">Eliminar</button>
-    </div>
-  </div>
-  
+<!-- HTML para el memorama -->
+<div class="memorama-container">
+  <!-- Aquí va el contenido del memorama -->
+</div>

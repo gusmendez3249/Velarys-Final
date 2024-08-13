@@ -98,7 +98,7 @@ export class LeccionesAdmin implements OnInit {
   }
 
   verJuegos(leccion: any):void{
-    this.router.navigate([`juegosadmin/${this.cursoId}/${this.nivelId}/${leccion.id}`]);
+    this.router.navigate([`juegos/${this.cursoId}/${this.nivelId}/${leccion.id}`]);
   }
 }
 

@@ -1,27 +1,54 @@
 // models/leccion.model.js
-const mysql = require('mysql2');
-const config = require('../config');
-
-const connection = mysql.createConnection(config.database);
+const promisePool = require('./db'); // Asegúrate de que el archivo db.js esté correctamente ubicado
 
 const Leccion = {
-  getAll: (callback) => {
-    connection.query('SELECT * FROM lecciones', callback);
+  getAll: async (callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM lecciones');
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-  getById: (id, callback) => {
-    connection.query('SELECT * FROM lecciones WHERE id = ?', [id], callback);
+  getById: async (id, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM lecciones WHERE id = ?', [id]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-  getByNivelId: (nivelId, callback) => {
-    connection.query('SELECT * FROM lecciones WHERE nivelId = ?', [nivelId], callback);
+  getByNivelId: async (nivelId, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM lecciones WHERE nivelId = ?', [nivelId]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-  create: (data, callback) => {
-    connection.query('INSERT INTO lecciones SET ?', data, callback);
+  create: async (data, callback) => {
+    try {
+      const [result] = await promisePool.query('INSERT INTO lecciones SET ?', data);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   },
-  update: (id, data, callback) => {
-    connection.query('UPDATE lecciones SET ? WHERE id = ?', [data, id], callback);
+  update: async (id, data, callback) => {
+    try {
+      const [result] = await promisePool.query('UPDATE lecciones SET ? WHERE id = ?', [data, id]);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   },
-  delete: (id, callback) => {
-    connection.query('DELETE FROM lecciones WHERE id = ?', [id], callback);
+  delete: async (id, callback) => {
+    try {
+      const [result] = await promisePool.query('DELETE FROM lecciones WHERE id = ?', [id]);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   }
 };
 

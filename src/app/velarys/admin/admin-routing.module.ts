@@ -4,16 +4,17 @@ import { CursosAdmin } from './cursos/cursos.component';
 import { NivelesAdmin } from './niveles/niveles.component';
 import { LeccionesAdmin } from './lecciones/lecciones.component';
 import { JuegosAdmin } from './juegos/juegos.component';
-import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
-import { MemoramaComponent } from './juegos/memorama/memorama.component';
+import { MemoramaAdmin } from './juegos/memorama/memorama.component';
+import { PreguntasAdmin } from './juegos/preguntas/preguntas.component';
+
 
 const routes: Routes = [
   { path: 'cursoadmin', component: CursosAdmin },
   { path: 'niveladmin/:cursoId', component: NivelesAdmin },
   { path: 'leccionesadmin/:cursoId/:nivelId', component: LeccionesAdmin },
-  { path: 'juegosadmin/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
-  { path: 'preguntasadmin/:cursoId/:nivelId/:leccionId', component: PreguntasComponent },
-  { path: 'memoramaadmin/:cursoId/:nivelId/:leccionID', component:MemoramaComponent }
+  { path: 'juegos/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
+  { path: 'memorama/:cursoId/:nivelId/:leccionId', component: MemoramaAdmin },
+  { path: 'preguntas/:cursoId/:nivelId/:leccionId', component: PreguntasAdmin },
 ];
 
 @NgModule({

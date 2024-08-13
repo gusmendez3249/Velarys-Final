@@ -1,20 +1,23 @@
-const mysql = require('mysql2');
-const dbConfig = require('../config').database;
+// models/user.model.js
+const promisePool = require('./db');
 
-const pool = mysql.createPool(dbConfig);
-
-const getUserByEmail = (email, callback) => {
-  pool.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
-    if (error) return callback(error);
-    callback(null, results[0]);
-  });
+const User = {
+  getUserByEmail: async (email, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM users WHERE email = ?', [email]);
+      callback(null, rows[0]);
+    } catch (err) {
+      callback(err);
+    }
+  },
+  create: async (userData, callback) => {
+    try {
+      const [result] = await promisePool.query('INSERT INTO users SET ?', userData);
+      callback(null, result.insertId);
+    } catch (err) {
+      callback(err);
+    }
+  }
 };
 
-const createUser = (userData, callback) => {
-  pool.query('INSERT INTO users SET ?', userData, (error, results) => {
-    if (error) return callback(error);
-    callback(null, results.insertId);
-  });
-};
-
-module.exports = { getUserByEmail, createUser };
+module.exports = User;

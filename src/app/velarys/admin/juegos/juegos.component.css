@@ -1,102 +1,19 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #4b0082;
-  color: white;
-  padding: 10px 20px;
-}
-
-.logo img {
-  height: 50px;
-}
-
-.title h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.actions .btn-cerrar-sesion {
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-.actions .btn-cerrar-sesion:hover {
-  background-color: white;
-  color: #4b0082;
-}
-
-.admin-content {
-  padding: 20px;
-}
-
-.admin-content h2 {
-  margin-top: 0;
-}
-
-.juego-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.juego-details label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.juego-details select,
-.juego-details textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.juego-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.juego-actions button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.agregar-juego {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.agregar-juego label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.agregar-juego select,
-.agregar-juego textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.juegos-selection {
+  text-align: center;
+  margin-top: 20px;
 }
 
 button {
+  font-size: 18px;
+  margin: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  background-color: #6a0dad; /* Usando un tono de púrpura */
+  color: white;
+}
+
+button:hover {
+  background-color: #4a0072;
 }

@@ -1,10 +1,10 @@
-// models/curso.model.js
+// models/respuesta.model.js
 const promisePool = require('./db');
 
-const Curso = {
+const Respuesta = {
   getAll: async (callback) => {
     try {
-      const [rows] = await promisePool.query('SELECT * FROM cursos');
+      const [rows] = await promisePool.query('SELECT * FROM respuestas');
       callback(null, rows);
     } catch (err) {
       callback(err);
@@ -12,7 +12,7 @@ const Curso = {
   },
   getById: async (id, callback) => {
     try {
-      const [rows] = await promisePool.query('SELECT * FROM cursos WHERE id = ?', [id]);
+      const [rows] = await promisePool.query('SELECT * FROM respuestas WHERE id = ?', [id]);
       callback(null, rows);
     } catch (err) {
       callback(err);
@@ -20,7 +20,7 @@ const Curso = {
   },
   create: async (data, callback) => {
     try {
-      const [result] = await promisePool.query('INSERT INTO cursos SET ?', data);
+      const [result] = await promisePool.query('INSERT INTO respuestas SET ?', data);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -28,7 +28,7 @@ const Curso = {
   },
   update: async (id, data, callback) => {
     try {
-      const [result] = await promisePool.query('UPDATE cursos SET ? WHERE id = ?', [data, id]);
+      const [result] = await promisePool.query('UPDATE respuestas SET ? WHERE id = ?', [data, id]);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -36,7 +36,7 @@ const Curso = {
   },
   delete: async (id, callback) => {
     try {
-      const [result] = await promisePool.query('DELETE FROM cursos WHERE id = ?', [id]);
+      const [result] = await promisePool.query('DELETE FROM respuestas WHERE id = ?', [id]);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -44,4 +44,4 @@ const Curso = {
   }
 };
 
-module.exports = Curso;
+module.exports = Respuesta;

@@ -1,38 +1,54 @@
 // models/nivel.model.js
-const mysql = require('mysql2');
-const config = require('../config');
-
-const connection = mysql.createConnection(config.database);
+const promisePool = require('./db');
 
 const Nivel = {
-  // Obtiene todos los niveles sin filtrado por cursoId (si es necesario)
-  getAll: (callback) => {
-    connection.query('SELECT * FROM niveles', callback);
+  getAll: async (callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM niveles');
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-
-  // Obtiene un nivel específico por ID
-  getById: (id, callback) => {
-    connection.query('SELECT * FROM niveles WHERE id = ?', [id], callback);
+  getById: async (id, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM niveles WHERE id = ?', [id]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-
-  // Obtiene niveles por cursoId
-  getByCursoId: (cursoId, callback) => {
-    connection.query('SELECT * FROM niveles WHERE cursoId = ?', [cursoId], callback);
+  getByCursoId: async (cursoId, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM niveles WHERE cursoId = ?', [cursoId]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
   },
-
-  // Crea un nuevo nivel
-  create: (data, callback) => {
-    connection.query('INSERT INTO niveles SET ?', data, callback);
+  create: async (data, callback) => {
+    try {
+      const [result] = await promisePool.query('INSERT INTO niveles SET ?', data);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   },
-
-  // Actualiza un nivel existente
-  update: (id, data, callback) => {
-    connection.query('UPDATE niveles SET ? WHERE id = ?', [data, id], callback);
+  update: async (id, data, callback) => {
+    try {
+      const [result] = await promisePool.query('UPDATE niveles SET ? WHERE id = ?', [data, id]);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   },
-
-  // Elimina un nivel
-  delete: (id, callback) => {
-    connection.query('DELETE FROM niveles WHERE id = ?', [id], callback);
+  delete: async (id, callback) => {
+    try {
+      const [result] = await promisePool.query('DELETE FROM niveles WHERE id = ?', [id]);
+      callback(null, result);
+    } catch (err) {
+      callback(err);
+    }
   }
 };
 
