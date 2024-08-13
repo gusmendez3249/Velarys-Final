@@ -1,4 +1,3 @@
-// models/pregunta.model.js
 const promisePool = require('./db');
 
 const Pregunta = {
@@ -20,6 +19,8 @@ const Pregunta = {
   },
   create: async (data, callback) => {
     try {
+      // Asegúrate de que `opciones` sea una cadena JSON
+      data.opciones = JSON.stringify(data.opciones);
       const [result] = await promisePool.query('INSERT INTO preguntas SET ?', data);
       callback(null, result);
     } catch (err) {
@@ -28,6 +29,10 @@ const Pregunta = {
   },
   update: async (id, data, callback) => {
     try {
+      // Asegúrate de que `opciones` sea una cadena JSON
+      if (data.opciones) {
+        data.opciones = JSON.stringify(data.opciones);
+      }
       const [result] = await promisePool.query('UPDATE preguntas SET ? WHERE id = ?', [data, id]);
       callback(null, result);
     } catch (err) {

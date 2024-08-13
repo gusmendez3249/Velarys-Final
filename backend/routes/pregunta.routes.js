@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const preguntaController = require('../controllers/pregunta.controller');
 
-router.get('/preguntas', preguntaController.getAllPreguntas);
-router.get('/preguntas/:id', preguntaController.getPreguntaById);
-router.post('/preguntas', preguntaController.createPregunta);
-router.put('/preguntas/:id', preguntaController.updatePregunta);
-router.delete('/preguntas/:id', preguntaController.deletePregunta);
+// Rutas para preguntas
+router.get('/', preguntaController.getAllPreguntas);
+router.get('/:id', preguntaController.getPreguntaById);
+router.post('/', preguntaController.createPregunta);
+router.put('/:id', preguntaController.updatePregunta);
+router.delete('/:id', preguntaController.deletePregunta);
 
 module.exports = router;
