@@ -25,8 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'pago',
-    component: PagoComponent,
-    canActivate: [AuthGuard] // Protege la ruta de Pago
+    component: PagoComponent, // Protege la ruta de Pago
   },
 ];
 

@@ -4,6 +4,7 @@ const preguntaController = require('../controllers/pregunta.controller');
 
 // Rutas para preguntas
 router.get('/', preguntaController.getAllPreguntas);
+router.get('/leccion/:leccionId', preguntaController.getPreguntasPorLeccionId); // Nueva ruta
 router.get('/:id', preguntaController.getPreguntaById);
 router.post('/', preguntaController.createPregunta);
 router.put('/:id', preguntaController.updatePregunta);

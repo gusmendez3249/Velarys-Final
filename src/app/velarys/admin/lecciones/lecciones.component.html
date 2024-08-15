@@ -10,45 +10,48 @@
   </div>
 </div>
 
+<!-- Modal de Confirmación -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <p>{{ mensajeModal }}</p>
+    <button (click)="confirmarAccion()">Confirmar</button>
+    <button (click)="cerrarModal()">Cancelar</button>
+  </div>
+</div>
+
 <div class="admin-content">
-  <h2>Agregar Lección</h2>
+  <h2>Gestión de Niveles</h2>
+
+  <!-- Formulario de agregar/editar lección -->
   <div class="agregar-leccion">
-    <label for="titulo">Título:</label>
-    <input id="titulo" [(ngModel)]="nuevaLeccion.nombre" type="text">
-
-    <label for="contenido">Contenido:</label>
-    <textarea id="contenido" [(ngModel)]="nuevaLeccion.contenido"></textarea>
-
-    <label for="nivelId">Nivel:</label>
-    <input id="nivelId" [(ngModel)]="nivelId" type="hidden">
-
-    <button (click)="crearLeccion()">Agregar Lección</button>
+    <h3 *ngIf="!leccionEditada">Agregar Lección</h3>
+    <h3 *ngIf="leccionEditada">Editar Lección</h3>
+    <form [formGroup]="leccionEditada ? leccionEditadaForm : nuevaLeccionForm" (ngSubmit)="leccionEditada ? editarLeccion() : crearLeccion()">
+      <label>Nombre:</label>
+      <input formControlName="nombre" type="text" />
+      <label>Contenido:</label>
+      <textarea formControlName="contenido"></textarea>
+      <button type="submit">{{ leccionEditada ? 'Actualizar Lección' : 'Crear Lección' }}</button>
+      <button type="button" *ngIf="leccionEditada" (click)="cancelarEdicion()">Cancelar</button>
+    </form>
+    <div class="error" *ngIf="errorMensaje">{{ errorMensaje }}</div>
   </div>
 
-  <h2>Lista de Lecciones</h2>
-  <div *ngFor="let leccion of lecciones" class="leccion-card">
-    <div class="leccion-details">
-      <label>Título:</label>
-      <span>{{ leccion.nombre }}</span>
+  <h2>Listado de Lecciones</h2>
 
+  <!-- Tarjeta de lección -->
+  <div class="leccion-card" *ngFor="let leccion of lecciones">
+    <div class="leccion-details">
+      <label>Nombre:</label>
+      <span>{{ leccion.nombre }}</span>
       <label>Contenido:</label>
       <span>{{ leccion.contenido }}</span>
     </div>
     <div class="leccion-actions">
       <button (click)="seleccionarLeccion(leccion)">Editar</button>
-      <button (click)="eliminarLeccion(leccion.id!)">Eliminar</button>
-      <button (click)="verJuegos(leccion)">Ver juegos</button>
+      <button *ngIf="leccion.id !== undefined" (click)="eliminarLeccion(leccion.id!)">Eliminar</button>
+      <button (click)="verJuegos(leccion)">Ver Juegos</button>
     </div>
-  </div>
-
-  <div *ngIf="leccionEditada" class="agregar-leccion">
-    <h3>Editar Lección</h3>
-    <label for="nombreEditado">Título:</label>
-    <input id="nombreEditado" [(ngModel)]="leccionEditada.nombre" type="text">
-
-    <label for="contenidoEditado">Contenido:</label>
-    <textarea id="contenidoEditado" [(ngModel)]="leccionEditada.contenido"></textarea>
-
-    <button (click)="editarLeccion()">Guardar Cambios</button>
   </div>
 </div>

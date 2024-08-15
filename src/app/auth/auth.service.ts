@@ -27,8 +27,10 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
       .pipe(
         tap(response => {
-          this.setToken(response.token); // Suponiendo que el token se recibe en la respuesta
-          this.isAuthenticatedSubject.next(true);
+          if (response.token) {
+            this.setToken(response.token); // Suponiendo que el token se recibe en la respuesta
+            this.isAuthenticatedSubject.next(true);
+          }
         })
       );
   }
@@ -43,14 +45,22 @@ export class AuthService {
   }
 
   private setToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    if (this.isBrowser()) {
+      localStorage.setItem('authToken', token);
+    }
   }
 
   private removeToken(): void {
-    localStorage.removeItem('authToken');
+    if (this.isBrowser()) {
+      localStorage.removeItem('authToken');
+    }
   }
 
   private hasToken(): boolean {
-    return !!localStorage.getItem('authToken');
+    return this.isBrowser() && !!localStorage.getItem('authToken');
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 }

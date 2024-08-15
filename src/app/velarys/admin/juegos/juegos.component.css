@@ -1,3 +1,58 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4b0082;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header .logo img {
+  height: 50px;
+}
+
+.header .title h1 {
+  margin: 0;
+}
+
+.header .actions button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.header .actions button:hover {
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
+}
+
+.actions .btn-cerrar-sesion {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.actions .btn-cerrar-sesion:hover {
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border:rgb(184, 45, 230);
+  transform: scale(1.05);
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+.admin-content h2 {
+  margin-top: 0;
+}
 .juegos-selection {
   text-align: center;
   margin-top: 20px;

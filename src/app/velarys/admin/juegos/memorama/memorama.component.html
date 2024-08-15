@@ -1,4 +1,117 @@
-<!-- HTML para el memorama -->
-<div class="memorama-container">
-  <!-- Aquí va el contenido del memorama -->
+<div class="container">
+  <h2>Memoramas</h2>
+
+  <div class="mb-4">
+    <form [formGroup]="nuevoMemoramaForm" (ngSubmit)="crearMemorama()">
+      <div class="form-group">
+        <label for="nombre">Nombre del memorama</label>
+        <input id="nombre" formControlName="nombre" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Crear Memoramas</button>
+    </form>
+  </div>
+
+  <div *ngIf="errorMensaje" class="alert alert-danger">
+    {{ errorMensaje }}
+  </div>
+
+  <div *ngIf="memoramas.length > 0">
+    <h3>Lista de Memoramas</h3>
+    <ul class="list-group">
+      <li *ngFor="let memorama of memoramas" class="list-group-item">
+        {{ memorama.nombre }}
+        <button (click)="seleccionarMemorama(memorama)" class="btn btn-info btn-sm float-right">Editar</button>
+        <button (click)="eliminarMemorama(memorama.id!)" class="btn btn-danger btn-sm float-right mr-2">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="esEdicionMemorama" class="mt-4">
+    <h3>Editar Memorama</h3>
+    <form [formGroup]="memoramaEditadoForm" (ngSubmit)="actualizarMemorama()">
+      <div class="form-group">
+        <label for="nombreEditado">Nombre del memorama</label>
+        <input id="nombreEditado" formControlName="nombre" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar Memoramas</button>
+      <button (click)="cancelarEdicionMemorama()" class="btn btn-secondary">Cancelar</button>
+    </form>
+  </div>
+
+  <div *ngIf="esEdicionMemorama && memoramaEditado">
+    <h3>Agregar Cartas</h3>
+    <form [formGroup]="nuevaCartaForm" (ngSubmit)="agregarCartas()">
+      <div class="form-group">
+        <label for="valor">Valor</label>
+        <input id="valor" formControlName="valor" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" formControlName="estado" class="form-control">
+          <option value="cerrado">Cerrado</option>
+          <option value="abierto">Abierto</option>
+          <option value="completado">Completado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="colorClass">Clase de Color</label>
+        <input id="colorClass" formControlName="colorClass" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar Carta</button>
+    </form>
+
+    <div *ngIf="cartas.length > 0" class="mt-4">
+      <h4>Cartas en el Memoramas</h4>
+      <ul class="list-group">
+        <li *ngFor="let carta of cartas" class="list-group-item">
+          {{ carta.valor }} - {{ carta.estado }}
+          <button (click)="seleccionarCarta(carta)" class="btn btn-info btn-sm float-right">Editar</button>
+          <button (click)="eliminarCarta(carta.id!)" class="btn btn-danger btn-sm float-right mr-2">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="esEdicionCarta && cartaEditada">
+    <h3>Editar Carta</h3>
+    <form [formGroup]="nuevaCartaForm" (ngSubmit)="actualizarCarta()">
+      <div class="form-group">
+        <label for="valorEditado">Valor</label>
+        <input id="valorEditado" formControlName="valor" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="estadoEditado">Estado</label>
+        <select id="estadoEditado" formControlName="estado" class="form-control">
+          <option value="cerrado">Cerrado</option>
+          <option value="abierto">Abierto</option>
+          <option value="completado">Completado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="colorClassEditado">Clase de Color</label>
+        <input id="colorClassEditado" formControlName="colorClass" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar Carta</button>
+      <button (click)="esEdicionCarta = false" class="btn btn-secondary">Cancelar</button>
+    </form>
+  </div>
+
+  <!-- Modal de confirmación -->
+  <div class="modal" tabindex="-1" *ngIf="mostrarModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmación</h5>
+          <button type="button" class="btn-close" (click)="cancelar()"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ mensajeModal }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="confirmar()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

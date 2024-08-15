@@ -22,7 +22,7 @@
   <div class="nivel-card" *ngFor="let nivel of niveles">
     <h3>{{ nivel.nombre }}</h3>
     <p>{{ nivel.descripcion }}</p>
-    <p>Precio: {{ nivel.precio | currency:'USD' }}</p>
+    <p>Precio: {{ nivel.precio }}</p>
     <p>Es de paga: {{ nivel.esDePaga ? 'Sí' : 'No' }}</p>
     <p>Acceso: {{ nivel.acceso ? 'Sí' : 'No' }}</p>
 

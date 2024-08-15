@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JuegoService } from '../../services/juego.service';
-import { Juego } from '../../models/juego.model';
-import { TipoJuego } from '../../models/tipo-juego.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-juegos-usuario',
@@ -9,37 +7,33 @@ import { TipoJuego } from '../../models/tipo-juego.model';
   styleUrls: ['./juegos.component.css']
 })
 export class JuegosComponent implements OnInit {
-  juegos: Juego[] = [];
-  tiposJuegos: TipoJuego[] = [];
-  juegoSeleccionado: Juego | null = null;
-  leccionId: number = 1; // O lo que corresponda en tu aplicación
+  cursoId: number | null = null;
+  nivelId: number | null = null;
+  leccionId: number | null = null;
 
-  constructor(private juegoService: JuegoService) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.obtenerJuegos();
-    this.obtenerTiposJuegos();
+    this.route.paramMap.subscribe(params => {
+      const cursoIdParam = params.get('cursoId');
+      const nivelIdParam = params.get('nivelId');
+      const leccionIdParam = params.get('leccionId');
+
+      this.cursoId = cursoIdParam ? +cursoIdParam : null;
+      this.nivelId = nivelIdParam ? +nivelIdParam : null;
+      this.leccionId = leccionIdParam ? +leccionIdParam : null;
+    });
   }
 
-  obtenerJuegos(): void {
-    this.juegoService.obtenerJuegosPorLeccionId(this.leccionId).subscribe(
-      (data) => this.juegos = data,
-      (error) => console.error('Error al obtener juegos', error)
-    );
-  }
-
-  obtenerTiposJuegos(): void {
-    this.juegoService.obtenerTiposJuegos().subscribe(
-      (data) => this.tiposJuegos = data,
-      (error) => console.error('Error al obtener tipos de juegos', error)
-    );
-  }
-
-  seleccionarJuego(juego: Juego): void {
-    this.juegoSeleccionado = juego;
-  }
-
-  reiniciarJuego(): void {
-    this.juegoSeleccionado = null;
+  seleccionarJuego(tipo: string): void {
+    if (this.cursoId !== null && this.nivelId !== null && this.leccionId !== null) {
+      if (tipo === 'preguntas') {
+        this.router.navigate([`/preguntasuser/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
+      } else if (tipo === 'memorama') {
+        this.router.navigate([`/memoramauser/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
+      }
+    } else {
+      console.error('Los parámetros de curso, nivel y lección no están disponibles.');
+    }
   }
 }

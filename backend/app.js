@@ -6,7 +6,8 @@ const cursoRoutes = require('./routes/curso.routes');
 const nivelRoutes = require('./routes/nivel.routes');
 const leccionRoutes = require('./routes/leccion.routes');
 const authRoutes = require('./routes/auth.routes');
-const preguntaRoutes = require('./routes/pregunta.routes'); // Importar rutas de preguntas
+const preguntaRoutes = require('./routes/pregunta.routes');
+const memoramaRoutes = require('./routes/memorama.routes'); // Asegúrate de que la ruta esté importada
 
 const app = express();
 
@@ -17,7 +18,8 @@ app.use('/api/cursos', cursoRoutes);
 app.use('/api/niveles', nivelRoutes);
 app.use('/api/lecciones', leccionRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/preguntas', preguntaRoutes); // Añadir middleware para preguntas
+app.use('/api/preguntas', preguntaRoutes);
+app.use('/api/memoramas', memoramaRoutes); // Asegúrate de que esta línea esté aquí
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

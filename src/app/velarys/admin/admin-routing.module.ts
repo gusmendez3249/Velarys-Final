@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'cursoadmin', component: CursosAdmin },
   { path: 'niveladmin/:cursoId', component: NivelesAdmin },
   { path: 'leccionesadmin/:cursoId/:nivelId', component: LeccionesAdmin },
-  { path: 'juegos/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
+  { path: 'juegosadmin/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
   { path: 'memorama/:cursoId/:nivelId/:leccionId', component: MemoramaAdmin },
   { path: 'preguntas/:cursoId/:nivelId/:leccionId', component: PreguntasAdmin },
 ];

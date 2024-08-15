@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Pregunta } from '../../../models/preguntas.model';  // Ajusta la ruta según sea necesario
+import { PreguntaService } from '../../../services/preguntas.service';
+import { Pregunta } from '../../../models/preguntas.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-preguntas-usuario',
@@ -9,65 +11,71 @@ import { Pregunta } from '../../../models/preguntas.model';  // Ajusta la ruta s
 })
 export class PreguntasComponent implements OnInit {
   preguntasForm: FormGroup;
-  preguntas: Pregunta[] = []; // Este array será llenado con las preguntas administradas
-  currentIndex = 0;
   shuffledQuestions: Pregunta[] = [];
-  isFinished = false;
+  currentIndex: number = 0;
+  isFinished: boolean = false;
+  leccionId: number | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private preguntaService: PreguntaService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.preguntasForm = this.fb.group({
-      respuesta: ['', Validators.required],
-      opciones: this.fb.array([]) // Inicializa el FormArray vacío
+      opciones: this.fb.array([])
     });
   }
 
   ngOnInit(): void {
-    this.shuffledQuestions = this.shuffleArray(this.preguntas);
-    this.showQuestion(this.currentIndex);
+    this.route.paramMap.subscribe(params => {
+      const newLeccionId = +params.get('leccionId')!;
+      if (newLeccionId !== this.leccionId) {
+        this.leccionId = newLeccionId;
+        this.loadQuestions();
+      }
+    });
+  }
+
+  loadQuestions(): void {
+    if (this.leccionId !== null) {
+      this.preguntaService.getPreguntasPorLeccion(this.leccionId).subscribe(
+        (preguntas: Pregunta[]) => {
+          this.shuffledQuestions = preguntas;
+          this.currentIndex = 0; // Reiniciar el índice al cargar nuevas preguntas
+          this.isFinished = false; // Asegúrate de que el estado de finalización esté actualizado
+          this.updateForm();
+        },
+        error => console.error('Error al cargar preguntas', error)
+      );
+    } else {
+      console.error('ID de lección no disponible.');
+    }
+  }
+
+  updateForm(): void {
+    if (this.shuffledQuestions.length > 0) {
+      this.setFormOptions(this.shuffledQuestions[this.currentIndex].opciones);
+    }
+  }
+
+  setFormOptions(opciones: { texto: string, esCorrecta: boolean }[]): void {
+    const formArray = this.fb.array(
+      opciones.map(opcion => this.fb.control(opcion.texto, Validators.required))
+    );
+    this.preguntasForm.setControl('opciones', formArray);
   }
 
   get opciones(): FormArray {
     return this.preguntasForm.get('opciones') as FormArray;
   }
 
-  shuffleArray(array: Pregunta[]): Pregunta[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  showQuestion(index: number): void {
-    if (index < this.shuffledQuestions.length) {
-      const opciones = this.shuffledQuestions[index]?.opciones || [];
-      this.preguntasForm.reset({ respuesta: '' });
-      this.setOpciones(opciones);
-      this.currentIndex = index;
+  guardarRespuesta(): void {
+    if (this.currentIndex < this.shuffledQuestions.length - 1) {
+      this.currentIndex++;
+      this.updateForm();
     } else {
       this.isFinished = true;
     }
   }
-
-  setOpciones(opciones: string[]): void {
-    const opcionesFormArray = this.opciones;
-    opcionesFormArray.clear();
-    opciones.forEach(opcion => opcionesFormArray.push(this.fb.control(opcion, Validators.required)));
-  }
-
-  nextQuestion(): void {
-    this.currentIndex++;
-    this.showQuestion(this.currentIndex);
-  }
-
-  guardarRespuesta(): void {
-    if (this.preguntasForm.valid) {
-      console.log('Respuesta guardada:', this.preguntasForm.value.respuesta);
-      this.nextQuestion();
-    } else {
-      console.error('Formulario no es válido');
-    }
-  }
 }
-
-

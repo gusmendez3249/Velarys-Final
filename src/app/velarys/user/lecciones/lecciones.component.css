@@ -1,0 +1,102 @@
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4b0082; /* Color morado oscuro */
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 40px; /* Tamaño del título */
+}
+
+.actions .btn-cerrar-sesion {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.actions .btn-cerrar-sesion:hover {
+  background-color: rgb(184, 45, 230);
+  color: #fff;
+  border: rgb(184, 45, 230);
+  transform: scale(1.05);
+}
+
+/* Encabezado */
+.encabezado {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.encabezado h2 {
+  color: #8b1d99; /* Color morado claro */
+  margin: 0;
+  font-size: 40px;
+}
+
+.encabezado p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Carrusel de lecciones */
+.leccion-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px auto; /* Ajustar el margen superior e inferior */
+  max-width: 1000px; /* Ampliar el ancho máximo */
+  padding: 30px; /* Aumentar el padding */
+  border: 2px solid #8b1d99; /* Color morado claro para el borde */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Fondo claro para el carrusel */
+}
+
+.leccion-item {
+  flex: 1;
+  text-align: center;
+}
+
+.leccion-item h2 {
+  color: #6206a3; /* Color morado oscuro */
+  margin: 0;
+  font-size: 32px; /* Aumentar el tamaño del título */
+}
+
+.leccion-item p {
+  margin: 10px 0;
+  font-size: 20px; /* Aumentar el tamaño del texto */
+}
+
+.leccion-carousel button {
+  padding: 15px 25px; /* Aumentar el padding de los botones */
+  background-color: #8b1d99; /* Color morado claro */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.leccion-carousel button:hover {
+  background-color: #6206a3; /* Color morado oscuro para hover */
+  
+}
+
+.leccion-carousel button[disabled] {
+  background-color: #d78c8c; /* Color gris claro para botones deshabilitados */
+  cursor: not-allowed;
+}

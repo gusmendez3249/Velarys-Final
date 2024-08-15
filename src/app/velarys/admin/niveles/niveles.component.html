@@ -13,23 +13,6 @@
 <div class="admin-content">
   <h2>Gestión de Niveles</h2>
 
-  <!-- Lista de Niveles -->
-  <div class="nivel-container">
-    <div *ngFor="let nivel of niveles" class="nivel-card">
-      <div class="nivel-details">
-        <h3>{{ nivel.nombre }}</h3>
-        <p>{{ nivel.descripcion }}</p>
-        <p>Precio: {{ nivel.precio | currency:'USD' }}</p>
-        <p>Acceso: {{ nivel.acceso ? 'Sí' : 'No' }}</p>
-        <p>ID: {{ nivel.id }}</p>
-      </div>
-      <div class="nivel-actions">
-        <button (click)="verLecciones(nivel)">Ver Lecciones</button>
-        <button (click)="seleccionarNivel(nivel)">Editar</button>
-        <button (click)="confirmarEliminarNivel(nivel.id!)">Eliminar</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Formulario de agregar niveles -->
   <div *ngIf="!esEdicion" class="agregar-nivel">
@@ -108,7 +91,24 @@
     </div>
   </form>
 </div>
-
+<h2>Listado de Niveles</h2>
+  <!-- Lista de Niveles -->
+  <div class="nivel-container">
+    <div *ngFor="let nivel of niveles" class="nivel-card">
+      <div class="nivel-details">
+        <h3>{{ nivel.nombre }}</h3>
+        <p>{{ nivel.descripcion }}</p>
+        <p>Precio: {{ nivel.precio | currency:'USD' }}</p>
+        <p>Acceso: {{ nivel.acceso ? 'Sí' : 'No' }}</p>
+        <p>ID: {{ nivel.id }}</p>
+      </div>
+      <div class="nivel-actions">
+        <button (click)="verLecciones(nivel)">Ver Lecciones</button>
+        <button (click)="seleccionarNivel(nivel)">Editar</button>
+        <button (click)="confirmarEliminarNivel(nivel.id!)">Eliminar</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal de Confirmación -->
   <div *ngIf="mostrarModal" class="modal">

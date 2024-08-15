@@ -1,4 +1,56 @@
-<!-- HTML para el cuestionario -->
-<div class="preguntas-container">
-  <!-- Aquí va el contenido del cuestionario -->
+<div class="header">
+  <h1>Administración de Preguntas</h1>
+  <button class="volver-button" (click)="volver()">Volver</button>
+</div>
+
+<div *ngIf="!editing">
+  <h2>Preguntas</h2>
+  <ul>
+    <li *ngFor="let pregunta of preguntas">
+      {{ pregunta.texto }}
+      <button (click)="viewPregunta(pregunta.id!)">Editar</button>
+      <button (click)="deletePregunta(pregunta.id!)">Eliminar</button>
+    </li>
+  </ul>
+
+  <h2>Crear Nueva Pregunta</h2>
+  <form (ngSubmit)="createPregunta()">
+    <label for="texto">Texto:</label>
+    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" required>
+
+    <label for="opciones">Opciones:</label>
+    <div *ngFor="let opcion of pregunta.opciones; let i = index">
+      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" placeholder="Texto de la opción" required>
+      <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+      <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
+    </div>
+    <button type="button" (click)="addOpcion()">Añadir Opción</button>
+
+    <label for="respuesta_correcta">Respuesta Correcta:</label>
+    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" required>
+
+    <button type="submit">Guardar</button>
+  </form>
+</div>
+
+<div *ngIf="editing">
+  <h2>Editar Pregunta</h2>
+  <form (ngSubmit)="updatePregunta()">
+    <label for="texto">Texto:</label>
+    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" required>
+
+    <label for="opciones">Opciones:</label>
+    <div *ngFor="let opcion of pregunta.opciones; let i = index">
+      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" placeholder="Texto de la opción" required>
+      <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+      <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
+    </div>
+    <button type="button" (click)="addOpcion()">Añadir Opción</button>
+
+    <label for="respuesta_correcta">Respuesta Correcta:</label>
+    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" required>
+
+    <button type="submit">Actualizar</button>
+    <button type="button" (click)="resetForm()">Cancelar</button>
+  </form>
 </div>

@@ -1,1 +1,36 @@
-<p>lecciones works!</p>
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Logo">
+  </div>
+  <div class="title">
+    <h1>Lecciones Velarys</h1>
+  </div>
+  <div class="actions">
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
+  </div>
+</div>
+
+<!-- Encabezado -->
+<div class="encabezado">
+  <h2>Bienvenido a las lecciones</h2>
+</div>
+
+<div class="lecciones-container">
+  <!-- Carrusel de lecciones -->
+  <div class="leccion-carousel">
+    <button class="botones" (click)="anteriorLeccion()" [disabled]="indiceActual === 0">Anterior</button>
+
+    <div *ngIf="lecciones.length > 0">
+      <div class="leccion-item">
+        <h2>{{ lecciones[indiceActual].nombre }}</h2>
+        <p>{{ lecciones[indiceActual].contenido }}</p>
+        <button *ngIf="lecciones[indiceActual].id !== undefined" (click)="verJuegos(lecciones[indiceActual].id)">
+          Ver Juegos
+        </button>
+      </div>
+    </div>
+
+    <button class="botones" (click)="siguienteLeccion()" [disabled]="indiceActual === lecciones.length - 1">Siguiente</button>
+  </div>
+</div>

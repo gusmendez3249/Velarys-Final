@@ -16,7 +16,8 @@ const register = (req, res) => {
 
     const userData = { nombres, apellidos, email, edad, sexo, password: hashedPassword, role: userRole };
 
-    userModel.createUser(userData, (error, userId) => {
+    // Cambia 'createUser' a 'create'
+    userModel.create(userData, (error, userId) => {
       if (error) {
         console.error('Error al registrar el usuario:', error);
         return res.status(500).json({ message: 'Error al registrar el usuario', error: error.message });
@@ -35,16 +36,15 @@ const login = (req, res) => {
       console.error('Error al buscar el usuario:', error);
       return res.status(500).json({ message: 'Error al buscar el usuario', error: error.message });
     }
-    if (!user) return res.status(401).json({ message: 'Usuario o contraseña equivocada' });
+    if (!user) return res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
 
     bcrypt.compare(password, user.password, (err, result) => {
       if (err) {
         console.error('Error al comparar contraseñas:', err);
         return res.status(500).json({ message: 'Error al comparar contraseñas', error: err.message });
       }
-      if (!result) return res.status(401).json({ message: 'Usuario o contraseña equivocada' });
+      if (!result) return res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
 
-      // En lugar de JWT, devolvemos una respuesta simple
       res.json({ message: 'Inicio de sesión correcto', userId: user.id, role: user.role });
     });
   });

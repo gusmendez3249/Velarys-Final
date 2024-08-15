@@ -1,5 +1,6 @@
 const Pregunta = require('../models/pregunta.model');
 
+// Obtener todas las preguntas
 exports.getAllPreguntas = (req, res) => {
   Pregunta.getAll((err, results) => {
     if (err) res.status(500).send(err);
@@ -7,29 +8,61 @@ exports.getAllPreguntas = (req, res) => {
   });
 };
 
+// Obtener preguntas por lección
+exports.getPreguntasPorLeccionId = (req, res) => {
+  const leccionId = parseInt(req.params.leccionId, 10);
+  if (isNaN(leccionId)) {
+    return res.status(400).send('ID de lección inválido');
+  }
+  Pregunta.getByLeccionId(leccionId, (err, results) => {
+    if (err) res.status(500).send(err);
+    else res.json(results);
+  });
+};
+
+// Obtener una pregunta por su ID
 exports.getPreguntaById = (req, res) => {
-  Pregunta.getById(req.params.id, (err, results) => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id)) {
+    return res.status(400).send('ID de pregunta inválido');
+  }
+  Pregunta.getById(id, (err, results) => {
     if (err) res.status(500).send(err);
     else res.json(results[0]);
   });
 };
 
+// Crear una nueva pregunta
 exports.createPregunta = (req, res) => {
+  // Validar el formato de `opciones` si es necesario
+  if (!req.body.opciones) {
+    return res.status(400).send('El campo `opciones` es obligatorio');
+  }
   Pregunta.create(req.body, (err, results) => {
     if (err) res.status(500).send(err);
     else res.status(201).json({ id: results.insertId });
   });
 };
 
+// Actualizar una pregunta existente
 exports.updatePregunta = (req, res) => {
-  Pregunta.update(req.params.id, req.body, (err, results) => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id)) {
+    return res.status(400).send('ID de pregunta inválido');
+  }
+  Pregunta.update(id, req.body, (err, results) => {
     if (err) res.status(500).send(err);
     else res.json(results);
   });
 };
 
+// Eliminar una pregunta
 exports.deletePregunta = (req, res) => {
-  Pregunta.delete(req.params.id, (err, results) => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id)) {
+    return res.status(400).send('ID de pregunta inválido');
+  }
+  Pregunta.delete(id, (err, results) => {
     if (err) {
       if (err.code === 'ER_ROW_IS_REFERENCED_2') {
         res.status(400).send('No se puede eliminar la pregunta porque existen registros relacionados en otras tablas.');

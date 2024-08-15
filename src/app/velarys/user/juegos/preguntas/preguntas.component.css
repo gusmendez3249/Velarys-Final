@@ -7,19 +7,64 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   h2 {
     font-size: 26px;
-    color: #333;
+    color: #333;.user-content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pregunta-texto {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .opciones-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .opcion-item {
+      margin-bottom: 10px;
+    }
+
+    .submit-btn {
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .final-message {
+      text-align: center;
+      padding: 20px;
+    }
+
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
   form {
     display: flex;
     flex-direction: column;
   }
-  
+
   img {
     display: block;
     max-width: 100%;
@@ -28,7 +73,7 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   label {
     background-color: #007bff;
     color: white;
@@ -39,12 +84,12 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   input[type="radio"] {
     margin-right: 10px;
     transform: scale(1.2);
   }
-  
+
   button {
     padding: 12px 24px;
     background-color: #28a745;
@@ -56,43 +101,42 @@
     transition: background-color 0.3s ease;
     margin-top: 20px;
   }
-  
+
   button:hover {
     background-color: #218838;
   }
-  
+
   .user-content * {
     margin-bottom: 10px;
   }
-  
+
   .user-content div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .user-content div label:hover {
     background-color: #0056b3;
   }
-  
+
   .user-content .finished-message {
     text-align: center;
     font-size: 24px;
     color: #28a745;
     margin-top: 50px;
   }
-  
+
   @media (max-width: 600px) {
     .user-content {
       padding: 15px;
     }
-  
+
     h2 {
       font-size: 22px;
     }
-  
+
     button {
       width: 100%;
     }
   }
-  

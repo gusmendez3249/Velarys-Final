@@ -1,18 +1,12 @@
-export interface Juego {
-  id?: number;
-  leccionId: number;
-  tipo: string;
-  contenido: string;
-}
-
 export interface Memorama {
   id?: number;
   nombre: string;
-  cartas: Carta[];
+  leccionId?: number;
 }
 
 export interface Carta {
-  id: number;
+  id?: number;
+  memoramaId: number;
   valor: string;
   estado: 'cerrado' | 'abierto' | 'completado';
   colorClass: string;
