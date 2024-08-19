@@ -1,10 +1,10 @@
-import { PreguntaService } from '../../../services/preguntas.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Pregunta, Opcion } from '../../../models/preguntas.model'; // Asegúrate de tener estas interfaces definidas
+import { PreguntaService } from '../../../services/preguntas.service';
+import { Pregunta, Opcion } from '../../../models/preguntas.model';
 
 @Component({
-  selector: 'app-preguntas',
+  selector: 'app-preguntas-admin',
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css']
 })
@@ -13,9 +13,12 @@ export class PreguntasAdmin implements OnInit {
   nivelId: string | null = null;
   leccionId: string | null = null;
   preguntas: Pregunta[] = [];
-  pregunta: Pregunta = { texto: '', opciones: [], respuesta_correcta: '' }; // Inicializa con todas las propiedades
+  pregunta: Pregunta = { texto: '', opciones: [], respuesta_correcta: '' };
   editing: boolean = false;
-  errorMessage: string | null = null;
+  formErrors: { [key: string]: string } = {}; // Mensajes de error para los campos
+  mostrarModal: boolean = false;
+  mensajeModal: string = '';
+  callbackConfirm: () => void = () => {};
 
   constructor(
     private route: ActivatedRoute,
@@ -56,61 +59,115 @@ export class PreguntasAdmin implements OnInit {
   }
 
   createPregunta(): void {
-    const newPregunta = this.preparePregunta();
-    this.preguntaService.createPregunta(newPregunta).subscribe(
+    if (!this.validatePregunta()) return;
+    this.mostrarConfirmacion(
+      '¿Estás seguro de que deseas crear esta pregunta?',
       () => {
-        this.loadPreguntas();
-        this.resetForm();
-      },
-      error => this.handleError('Error al crear la pregunta.', error)
+        const newPregunta = this.preparePregunta();
+        this.preguntaService.createPregunta(newPregunta).subscribe(
+          () => {
+            this.loadPreguntas();
+            this.resetForm();
+          },
+          error => this.handleError('Error al crear la pregunta.', error)
+        );
+      }
     );
   }
 
   updatePregunta(): void {
     if (this.pregunta.id === undefined) {
-      console.error('ID de pregunta no está definido.');
+      this.handleError('ID de pregunta no está definido. No se puede actualizar.', null);
       return;
     }
-    const updatedPregunta = this.preparePregunta();
-    this.preguntaService.updatePregunta(this.pregunta.id, updatedPregunta).subscribe(
+    if (!this.validatePregunta()) return;
+    this.mostrarConfirmacion(
+      '¿Estás seguro de que deseas actualizar esta pregunta?',
       () => {
-        this.loadPreguntas();
-        this.resetForm();
-      },
-      error => this.handleError('Error al actualizar la pregunta.', error)
+        const updatedPregunta = this.preparePregunta();
+        this.preguntaService.updatePregunta(this.pregunta.id!, updatedPregunta).subscribe(
+          () => {
+            this.loadPreguntas();
+            this.resetForm();
+          },
+          error => this.handleError('Error al actualizar la pregunta.', error)
+        );
+      }
     );
   }
 
   deletePregunta(id: number): void {
-    if (confirm('¿Estás seguro de que quieres eliminar esta pregunta?')) {
-      this.preguntaService.deletePregunta(id).subscribe(
-        () => this.loadPreguntas(),
-        error => this.handleError('Error al eliminar la pregunta.', error)
-      );
+    this.mostrarConfirmacion(
+      '¿Estás seguro de que deseas eliminar esta pregunta?',
+      () => {
+        this.preguntaService.deletePregunta(id).subscribe(
+          () => this.loadPreguntas(),
+          error => this.handleError('Error al eliminar la pregunta.', error)
+        );
+      }
+    );
+  }
+
+  validatePregunta(): boolean {
+    this.formErrors = {}; // Resetear errores
+    let isValid = true;
+
+    if (!this.pregunta.texto) {
+      this.formErrors['texto'] = 'El texto de la pregunta es obligatorio.';
+      isValid = false;
     }
+
+    if (!this.pregunta.respuesta_correcta) {
+      this.formErrors['respuesta_correcta'] = 'La respuesta correcta es obligatoria.';
+      isValid = false;
+    }
+
+    if (this.pregunta.opciones.length === 0) {
+      this.formErrors['general'] = 'Debe agregar al menos una opción.';
+      isValid = false;
+    } else {
+      this.pregunta.opciones.forEach((opcion, index) => {
+        if (!opcion.texto) {
+          this.formErrors['opcionTexto' + index] = 'El texto de la opción es obligatorio.';
+          isValid = false;
+        }
+      });
+    }
+
+    return isValid;
   }
 
   preparePregunta(): Pregunta {
     return {
-      texto: this.pregunta.texto || '',
-      opciones: this.pregunta.opciones || [],
-      respuesta_correcta: this.pregunta.respuesta_correcta || '',
+      ...this.pregunta,
       leccionId: this.leccionId ? parseInt(this.leccionId, 10) : undefined
     };
   }
 
   resetForm(): void {
-    this.pregunta = { texto: '', opciones: [], respuesta_correcta: '' }; // Resetea con un objeto completo
+    this.pregunta = { texto: '', opciones: [], respuesta_correcta: '' };
     this.editing = false;
+    this.formErrors = {};
   }
 
-  handleError(message: string, error: any): void {
-    this.errorMessage = message;
-    console.error(message, error); // Mensaje añadido a los logs para claridad
+  mostrarConfirmacion(mensaje: string, callback: () => void): void {
+    this.mensajeModal = mensaje;
+    this.mostrarModal = true;
+    this.callbackConfirm = callback;
   }
 
-  volver(): void {
-    window.history.back(); // Actualiza la ruta según corresponda
+  confirmarAccion(): void {
+    this.callbackConfirm();
+    this.cerrarModal();
+  }
+
+  cerrarModal(): void {
+    this.mostrarModal = false;
+  }
+
+  handleError(mensaje: string, error: any): void {
+    console.error(error);
+    this.formErrors['general'] = mensaje;
   }
 
   addOpcion(): void {
@@ -119,5 +176,13 @@ export class PreguntasAdmin implements OnInit {
 
   removeOpcion(index: number): void {
     this.pregunta.opciones.splice(index, 1);
+  }
+
+  cancelarEdicion(): void {
+    this.resetForm();
+  }
+
+  volver(): void {
+    this.router.navigate(['/']);
   }
 }

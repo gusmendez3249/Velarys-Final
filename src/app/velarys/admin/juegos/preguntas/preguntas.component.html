@@ -3,54 +3,100 @@
   <button class="volver-button" (click)="volver()">Volver</button>
 </div>
 
+<!-- Sección para crear una nueva pregunta -->
 <div *ngIf="!editing">
-  <h2>Preguntas</h2>
-  <ul>
-    <li *ngFor="let pregunta of preguntas">
-      {{ pregunta.texto }}
-      <button (click)="viewPregunta(pregunta.id!)">Editar</button>
-      <button (click)="deletePregunta(pregunta.id!)">Eliminar</button>
-    </li>
-  </ul>
-
   <h2>Crear Nueva Pregunta</h2>
   <form (ngSubmit)="createPregunta()">
+    <div *ngIf="formErrors['general']" class="error">
+      <p>{{ formErrors['general'] }}</p>
+    </div>
+
     <label for="texto">Texto:</label>
-    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" required>
+    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" maxlength="255" required>
+    <div *ngIf="formErrors['texto']" class="error">
+      <p>{{ formErrors['texto'] }}</p>
+    </div>
 
     <label for="opciones">Opciones:</label>
     <div *ngFor="let opcion of pregunta.opciones; let i = index">
-      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" placeholder="Texto de la opción" required>
-      <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" maxlength="255" placeholder="Texto de la opción" required>
+      <div *ngIf="formErrors['opcionTexto' + i]" class="error">
+        <p>{{ formErrors['opcionTexto' + i] }}</p>
+      </div>
+      <label>
+        <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+        Seleccionar como respuesta correcta
+      </label>
       <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
     </div>
     <button type="button" (click)="addOpcion()">Añadir Opción</button>
 
     <label for="respuesta_correcta">Respuesta Correcta:</label>
-    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" required>
+    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" maxlength="255" required>
+    <div *ngIf="formErrors['respuesta_correcta']" class="error">
+      <p>{{ formErrors['respuesta_correcta'] }}</p>
+    </div>
 
-    <button type="submit">Guardar</button>
+    <button type="submit" [disabled]="pregunta.opciones.length === 0">Guardar</button>
   </form>
+
+  <h2>Listado de Preguntas</h2>
+  <div class="preguntas-container">
+    <ul>
+      <li *ngFor="let pregunta of preguntas">
+        <span class="pregunta-texto">{{ pregunta.texto }}</span>
+        <button (click)="viewPregunta(pregunta.id!)">Editar</button>
+        <button (click)="deletePregunta(pregunta.id!)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
 </div>
 
+<!-- Sección para editar una pregunta -->
 <div *ngIf="editing">
   <h2>Editar Pregunta</h2>
   <form (ngSubmit)="updatePregunta()">
+    <div *ngIf="formErrors['general']" class="error">
+      <p>{{ formErrors['general'] }}</p>
+    </div>
+
     <label for="texto">Texto:</label>
-    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" required>
+    <input type="text" id="texto" [(ngModel)]="pregunta.texto" name="texto" maxlength="255" required>
+    <div *ngIf="formErrors['texto']" class="error">
+      <p>{{ formErrors['texto'] }}</p>
+    </div>
 
     <label for="opciones">Opciones:</label>
     <div *ngFor="let opcion of pregunta.opciones; let i = index">
-      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" placeholder="Texto de la opción" required>
-      <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+      <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" maxlength="255" placeholder="Texto de la opción" required>
+      <div *ngIf="formErrors['opcionTexto' + i]" class="error">
+        <p>{{ formErrors['opcionTexto' + i] }}</p>
+      </div>
+      <label>
+        <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+        Seleccionar como respuesta correcta
+      </label>
       <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
     </div>
     <button type="button" (click)="addOpcion()">Añadir Opción</button>
 
     <label for="respuesta_correcta">Respuesta Correcta:</label>
-    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" required>
+    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" maxlength="255" required>
+    <div *ngIf="formErrors['respuesta_correcta']" class="error">
+      <p>{{ formErrors['respuesta_correcta'] }}</p>
+    </div>
 
-    <button type="submit">Actualizar</button>
-    <button type="button" (click)="resetForm()">Cancelar</button>
+    <button type="submit" [disabled]="pregunta.opciones.length === 0">Actualizar</button>
+    <button type="button" (click)="cancelarEdicion()">Cancelar</button>
   </form>
+</div>
+
+<!-- Modal de Confirmación -->
+<div *ngIf="mostrarModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <p>{{ mensajeModal }}</p>
+    <button (click)="confirmarAccion()">Confirmar</button>
+    <button (click)="cerrarModal()">Cancelar</button>
+  </div>
 </div>
