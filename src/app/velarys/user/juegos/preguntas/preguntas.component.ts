@@ -1,81 +1,105 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { PreguntaService } from '../../../services/preguntas.service';
-import { Pregunta } from '../../../models/preguntas.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Pregunta, Opcion } from '../../../models/preguntas.model';
 
 @Component({
-  selector: 'app-preguntas-usuario',
+  selector: 'app-preguntas',
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css']
 })
 export class PreguntasComponent implements OnInit {
-  preguntasForm: FormGroup;
-  shuffledQuestions: Pregunta[] = [];
-  currentIndex: number = 0;
-  isFinished: boolean = false;
-  leccionId: number | null = null;
+  cursoId!: string;
+  nivelId!: string;
+  leccionId!: string;
+  preguntas: Pregunta[] = [];
+  preguntaActual: Pregunta | null = null;
+  respuestaSeleccionada: string | null = null;
+  puntaje = 0;
+  mensajeFinal = '';
+  preguntaIndex = 0;
 
   constructor(
-    private fb: FormBuilder,
-    private preguntaService: PreguntaService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.preguntasForm = this.fb.group({
-      opciones: this.fb.array([])
-    });
-  }
+    private preguntaService: PreguntaService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const newLeccionId = +params.get('leccionId')!;
-      if (newLeccionId !== this.leccionId) {
-        this.leccionId = newLeccionId;
-        this.loadQuestions();
-      }
+      this.cursoId = params.get('cursoId')!;
+      this.nivelId = params.get('nivelId')!;
+      this.leccionId = params.get('leccionId')!;
+      this.loadPreguntas();
     });
   }
 
-  loadQuestions(): void {
-    if (this.leccionId !== null) {
-      this.preguntaService.getPreguntasPorLeccion(this.leccionId).subscribe(
-        (preguntas: Pregunta[]) => {
-          this.shuffledQuestions = preguntas;
-          this.currentIndex = 0; // Reiniciar el índice al cargar nuevas preguntas
-          this.isFinished = false; // Asegúrate de que el estado de finalización esté actualizado
-          this.updateForm();
-        },
-        error => console.error('Error al cargar preguntas', error)
-      );
-    } else {
-      console.error('ID de lección no disponible.');
-    }
-  }
-
-  updateForm(): void {
-    if (this.shuffledQuestions.length > 0) {
-      this.setFormOptions(this.shuffledQuestions[this.currentIndex].opciones);
-    }
-  }
-
-  setFormOptions(opciones: { texto: string, esCorrecta: boolean }[]): void {
-    const formArray = this.fb.array(
-      opciones.map(opcion => this.fb.control(opcion.texto, Validators.required))
+  loadPreguntas(): void {
+    this.preguntaService.getPreguntasPorLeccion(+this.leccionId).subscribe(
+      data => {
+        this.preguntas = this.shuffleArray(data);
+        this.showNextPregunta();
+      },
+      error => this.handleError('Error al cargar las preguntas.', error)
     );
-    this.preguntasForm.setControl('opciones', formArray);
   }
 
-  get opciones(): FormArray {
-    return this.preguntasForm.get('opciones') as FormArray;
-  }
-
-  guardarRespuesta(): void {
-    if (this.currentIndex < this.shuffledQuestions.length - 1) {
-      this.currentIndex++;
-      this.updateForm();
+  showNextPregunta(): void {
+    if (this.preguntaIndex < this.preguntas.length) {
+      this.preguntaActual = this.preguntas[this.preguntaIndex];
+      this.respuestaSeleccionada = null;
     } else {
-      this.isFinished = true;
+      this.mensajeFinal = `¡Juego terminado! Puntaje final: ${this.puntaje}`;
+      this.preguntaActual = null;
     }
+  }
+
+  selectOption(opcion: Opcion): void {
+    // Permitir cambiar de opción
+    this.respuestaSeleccionada = (this.respuestaSeleccionada === opcion.texto) ? null : opcion.texto;
+  }
+
+  submitAnswer(): void {
+    if (this.respuestaSeleccionada) {
+      // Verificar respuesta seleccionada
+      const opcionSeleccionada = this.preguntaActual?.opciones.find(opcion => opcion.texto === this.respuestaSeleccionada);
+      if (opcionSeleccionada?.esCorrecta) {
+        this.puntaje++;
+      }
+
+      this.preguntaIndex++;
+      this.showNextPregunta();
+
+      // Resetear color de la opción seleccionada
+      const opciones = document.querySelectorAll('.opcion-label');
+      opciones.forEach(option => option.classList.remove('opcion-seleccionada'));
+    }
+  }
+
+  volver(): void {
+    window.history.back();
+  }
+
+  handleError(mensaje: string, error: any): void {
+    console.error(error);
+    alert(mensaje);
+  }
+
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  reiniciarJuego(): void {
+    this.puntaje = 0;
+    this.preguntaIndex = 0;
+    this.mensajeFinal = '';
+    this.loadPreguntas();
+  }
+
+  salir(): void {
+    window.history.back();
   }
 }

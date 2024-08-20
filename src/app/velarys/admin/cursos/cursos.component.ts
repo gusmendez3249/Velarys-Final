@@ -155,8 +155,12 @@ export class CursosAdmin implements OnInit {
 
 
   cerrarSesion(): void {
-    this.router.navigate(['/cerrar']);
+    this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
+      // Redirigir al usuario a la página de cierre de sesión después de la confirmación
+      this.router.navigate(['/']);
+    });
   }
+
 
   mostrarConfirmacion(mensaje: string, callback: () => void): void {
     this.mensajeModal = mensaje;
@@ -174,6 +178,8 @@ export class CursosAdmin implements OnInit {
     }
     this.cerrarModal();
   }
+
+
 
   // Método para actualizar el campo esDePaga basado en el valor de precio
   private actualizarEsDePaga(precio: number, esDePagaControl: AbstractControl | null): void {

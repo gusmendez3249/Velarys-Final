@@ -36,4 +36,8 @@ export class JuegosComponent implements OnInit {
       console.error('Los parámetros de curso, nivel y lección no están disponibles.');
     }
   }
+
+  volver(): void{
+    window.history.back();
+  }
 }

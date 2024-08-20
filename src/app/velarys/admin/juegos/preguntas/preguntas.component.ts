@@ -9,15 +9,15 @@ import { Pregunta, Opcion } from '../../../models/preguntas.model';
   styleUrls: ['./preguntas.component.css']
 })
 export class PreguntasAdmin implements OnInit {
-  cursoId: string | null = null;
-  nivelId: string | null = null;
-  leccionId: string | null = null;
+  cursoId!: string;
+  nivelId!: string;
+  leccionId!: string;
   preguntas: Pregunta[] = [];
-  pregunta: Pregunta = { texto: '', opciones: [], respuesta_correcta: '' };
-  editing: boolean = false;
-  formErrors: { [key: string]: string } = {}; // Mensajes de error para los campos
-  mostrarModal: boolean = false;
-  mensajeModal: string = '';
+  pregunta: Pregunta = this.getEmptyPregunta();
+  editing = false;
+  formErrors: { [key: string]: string } = {};
+  mostrarModal = false;
+  mensajeModal = '';
   callbackConfirm: () => void = () => {};
 
   constructor(
@@ -28,29 +28,25 @@ export class PreguntasAdmin implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.cursoId = params.get('cursoId');
-      this.nivelId = params.get('nivelId');
-      this.leccionId = params.get('leccionId');
-      if (this.leccionId) {
-        this.loadPreguntas();
-      }
+      this.cursoId = params.get('cursoId')!;
+      this.nivelId = params.get('nivelId')!;
+      this.leccionId = params.get('leccionId')!;
+      this.loadPreguntas();
     });
   }
 
   loadPreguntas(): void {
-    if (this.leccionId) {
-      this.preguntaService.getAllPreguntas().subscribe(
-        (data: Pregunta[]) => {
-          this.preguntas = data.filter(p => p.leccionId === parseInt(this.leccionId!, 10));
-        },
-        error => this.handleError('Error al cargar las preguntas.', error)
-      );
-    }
+    this.preguntaService.getPreguntasPorLeccion(+this.leccionId).subscribe(
+      data => {
+        this.preguntas = data;
+      },
+      error => this.handleError('Error al cargar las preguntas.', error)
+    );
   }
 
   viewPregunta(id: number): void {
     this.preguntaService.getPreguntaById(id).subscribe(
-      (data: Pregunta) => {
+      data => {
         this.pregunta = data;
         this.editing = true;
       },
@@ -60,56 +56,35 @@ export class PreguntasAdmin implements OnInit {
 
   createPregunta(): void {
     if (!this.validatePregunta()) return;
-    this.mostrarConfirmacion(
-      '¿Estás seguro de que deseas crear esta pregunta?',
-      () => {
-        const newPregunta = this.preparePregunta();
-        this.preguntaService.createPregunta(newPregunta).subscribe(
-          () => {
-            this.loadPreguntas();
-            this.resetForm();
-          },
-          error => this.handleError('Error al crear la pregunta.', error)
-        );
-      }
-    );
+    this.mostrarConfirmacion('¿Estás seguro de que deseas crear esta pregunta?', () => {
+      this.preguntaService.createPregunta(this.preparePregunta()).subscribe(
+        () => this.handleSuccess(),
+        error => this.handleError('Error al crear la pregunta.', error)
+      );
+    });
   }
 
   updatePregunta(): void {
-    if (this.pregunta.id === undefined) {
-      this.handleError('ID de pregunta no está definido. No se puede actualizar.', null);
-      return;
-    }
-    if (!this.validatePregunta()) return;
-    this.mostrarConfirmacion(
-      '¿Estás seguro de que deseas actualizar esta pregunta?',
-      () => {
-        const updatedPregunta = this.preparePregunta();
-        this.preguntaService.updatePregunta(this.pregunta.id!, updatedPregunta).subscribe(
-          () => {
-            this.loadPreguntas();
-            this.resetForm();
-          },
-          error => this.handleError('Error al actualizar la pregunta.', error)
-        );
-      }
-    );
+    if (!this.validatePregunta() || !this.pregunta.id) return;
+    this.mostrarConfirmacion('¿Estás seguro de que deseas actualizar esta pregunta?', () => {
+      this.preguntaService.updatePregunta(this.pregunta.id!, this.preparePregunta()).subscribe(
+        () => this.handleSuccess(),
+        error => this.handleError('Error al actualizar la pregunta.', error)
+      );
+    });
   }
 
   deletePregunta(id: number): void {
-    this.mostrarConfirmacion(
-      '¿Estás seguro de que deseas eliminar esta pregunta?',
-      () => {
-        this.preguntaService.deletePregunta(id).subscribe(
-          () => this.loadPreguntas(),
-          error => this.handleError('Error al eliminar la pregunta.', error)
-        );
-      }
-    );
+    this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar esta pregunta?', () => {
+      this.preguntaService.deletePregunta(id).subscribe(
+        () => this.loadPreguntas(),
+        error => this.handleError('Error al eliminar la pregunta.', error)
+      );
+    });
   }
 
   validatePregunta(): boolean {
-    this.formErrors = {}; // Resetear errores
+    this.formErrors = {};
     let isValid = true;
 
     if (!this.pregunta.texto) {
@@ -128,7 +103,7 @@ export class PreguntasAdmin implements OnInit {
     } else {
       this.pregunta.opciones.forEach((opcion, index) => {
         if (!opcion.texto) {
-          this.formErrors['opcionTexto' + index] = 'El texto de la opción es obligatorio.';
+          this.formErrors[`opcionTexto${index}`] = 'El texto de la opción es obligatorio.';
           isValid = false;
         }
       });
@@ -138,22 +113,39 @@ export class PreguntasAdmin implements OnInit {
   }
 
   preparePregunta(): Pregunta {
-    return {
-      ...this.pregunta,
-      leccionId: this.leccionId ? parseInt(this.leccionId, 10) : undefined
-    };
+    this.pregunta.opciones.forEach(opcion => {
+      opcion.esCorrecta = opcion.texto === this.pregunta.respuesta_correcta;
+    });
+    return { ...this.pregunta, leccionId: +this.leccionId };
   }
 
-  resetForm(): void {
-    this.pregunta = { texto: '', opciones: [], respuesta_correcta: '' };
+  addOpcion(): void {
+    this.pregunta.opciones.push({ texto: '', esCorrecta: false });
+  }
+
+  removeOpcion(index: number): void {
+    this.pregunta.opciones.splice(index, 1);
+  }
+
+  onCorrectOptionChange(selectedOption: Opcion): void {
+    this.pregunta.opciones.forEach(opcion => {
+      opcion.esCorrecta = opcion.texto === selectedOption.texto;
+    });
+  }
+
+  cancelarEdicion(): void {
     this.editing = false;
-    this.formErrors = {};
+    this.pregunta = this.getEmptyPregunta();
   }
 
-  mostrarConfirmacion(mensaje: string, callback: () => void): void {
+  volver(): void {
+    this.router.navigate(['/leccionesadmin', this.cursoId, this.nivelId]);
+  }
+
+  mostrarConfirmacion(mensaje: string, callbackConfirm: () => void): void {
     this.mensajeModal = mensaje;
+    this.callbackConfirm = callbackConfirm;
     this.mostrarModal = true;
-    this.callbackConfirm = callback;
   }
 
   confirmarAccion(): void {
@@ -165,24 +157,22 @@ export class PreguntasAdmin implements OnInit {
     this.mostrarModal = false;
   }
 
+  handleSuccess(): void {
+    this.loadPreguntas();
+    this.cancelarEdicion();
+  }
+
   handleError(mensaje: string, error: any): void {
     console.error(error);
-    this.formErrors['general'] = mensaje;
+    alert(mensaje);
   }
 
-  addOpcion(): void {
-    this.pregunta.opciones.push({ texto: '', esCorrecta: false });
-  }
-
-  removeOpcion(index: number): void {
-    this.pregunta.opciones.splice(index, 1);
-  }
-
-  cancelarEdicion(): void {
-    this.resetForm();
-  }
-
-  volver(): void {
-    this.router.navigate(['/']);
+  getEmptyPregunta(): Pregunta {
+    return {
+      id: 0,
+      texto: '',
+      opciones: [],
+      respuesta_correcta: ''
+    };
   }
 }

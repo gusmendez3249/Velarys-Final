@@ -1,7 +1,23 @@
-<div class="juegos-container">
-  <h2>Selecciona un juego</h2>
-  <div class="juegos-options">
-    <button (click)="seleccionarJuego('preguntas')">Jugar a Preguntas</button>
-    <button (click)="seleccionarJuego('memorama')">Jugar a Memorama</button>
+<div class="header">
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Logo">
+  </div>
+  <div class="title">
+    <h1>Juegos</h1>
+  </div>
+  <div class="actions">
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
+  </div>
+</div>
+
+<div class="info-message">
+  <p>¡Bienvenido! Elige un juego para empezar a divertirte. Cada juego está diseñado para ayudarte a mejorar tus habilidades y disfrutar mientras aprendes.</p>
+</div>
+
+<div class="juegos-selection">
+  <h1>Selecciona un juego</h1>
+  <div class="buttons-container">
+    <button (click)="seleccionarJuego('preguntas')">Preguntas</button>
+    <button (click)="seleccionarJuego('memorama')">Memorama</button>
   </div>
 </div>

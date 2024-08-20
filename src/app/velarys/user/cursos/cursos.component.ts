@@ -9,6 +9,9 @@ import { CursoService } from '../../services/curso.service';
 })
 export class CursosComponent implements OnInit {
   cursos: any[] = [];
+  mostrarModal: boolean = false;
+  mensajeModal: string = '';
+  callbackConfirm: () => void = () => {};
 
   constructor(private cursoService: CursoService, private router: Router) {}
 
@@ -35,11 +38,31 @@ export class CursosComponent implements OnInit {
 
   pagarCurso(curso: any): void {
     // Implementar lógica para el pago del curso
-  this.router.navigate(['/pago'])
+    this.router.navigate(['/pago']);
     // Redirigir a la página de pago o realizar el pago aquí
   }
 
   cerrarSesion(): void {
-    this.router.navigate(['/cerrar']);
+    this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
+      // Redirigir al usuario a la página de cierre de sesión después de la confirmación
+      this.router.navigate(['/']);
+    });
+  }
+
+  mostrarConfirmacion(mensaje: string, callback: () => void): void {
+    this.mensajeModal = mensaje;
+    this.callbackConfirm = callback;
+    this.mostrarModal = true;
+  }
+
+  cerrarModal(): void {
+    this.mostrarModal = false;
+  }
+
+  confirmarAccion(): void {
+    if (this.callbackConfirm) {
+      this.callbackConfirm();
+    }
+    this.cerrarModal();
   }
 }

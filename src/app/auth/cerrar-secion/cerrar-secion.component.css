@@ -1,82 +1,66 @@
-/* Tipografía general */
-body {
-  font-family: 'Roboto', sans-serif; /* Tipografía para el cuerpo del texto */
-}
-
-/* Estilo general del contenedor */
-.container {
+/* Estilos del modal */
+.modal-overlay {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh; /* Mantener la altura mínima */
-  max-width: 500px; /* Tamaño máximo del contenedor */
-  background: rgba(75, 0, 130, 0.1); /* Fondo morado claro con opacidad */
-  padding: 30px; /* Padding alrededor del contenido */
-  border-radius: 10px; /* Borde redondeado */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
-  text-align: center; /* Alinear el texto en el centro */
-  background-color: #b28ef6; /* Color morado medio */
-}
-
-/* Estilo de la tarjeta de cierre de sesión */
-.card {
-  background-color: #e1bee7; /* Morado claro */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
-  text-align: center;
-  max-width: 400px;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
   width: 100%;
-  margin: 20px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
 }
 
-/* Estilo del título */
-.card h2 {
-  font-family: 'Poppins', sans-serif; /* Tipografía para los encabezados */
-  color: #4a4a4a; /* Color gris oscuro */
-  font-size: 1.8em;
-  margin-bottom: 15px;
+.modal-content {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
 }
 
-/* Estilo del párrafo */
-.card p {
-  color: #6c757d; /* Color gris claro */
-  font-size: 1em;
-  margin-bottom: 25px;
-}
-
-/* Estilo de los botones */
-.btn {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 30px; /* Botón ovalado */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
   cursor: pointer;
-  font-size: 1em;
-  margin: 10px;
-  color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  display: inline-block;
-  font-family: 'Roboto', sans-serif; /* Tipografía para los botones */
 }
 
-/* Estilo del botón de cerrar sesión */
+.btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
 .btn-danger {
-  background-color: #0fc887; /* Morado para el botón de cerrar sesión */
+  background-color: #dc3545;
+  color: white;
 }
 
 .btn-danger:hover {
-  background-color: #67c6a5; /* Un tono más oscuro para el hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+  background-color: #c82333;
 }
 
-/* Estilo del botón de cancelar */
 .btn-secondary {
-  background-color: #ee4337; /* Morado para el botón de cancelar */
+  background-color: #6c757d;
+  color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #d06969; /* Un tono más oscuro para el hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+  background-color: #5a6268;
 }

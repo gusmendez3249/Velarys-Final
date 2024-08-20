@@ -1,8 +1,9 @@
-<div class="container">
-  <div class="card">
+<div class="modal-overlay" *ngIf="isVisible">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
     <h2>Cerrar Sesión</h2>
     <p>¿Estás seguro de que deseas cerrar sesión?</p>
-    <button class="btn btn-danger" id="logout-btn" (click)="cerrarSesion()">Cerrar Sesión</button>
-    <button class="btn btn-secondary" id="cancel-btn" (click)="cancelar()">Cancelar</button>
+    <button class="btn btn-danger" (click)="confirm()">Cerrar Sesión</button>
+    <button class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
   </div>
 </div>

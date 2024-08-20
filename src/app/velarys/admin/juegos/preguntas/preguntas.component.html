@@ -18,24 +18,24 @@
     </div>
 
     <label for="opciones">Opciones:</label>
-    <div *ngFor="let opcion of pregunta.opciones; let i = index">
+    <div *ngFor="let opcion of pregunta.opciones; let i = index" style="margin-bottom: 20px;">
       <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" maxlength="255" placeholder="Texto de la opción" required>
       <div *ngIf="formErrors['opcionTexto' + i]" class="error">
         <p>{{ formErrors['opcionTexto' + i] }}</p>
       </div>
       <label>
-        <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+        <input
+          type="radio"
+          [(ngModel)]="pregunta.respuesta_correcta"
+          [value]="opcion.texto"
+          name="respuestaCorrecta"
+          (change)="onCorrectOptionChange(opcion)"
+        />
         Seleccionar como respuesta correcta
       </label>
-      <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
+      <button type="button" (click)="removeOpcion(i)" style="margin-left: 10px;">Eliminar Opción</button>
     </div>
     <button type="button" (click)="addOpcion()">Añadir Opción</button>
-
-    <label for="respuesta_correcta">Respuesta Correcta:</label>
-    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" maxlength="255" required>
-    <div *ngIf="formErrors['respuesta_correcta']" class="error">
-      <p>{{ formErrors['respuesta_correcta'] }}</p>
-    </div>
 
     <button type="submit" [disabled]="pregunta.opciones.length === 0">Guardar</button>
   </form>
@@ -67,24 +67,24 @@
     </div>
 
     <label for="opciones">Opciones:</label>
-    <div *ngFor="let opcion of pregunta.opciones; let i = index">
+    <div *ngFor="let opcion of pregunta.opciones; let i = index" style="margin-bottom: 20px;">
       <input type="text" [(ngModel)]="opcion.texto" name="opcionTexto{{i}}" maxlength="255" placeholder="Texto de la opción" required>
       <div *ngIf="formErrors['opcionTexto' + i]" class="error">
         <p>{{ formErrors['opcionTexto' + i] }}</p>
       </div>
       <label>
-        <input type="checkbox" [(ngModel)]="opcion.esCorrecta" name="opcionCorrecta{{i}}">
+        <input
+          type="radio"
+          [(ngModel)]="pregunta.respuesta_correcta"
+          [value]="opcion.texto"
+          name="respuestaCorrecta"
+          (change)="onCorrectOptionChange(opcion)"
+        />
         Seleccionar como respuesta correcta
       </label>
-      <button type="button" (click)="removeOpcion(i)">Eliminar Opción</button>
+      <button type="button" (click)="removeOpcion(i)" style="margin-left: 10px;">Eliminar Opción</button>
     </div>
     <button type="button" (click)="addOpcion()">Añadir Opción</button>
-
-    <label for="respuesta_correcta">Respuesta Correcta:</label>
-    <input type="text" id="respuesta_correcta" [(ngModel)]="pregunta.respuesta_correcta" name="respuesta_correcta" maxlength="255" required>
-    <div *ngIf="formErrors['respuesta_correcta']" class="error">
-      <p>{{ formErrors['respuesta_correcta'] }}</p>
-    </div>
 
     <button type="submit" [disabled]="pregunta.opciones.length === 0">Actualizar</button>
     <button type="button" (click)="cancelarEdicion()">Cancelar</button>

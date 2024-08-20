@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-cerrar-secion',
   templateUrl: './cerrar-secion.component.html',
-  styleUrl: './cerrar-secion.component.css'
+  styleUrls: ['./cerrar-secion.component.css']
 })
 export class CerrarSecionComponent {
+  isVisible = false;
 
-  constructor() {}
+  @Output() onConfirm = new EventEmitter<void>();
 
-  cerrarSesion() {
-
-    // Redirigir al usuario a la página de inicio de sesión
-    window.location.href = '/bienvenida';
+  openModal(): void {
+    this.isVisible = true;
   }
 
-  cancelar() {
-    // Volver a la página anterior usando la History API
-    window.history.back(); // Regresa a la página anterior
+  closeModal(): void {
+    this.isVisible = false;
+  }
+
+  confirm(): void {
+    this.onConfirm.emit();
+    this.closeModal();
   }
 }

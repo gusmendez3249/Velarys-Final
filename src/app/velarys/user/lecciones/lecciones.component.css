@@ -93,7 +93,7 @@
 
 .leccion-carousel button:hover {
   background-color: #6206a3; /* Color morado oscuro para hover */
-  
+
 }
 
 .leccion-carousel button[disabled] {

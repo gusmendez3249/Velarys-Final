@@ -1,23 +1,32 @@
-<div class="user-content" *ngIf="!isFinished">
-  <h2 class="pregunta-texto">{{ shuffledQuestions[currentIndex].texto }}</h2>
-
-  <form [formGroup]="preguntasForm" (ngSubmit)="guardarRespuesta()">
-    <div formArrayName="opciones" class="opciones-container">
-      <div *ngFor="let opcionControl of opciones.controls; let i = index" class="opcion-item">
-        <label>
-          <input
-            type="radio"
-            [formControlName]="i.toString()"
-            [value]="opcionControl.value"
-          />
-          {{ opcionControl.value }}
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="submit-btn">Siguiente</button>
-  </form>
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <img src="assets/logo.jpg" alt="Logo">
+  </div>
+  <div class="title">
+    <h1>Juego de Preguntas</h1>
+  </div>
+  <div class="actions">
+    <button (click)="volver()" class="btn-cerrar-sesion">Volver</button>
+  </div>
 </div>
 
-<div *ngIf="isFinished" class="final-message">
-  <h2>¡Has completado todas las preguntas!</h2>
+<div class="preguntas-container" *ngIf="preguntaActual">
+  <h2 class="pregunta-texto">{{ preguntaActual.texto }}</h2>
+  <div class="opciones-container">
+    <div *ngFor="let opcion of preguntaActual.opciones" class="opcion-item">
+      <button (click)="selectOption(opcion)"
+              [ngClass]="{'opcion-seleccionada': respuestaSeleccionada === opcion.texto}"
+              class="opcion-label">
+        {{ opcion.texto }}
+      </button>
+    </div>
+  </div>
+  <button class="submit-btn" (click)="submitAnswer()" [disabled]="respuestaSeleccionada === null">Siguiente</button>
+</div>
+
+<div *ngIf="mensajeFinal" class="final-message">
+  <h2>{{ mensajeFinal }}</h2>
+  <button (click)="reiniciarJuego()" class="submit-btn final-btn">Volver a Jugar</button>
+  <button (click)="volver()" class="submit-btn final-btn">Salir</button>
 </div>

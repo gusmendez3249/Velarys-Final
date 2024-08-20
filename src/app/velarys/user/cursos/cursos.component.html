@@ -10,12 +10,12 @@
     <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
   </div>
 </div>
+
 <!-- Encabezado -->
 <div class="encabezado">
   <h2>Bienvenido a los cursos de Velarys</h2>
   <p>¡Gracias por unirte a nuestra plataforma!</p>
 </div>
-
 
 <!-- Contenedor de cursos -->
 <div class="cursos-container">
@@ -49,6 +49,19 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div *ngIf="mostrarModal" class="modal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <p>{{ mensajeModal }}</p>
+    <div class="modal-actions">
+      <button (click)="confirmarAccion()" class="btn-confirmar">Confirmar</button>
+      <button (click)="cerrarModal()" class="btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
 <div class="container">
-<p class="copyright">&copy; 2024 Velarys. Todos los derechos reservados.</p>
+  <p class="copyright">&copy; 2024 Velarys. Todos los derechos reservados.</p>
 </div>
