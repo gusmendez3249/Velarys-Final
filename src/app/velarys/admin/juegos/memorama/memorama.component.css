@@ -1,106 +1,248 @@
-/* Header Styling */
+/* Estilos generales */
+body {
+  font-family: 'Poppins', sans-serif; /* Cambié la tipografía a Poppins */
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9; /* Fondo claro */
+}
+
+/* Estilos para el encabezado */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #4b0082; /* Color de fondo del encabezado */
-  color: white; /* Color del texto */
+  background-color: #4b0082; /* Morado oscuro */
+  color: white;
   padding: 20px 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Espacio debajo del encabezado */
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 28px; /* Tamaño del texto del encabezado */
-  font-weight: bold; /* Negrita para mayor impacto */
-  text-align: center;
-  letter-spacing: 1px; /* Espaciado de letras para claridad */
-}
-
-/* Button Styling */
-.header .volver-button {
-  background-color: #4b0082; /* Color de fondo del botón en el encabezado */
-  color: white; /* Color del texto del botón */
-  border: 2px solid white; /* Borde del botón */
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 5px; /* Esquinas redondeadas */
-}
-
-.header .volver-button:hover {
-  background-color: white;
-  color: #4b0082; /* Color de texto al pasar el cursor */
-}
-
-/* Admin Content Styling */
-.admin-content {
-  padding: 20px;
-}
-
-.admin-content h2 {
-  margin-top: 0;
-}
-
-.agregar-memorama {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
   margin-bottom: 20px;
 }
 
-.agregar-memorama label {
-  display: block;
-  margin-bottom: 5px;
+.header .logo img {
+  height: 50px;
 }
 
-.agregar-memorama input {
+.header .title h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.header .actions button {
+  background-color: #4b0082;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header .actions button:hover {
+  background-color: white;
+  color: #4b0082;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #f44336; /* Rojo */
+  text-align: center;
+  margin: 10px 0;
+  background-color: #ffebee; /* Fondo rosa claro */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Contenedor para edición de memoramas y cartas */
+.edit-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* Formulario */
+.form-container {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f3e6f7; /* Morado claro */
+  max-width: 400px; /* Menos ancho para los formularios */
+  margin: 0 auto; /* Centrando el formulario */
+}
+
+.form-container h2 {
+  margin-top: 0;
+  color: #4b0082; /* Morado oscuro */
+}
+
+.form-container label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #6c5b7b; /* Morado oscuro */
+}
+
+.form-container input,
+.form-container select {
   width: 100%;
   padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  margin-top: 5px;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-.agregar-memorama button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+.form-container input:focus,
+.form-container select:focus {
+  border-color: #4b0082; /* Morado oscuro */
+  outline: none;
+}
+
+.form-container button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #6a0dad;
+  color: white;
   border: none;
-  cursor: pointer;
-}
-
-.agregar-memorama button:hover {
-  background-color: #0056b3;
-}
-
-.memorama-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 20px;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-container button:hover {
+  background-color: #4a0072;
+  transform: scale(1.05);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Lista de memoramas y cartas */
+.memorama-list-container,
+.card-list-container {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #d7bce8; /* Fondo moradito más claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.memorama-list ul,
+.card-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.memorama-list li,
+.card-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #4b0082; /* Morado oscuro */
+  border-radius: 5px;
+  color: white; /* Texto blanco */
+  margin: 5px 0;
 }
 
-.memorama-card p {
-  margin: 0;
-  font-size: 16px;
+.memorama-list li:last-child,
+.card-list li:last-child {
+  border-bottom: none;
 }
 
-.memorama-card button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+.memorama-list li .actions,
+.card-list li .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.memorama-list li button,
+.card-list li button {
+  background-color: #ffffff; /* Botones blancos */
+  color: #4b0082; /* Texto morado */
+  border: 1px solid #4b0082; /* Borde morado */
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-left: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.memorama-card button:hover {
-  background-color: #0056b3;
+.memorama-list li button:hover,
+.card-list li button:hover {
+  background-color: #d7bce8; /* Cambié a morado oscuro */
+  color: white;
+  transform: scale(1.05);
 }
+/* Modal de confirmación */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center; /* Centrando el texto en el modal */
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column; /* Coloca los botones en columna */
+  gap: 10px; /* Espacio entre los botones */
+  align-items: center; /* Centra los botones */
+}
+
+.btn-group button {
+  width: 120px; /* Ancho de los botones */
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-confirmar {
+  background-color: #4caf50; /* Verde */
+  color: white;
+  border: none;
+}
+
+.btn-confirmar:hover {
+  background-color: #388e3c; /* Verde más oscuro */
+}
+
+.btn-cancelar {
+  background-color: #f44336; /* Rojo */
+  color: white;
+  border: none;
+}
+
+.btn-cancelar:hover {
+  background-color: #c62828; /* Rojo más oscuro */
+}
+
+

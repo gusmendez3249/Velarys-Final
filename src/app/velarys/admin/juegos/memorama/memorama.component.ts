@@ -1,213 +1,232 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MemoramaService } from '../../../services/memorama.service';
-import { Memorama, Carta } from '../../../models/juego.model';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MemoramaService } from './../../../services/memorama.service';
+import { Memorama } from './../../../models/memorama.model';
+import { Carta } from './../../../models/carta.model';
 
 @Component({
-  selector: 'app-memorama',
+  selector: 'app-memoramas',
   templateUrl: './memorama.component.html',
   styleUrls: ['./memorama.component.css']
 })
 export class MemoramaAdmin implements OnInit {
   memoramas: Memorama[] = [];
   cartas: Carta[] = [];
-  nuevoMemoramaForm: FormGroup;
-  memoramaEditadoForm: FormGroup;
-  nuevaCartaForm: FormGroup;
-  memoramaEditado: Memorama | null = null;
+  nuevaMemoramaForm: FormGroup;
+  memoramaEditadaForm: FormGroup;
+  cartaForm: FormGroup;
+  memoramaEditada: Memorama | null = null;
   cartaEditada: Carta | null = null;
-  esEdicionMemorama: boolean = false;
-  esEdicionCarta: boolean = false;
-  mensajeModal: string = '';
+  leccionId: number = 0;
   mostrarModal: boolean = false;
+  mensajeModal: string = '';
   callbackConfirm: () => void = () => {};
   errorMensaje: string = '';
-  leccionId: number;
 
   constructor(
-    private fb: FormBuilder,
     private memoramaService: MemoramaService,
+    private fb: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute
   ) {
-    this.nuevoMemoramaForm = this.fb.group({
-      nombre: ['', Validators.required]
+    this.nuevaMemoramaForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      leccionId: [this.leccionId]
     });
 
-    this.memoramaEditadoForm = this.fb.group({
-      nombre: ['', Validators.required]
+    this.memoramaEditadaForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required]
     });
 
-    this.nuevaCartaForm = this.fb.group({
+    this.cartaForm = this.fb.group({
       valor: ['', Validators.required],
-      estado: ['', Validators.required],
-      colorClass: ['', Validators.required]
+      estado: ['cerrado', Validators.required]
     });
-
-    this.leccionId = +this.route.snapshot.paramMap.get('leccionId')!; // Extraer leccionId de la ruta
   }
 
   ngOnInit(): void {
+    const leccionIdParam = this.route.snapshot.paramMap.get('leccionId');
+    this.leccionId = leccionIdParam ? +leccionIdParam : 0;
     this.obtenerMemoramas();
   }
 
   obtenerMemoramas(): void {
-    this.memoramaService.obtenerMemoramasPorLeccion(this.leccionId).subscribe(
-      (memoramas: Memorama[]) => {
-        this.memoramas = memoramas;
-      },
-      (error: any) => {
-        console.error('Error al obtener los memoramas:', error);
-      }
-    );
+    if (this.leccionId) {
+      this.memoramaService.obtenerMemoramasPorLeccionId(this.leccionId).subscribe(
+        (response: Memorama[]) => this.memoramas = response,
+        error => this.manejarError('Hubo un error al obtener los memoramas. Inténtalo nuevamente.', error)
+      );
+    }
   }
 
   seleccionarMemorama(memorama: Memorama): void {
-    this.memoramaEditado = { ...memorama };
-    this.memoramaEditadoForm.patchValue(memorama);
-    if (this.memoramaEditado?.id) {
-      this.obtenerCartas(this.memoramaEditado.id);
-    }
-    this.esEdicionMemorama = true;
+    this.memoramaEditada = memorama;
+    this.memoramaEditadaForm.patchValue(memorama);
+    this.obtenerCartas(memorama.id ?? 0);
   }
 
-  obtenerCartas(memoramaId: number): void {
-    this.memoramaService.obtenerCartasPorMemoramaId(memoramaId).subscribe(
-      (cartas: Carta[]) => {
-        this.cartas = cartas;
-      },
-      (error: any) => {
-        console.error('Error al obtener las cartas:', error);
-      }
-    );
+  cancelarEdicion(): void {
+    this.memoramaEditada = null;
+    this.cartaEditada = null;
+    this.memoramaEditadaForm.reset();
+    this.cartaForm.reset();
   }
 
   crearMemorama(): void {
-    if (this.nuevoMemoramaForm.valid) {
-      const nuevoMemorama = {
-        ...this.nuevoMemoramaForm.value,  // Obtiene los valores del formulario
-        leccionId: this.leccionId         // Agrega el leccionId actual
-      };
-
-      this.memoramaService.crearMemorama(nuevoMemorama).subscribe(
-        () => {
-          this.obtenerMemoramas(); // Recarga la lista de memoramas
-          this.nuevoMemoramaForm.reset(); // Resetea el formulario
-        },
-        (error: any) => {
-          console.error('Error al crear el memorama:', error);
-          this.errorMensaje = 'Error al crear el memorama. Inténtelo de nuevo más tarde.';
-        }
-      );
+    if (this.nuevaMemoramaForm.valid) {
+      this.mostrarConfirmacion('¿Estás seguro de que deseas crear este memorama?', () => {
+        const memoramaConLeccionId: Memorama = { ...this.nuevaMemoramaForm.value, leccionId: this.leccionId };
+        this.memoramaService.crearMemorama(memoramaConLeccionId).subscribe(
+          response => {
+            this.errorMensaje = '';
+            this.obtenerMemoramas();
+            this.nuevaMemoramaForm.reset({ leccionId: this.leccionId });
+          },
+          error => this.manejarError('Hubo un error al crear el memorama. Inténtalo nuevamente.', error)
+        );
+      });
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
+      this.marcarCamposComoTocados(this.nuevaMemoramaForm);
     }
   }
 
-
-  actualizarMemorama(): void {
-    const id = this.memoramaEditado?.id;
-    if (id && this.memoramaEditadoForm.valid) {
-      this.memoramaService.actualizarMemorama(id, this.memoramaEditadoForm.value).subscribe(
-        () => {
-          this.obtenerMemoramas();
-          this.esEdicionMemorama = false;
-        },
-        (error: any) => {
-          console.error('Error al actualizar el memorama:', error);
-          this.errorMensaje = 'Error al actualizar el memorama. Inténtelo de nuevo más tarde.';
-        }
-      );
+  editarMemorama(): void {
+    if (this.memoramaEditada && this.memoramaEditada.id !== undefined && !isNaN(this.memoramaEditada.id) && this.memoramaEditadaForm.valid) {
+      const memoramaId = this.memoramaEditada.id as number;
+      this.mostrarConfirmacion('¿Estás seguro de que deseas actualizar este memorama?', () => {
+        const memoramaActualizado: Memorama = {
+          ...this.memoramaEditadaForm.value,
+          leccionId: this.leccionId
+        };
+        this.memoramaService.actualizarMemorama(memoramaId, memoramaActualizado).subscribe(
+          response => {
+            this.errorMensaje = '';
+            this.obtenerMemoramas();
+            this.memoramaEditada = null;
+            this.memoramaEditadaForm.reset();
+          },
+          error => this.manejarError('Hubo un error al editar el memorama. Inténtalo nuevamente.', error)
+        );
+      });
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
+      this.marcarCamposComoTocados(this.memoramaEditadaForm);
     }
   }
 
   eliminarMemorama(id: number): void {
     this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar este memorama?', () => {
       this.memoramaService.eliminarMemorama(id).subscribe(
-        () => {
+        response => {
+          this.errorMensaje = '';
           this.obtenerMemoramas();
+          this.cancelarEdicion();
         },
-        (error: any) => {
-          console.error('Error al eliminar el memorama:', error);
-        }
+        error => this.manejarError('Hubo un error al eliminar el memorama. Inténtalo nuevamente.', error)
       );
     });
   }
 
-  cancelarEdicionMemorama(): void {
-    this.memoramaEditado = null;
-    this.esEdicionMemorama = false;
-    this.memoramaEditadoForm.reset();
-  }
-
-  seleccionarCarta(carta: Carta): void {
-    this.cartaEditada = { ...carta };
-    this.nuevaCartaForm.patchValue(carta);
-    this.esEdicionCarta = true;
-  }
-
-  agregarCartas(): void {
-    const memoramaId = this.memoramaEditado?.id;
-    if (this.nuevaCartaForm.valid && memoramaId !== undefined) {
-      const nuevaCarta = { ...this.nuevaCartaForm.value };
-      this.memoramaService.crearCarta(memoramaId, nuevaCarta).subscribe(
-        () => {
-          this.obtenerCartas(memoramaId);
-          this.nuevaCartaForm.reset();
+  crearCarta(): void {
+    if (this.cartaForm.valid && this.memoramaEditada?.id) {
+      const carta: Carta = { ...this.cartaForm.value, memoramaId: this.memoramaEditada.id };
+      this.memoramaService.crearCarta(carta).subscribe(
+        response => {
+          this.errorMensaje = '';
+          if (this.memoramaEditada?.id) {
+            this.obtenerCartas(this.memoramaEditada.id);
+          }
+          this.cartaForm.reset();
         },
-        (error: any) => {
-          console.error('Error al crear la carta:', error);
-          this.errorMensaje = 'Error al crear la carta. Inténtelo de nuevo más tarde.';
-        }
+        error => this.manejarError('Hubo un error al crear la carta. Inténtalo nuevamente.', error)
       );
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
+      this.marcarCamposComoTocados(this.cartaForm);
     }
   }
 
+  editarCarta(carta: Carta): void {
+    this.cartaEditada = carta;
+    this.cartaForm.patchValue(carta);
+  }
+
   actualizarCarta(): void {
-    const memoramaId = this.memoramaEditado?.id;
-    const cartaId = this.cartaEditada?.id;
-    if (cartaId !== undefined && this.nuevaCartaForm.valid && memoramaId !== undefined) {
-      this.memoramaService.actualizarCarta(memoramaId, cartaId, this.nuevaCartaForm.value).subscribe(
-        () => {
-          this.obtenerCartas(memoramaId);
+    if (this.cartaEditada?.id && this.cartaForm.valid) {
+      const cartaActualizada = { ...this.cartaForm.value };
+      this.memoramaService.actualizarCarta(this.cartaEditada.id, cartaActualizada).subscribe(
+        response => {
+          this.errorMensaje = '';
+          if (this.memoramaEditada?.id) {
+            this.obtenerCartas(this.memoramaEditada.id);
+          }
           this.cartaEditada = null;
-          this.esEdicionCarta = false;
+          this.cartaForm.reset();
         },
-        (error: any) => {
-          console.error('Error al actualizar la carta:', error);
-          this.errorMensaje = 'Error al actualizar la carta. Inténtelo de nuevo más tarde.';
-        }
+        error => this.manejarError('Hubo un error al editar la carta. Inténtalo nuevamente.', error)
       );
+    } else {
+      this.errorMensaje = 'Por favor, completa todos los campos obligatorios.';
+      this.marcarCamposComoTocados(this.cartaForm);
     }
   }
 
   eliminarCarta(id: number): void {
-    const memoramaId = this.memoramaEditado?.id;
-    if (memoramaId !== undefined) {
-      this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar esta carta?', () => {
-        this.memoramaService.eliminarCarta(memoramaId, id).subscribe(
-          () => {
-            this.obtenerCartas(memoramaId);
-          },
-          (error: any) => {
-            console.error('Error al eliminar la carta:', error);
+    this.mostrarConfirmacion('¿Estás seguro de que deseas eliminar esta carta?', () => {
+      this.memoramaService.eliminarCarta(id).subscribe(
+        response => {
+          this.errorMensaje = '';
+          if (this.memoramaEditada?.id) {
+            this.obtenerCartas(this.memoramaEditada.id);
           }
-        );
-      });
-    }
+        },
+        error => this.manejarError('Hubo un error al eliminar la carta. Inténtalo nuevamente.', error)
+      );
+    });
   }
 
-  mostrarConfirmacion(mensaje: string, callback: () => void): void {
+  obtenerCartas(memoramaId: number): void {
+    this.memoramaService.obtenerCartasPorMemoramaId(memoramaId).subscribe(
+      (response: Carta[]) => this.cartas = response,
+      error => this.manejarError('Hubo un error al obtener las cartas. Inténtalo nuevamente.', error)
+    );
+  }
+
+  private mostrarConfirmacion(mensaje: string, callback: () => void): void {
     this.mensajeModal = mensaje;
-    this.mostrarModal = true;
     this.callbackConfirm = callback;
+    this.mostrarModal = true;
   }
 
-  confirmar(): void {
-    this.mostrarModal = false;
+  confirmarAccion(): void {
     this.callbackConfirm();
+    this.cerrarModal();
   }
 
-  cancelar(): void {
+  cerrarModal(): void {
     this.mostrarModal = false;
-    this.callbackConfirm = () => {};
+  }
+
+  volver(): void{
+    window.history.back();
+  }
+
+  private manejarError(mensaje: string, error: any): void {
+    console.error(error);
+    this.errorMensaje = mensaje;
+  }
+
+  private marcarCamposComoTocados(form: FormGroup): void {
+    Object.keys(form.controls).forEach(key => {
+      const control = form.get(key);
+      if (control) {
+        control.markAsTouched();
+        control.updateValueAndValidity();
+      }
+    });
   }
 }

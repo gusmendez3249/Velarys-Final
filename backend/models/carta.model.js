@@ -3,15 +3,23 @@ const promisePool = require('./db');
 const Carta = {
   getByMemoramaId: async (memoramaId, callback) => {
     try {
-      const [rows] = await promisePool.query('SELECT * FROM Cartas WHERE memoramaId = ?', [memoramaId]);
+      const [rows] = await promisePool.query('SELECT * FROM cartas WHERE memoramaId = ?', [memoramaId]);
       callback(null, rows);
     } catch (err) {
       callback(err);
     }
   },
-  create: async (memoramaId, data, callback) => {
+  getById: async (id, callback) => {
     try {
-      const [result] = await promisePool.query('INSERT INTO Cartas SET ?', { memoramaId, ...data });
+      const [rows] = await promisePool.query('SELECT * FROM cartas WHERE id = ?', [id]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
+  },
+  create: async (data, callback) => {
+    try {
+      const [result] = await promisePool.query('INSERT INTO cartas SET ?', data);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -19,7 +27,7 @@ const Carta = {
   },
   update: async (id, data, callback) => {
     try {
-      const [result] = await promisePool.query('UPDATE Cartas SET ? WHERE id = ?', [data, id]);
+      const [result] = await promisePool.query('UPDATE cartas SET ? WHERE id = ?', [data, id]);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -27,7 +35,7 @@ const Carta = {
   },
   delete: async (id, callback) => {
     try {
-      const [result] = await promisePool.query('DELETE FROM Cartas WHERE id = ?', [id]);
+      const [result] = await promisePool.query('DELETE FROM cartas WHERE id = ?', [id]);
       callback(null, result);
     } catch (err) {
       callback(err);

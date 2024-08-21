@@ -1,9 +1,9 @@
 const promisePool = require('./db');
 
 const Memorama = {
-  getAllByLeccion: async (leccionId, callback) => {
+  getAll: async (callback) => {
     try {
-      const [rows] = await promisePool.query('SELECT * FROM Memoramas WHERE leccionId = ?', [leccionId]);
+      const [rows] = await promisePool.query('SELECT * FROM memoramas');
       callback(null, rows);
     } catch (err) {
       callback(err);
@@ -11,7 +11,15 @@ const Memorama = {
   },
   getById: async (id, callback) => {
     try {
-      const [rows] = await promisePool.query('SELECT * FROM Memoramas WHERE id = ?', [id]);
+      const [rows] = await promisePool.query('SELECT * FROM memoramas WHERE id = ?', [id]);
+      callback(null, rows);
+    } catch (err) {
+      callback(err);
+    }
+  },
+  getByLeccionId: async (leccionId, callback) => {
+    try {
+      const [rows] = await promisePool.query('SELECT * FROM memoramas WHERE leccionId = ?', [leccionId]);
       callback(null, rows);
     } catch (err) {
       callback(err);
@@ -19,7 +27,7 @@ const Memorama = {
   },
   create: async (data, callback) => {
     try {
-      const [result] = await promisePool.query('INSERT INTO Memoramas SET ?', data);
+      const [result] = await promisePool.query('INSERT INTO memoramas SET ?', data);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -27,7 +35,7 @@ const Memorama = {
   },
   update: async (id, data, callback) => {
     try {
-      const [result] = await promisePool.query('UPDATE Memoramas SET ? WHERE id = ?', [data, id]);
+      const [result] = await promisePool.query('UPDATE memoramas SET ? WHERE id = ?', [data, id]);
       callback(null, result);
     } catch (err) {
       callback(err);
@@ -35,7 +43,7 @@ const Memorama = {
   },
   delete: async (id, callback) => {
     try {
-      const [result] = await promisePool.query('DELETE FROM Memoramas WHERE id = ?', [id]);
+      const [result] = await promisePool.query('DELETE FROM memoramas WHERE id = ?', [id]);
       callback(null, result);
     } catch (err) {
       callback(err);

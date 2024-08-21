@@ -1,28 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getAllMemoramasByLeccion,
-  getMemoramaById,
-  createMemorama,
-  updateMemorama,
-  deleteMemorama,
-  getCartasByMemoramaId,
-  createCarta,
-  updateCarta,
-  deleteCarta
-} = require('../controllers/memorama.controller');
+const memoramaController = require('../controllers/memorama.controller');
 
-// Rutas para memoramas
-router.get('/leccion/:leccionId', getAllMemoramasByLeccion);
-router.get('/:id', getMemoramaById);
-router.post('/', createMemorama);
-router.put('/:id', updateMemorama);
-router.delete('/:id', deleteMemorama);
+// Obtener todos los memoramas
+router.get('/', memoramaController.getAllMemoramas);
 
-// Rutas para cartas en memoramas
-router.get('/:id/cartas', getCartasByMemoramaId);
-router.post('/:id/cartas', createCarta);
-router.put('/cartas/:id', updateCarta);
-router.delete('/cartas/:id', deleteCarta);
+// Obtener un memorama por ID
+router.get('/:id', memoramaController.getMemoramaById);
+
+// Obtener memoramas por leccionId (nueva ruta)
+router.get('/leccion/:leccionId', memoramaController.getMemoramasPorLeccionId);
+
+// Crear un nuevo memorama
+router.post('/', memoramaController.createMemorama);
+
+// Actualizar un memorama por ID
+router.put('/:id', memoramaController.updateMemorama);
+
+// Eliminar un memorama por ID
+router.delete('/:id', memoramaController.deleteMemorama);
 
 module.exports = router;
