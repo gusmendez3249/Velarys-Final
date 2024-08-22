@@ -7,7 +7,7 @@ import { Leccion } from '../models/leccion.model';
   providedIn: 'root'
 })
 export class LeccionService {
-  private apiUrl = 'http://localhost:3000/api/lecciones'; // Ajusta según tu configuración
+  private apiUrl = 'http://192.168.3.39:3000/api/lecciones'; // Ajusta según tu configuración
 
   constructor(private http: HttpClient) { }
 

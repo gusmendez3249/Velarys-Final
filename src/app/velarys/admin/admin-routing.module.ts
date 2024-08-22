@@ -4,8 +4,8 @@ import { CursosAdmin } from './cursos/cursos.component';
 import { NivelesAdmin } from './niveles/niveles.component';
 import { LeccionesAdmin } from './lecciones/lecciones.component';
 import { JuegosAdmin } from './juegos/juegos.component';
-import { MemoramaAdmin } from './juegos/memorama/memorama.component';
 import { PreguntasAdmin } from './juegos/preguntas/preguntas.component';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 
 
 const routes: Routes = [
@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'niveladmin/:cursoId', component: NivelesAdmin },
   { path: 'leccionesadmin/:cursoId/:nivelId', component: LeccionesAdmin },
   { path: 'juegosadmin/:cursoId/:nivelId/:leccionId', component: JuegosAdmin },
-  { path: 'memorama/:cursoId/:nivelId/:leccionId', component: MemoramaAdmin },
   { path: 'preguntas/:cursoId/:nivelId/:leccionId', component: PreguntasAdmin },
+  { path: 'bienvenidaadmin', component: BienvenidaComponent }
 ];
 
 @NgModule({

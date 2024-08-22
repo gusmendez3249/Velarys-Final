@@ -29,8 +29,6 @@ export class JuegosComponent implements OnInit {
     if (this.cursoId !== null && this.nivelId !== null && this.leccionId !== null) {
       if (tipo === 'preguntas') {
         this.router.navigate([`/preguntasuser/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
-      } else if (tipo === 'memorama') {
-        this.router.navigate([`/memoramauser/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
       }
     } else {
       console.error('Los parámetros de curso, nivel y lección no están disponibles.');

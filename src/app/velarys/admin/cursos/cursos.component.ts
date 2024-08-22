@@ -154,11 +154,8 @@ export class CursosAdmin implements OnInit {
   }
 
 
-  cerrarSesion(): void {
-    this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
-      // Redirigir al usuario a la página de cierre de sesión después de la confirmación
-      this.router.navigate(['/']);
-    });
+  volver(): void {
+   window.history.back();
   }
 
 

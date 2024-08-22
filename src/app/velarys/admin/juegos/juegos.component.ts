@@ -26,8 +26,6 @@ export class JuegosAdmin implements OnInit {
     if (this.cursoId && this.nivelId && this.leccionId) {
       if (tipo === 'preguntas') {
         this.router.navigate([`/preguntas/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
-      } else if (tipo === 'memorama') {
-        this.router.navigate([`/memorama/${this.cursoId}/${this.nivelId}/${this.leccionId}`]);
       }
     } else {
       console.error('Faltan parámetros de curso, nivel o lección.');

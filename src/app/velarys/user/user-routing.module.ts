@@ -5,9 +5,7 @@ import { CursosComponent } from './cursos/cursos.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { LeccionesComponent } from './lecciones/lecciones.component';
 import { JuegosComponent } from './juegos/juegos.component';
-import { AuthGuard } from './../../auth/auth.guard';
 import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
-
 
 const routes: Routes = [
   { path: 'cursos', component: CursosComponent },
@@ -15,7 +13,6 @@ const routes: Routes = [
   { path: 'lecciones/:cursoId/:nivelId', component: LeccionesComponent },
   { path: 'juegos/:cursoId/:nivelId/:leccionId', component: JuegosComponent },
   { path: 'preguntasuser/:cursoId/:nivelId/:leccionId', component: PreguntasComponent },
-
 ];
 
 @NgModule({

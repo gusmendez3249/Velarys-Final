@@ -1,0 +1,165 @@
+/* Estilos generales */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #9C6FBD;
+  color: #F0F2F5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Contenedor principal */
+.welcome-container {
+  background-color: #6F42C1;
+  padding: 3em 5em;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100vw; /* Ancho completo de la pantalla */
+  height: 100vh; /* Altura completa de la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #6F42C1,
+    #6F42C1 10px,
+    #8056C5 10px,
+    #8056C5 20px
+  ); /* Rayas horizontales más claritas */
+  position: relative; /* Necesario para posicionar el botón de cerrar sesión */
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #f5e2fc;
+  color: #1A7B8A;
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #1A7B8A;
+  color: #F0F2F5;
+  transform: scale(1.05);
+}
+
+/* Estilos para el encabezado */
+.header h1 {
+  font-family: 'Roboto', cursive;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: #F0F2F5;
+  text-shadow: 4px 4px 10px #000;
+}
+
+.header p {
+  font-family: 'Roboto', cursive;
+  font-size: 1.2em;
+  color: #D1E8E2;
+  margin-bottom: 2em;
+}
+
+/* Contenedor de opciones */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+/* Botones de opción */
+.option-btn {
+  font-family: 'Roboto', cursive;
+  background-color: #f5e2fc;
+  color: #1A7B8A;
+  border: none;
+  padding: 1em 2.5em;
+  font-size: 1.3em;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.option-btn:hover {
+  background-color: #1A7B8A;
+  color: #F0F2F5;
+  transform: scale(1.05);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #FFF;
+  padding: 2em;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 300px;
+}
+
+.modal-content p {
+  margin-bottom: 1.5em;
+  font-size: 1.2em;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-confirmar, .btn-cancelar {
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirmar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-confirmar:hover {
+  background-color: #218838;
+}
+
+.btn-cancelar:hover {
+  background-color: #c82333;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+}

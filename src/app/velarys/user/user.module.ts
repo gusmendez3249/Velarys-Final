@@ -8,7 +8,6 @@ import { LeccionesComponent } from './lecciones/lecciones.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     CursosComponent,
@@ -16,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LeccionesComponent,
     JuegosComponent,
     PreguntasComponent,
+
   ],
   imports: [
     CommonModule,

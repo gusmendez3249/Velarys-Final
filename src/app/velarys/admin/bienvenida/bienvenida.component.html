@@ -1,0 +1,25 @@
+<div class="welcome-container">
+  <!-- Botón de cerrar sesión en la esquina superior derecha -->
+  <button (click)="cerrarSesion()" class="logout-btn">Cerrar Sesión</button>
+
+  <div class="header">
+    <h1>¡Bienvenido Administrador!</h1>
+    <p>Selecciona una opción para continuar</p>
+  </div>
+  <div class="options-container">
+    <button (click)="irACursos()" class="option-btn">Administración de Cursos</button>
+    <button (click)="irAUsuariosPagados()" class="option-btn">Usuarios Pagados</button>
+  </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div *ngIf="mostrarModal" class="modal-backdrop">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <p>{{ mensajeModal }}</p>
+    <div class="modal-actions">
+      <button (click)="confirmarAccion()" class="btn-confirmar">Confirmar</button>
+      <button (click)="cerrarModal()" class="btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>

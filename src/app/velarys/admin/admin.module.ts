@@ -6,8 +6,8 @@ import { CursosAdmin } from './cursos/cursos.component';
 import { NivelesAdmin } from './niveles/niveles.component';
 import { LeccionesAdmin } from './lecciones/lecciones.component';
 import { JuegosAdmin } from './juegos/juegos.component';
-import { MemoramaAdmin } from './juegos/memorama/memorama.component';
 import { PreguntasAdmin } from './juegos/preguntas/preguntas.component';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 
 @NgModule({
   declarations: [
@@ -15,9 +15,9 @@ import { PreguntasAdmin } from './juegos/preguntas/preguntas.component';
     NivelesAdmin,
     LeccionesAdmin,
     JuegosAdmin,
-    MemoramaAdmin,
     PreguntasAdmin,
-  ],
+    BienvenidaComponent,
+    ],
   imports: [
     CommonModule,
     AdminRoutingModule,

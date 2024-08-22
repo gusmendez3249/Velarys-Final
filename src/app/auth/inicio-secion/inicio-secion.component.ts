@@ -19,7 +19,7 @@ export class InicioSecionComponent {
       (response: any) => {
         if (response) {
           if (response.role === 'admin') {
-            this.router.navigate(['/cursoadmin']);
+            this.router.navigate(['/bienvenidaadmin']);
           } else {
             this.router.navigate(['/cursos']);
           }

@@ -139,7 +139,8 @@ export class PreguntasAdmin implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/leccionesadmin', this.cursoId, this.nivelId]);
+    //this.router.navigate(['/leccionesadmin', this.cursoId, this.nivelId]);
+    window.history.back();
   }
 
   mostrarConfirmacion(mensaje: string, callbackConfirm: () => void): void {
