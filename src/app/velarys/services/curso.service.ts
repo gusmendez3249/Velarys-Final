@@ -7,7 +7,7 @@ import { Curso } from '../models/curso.model';
   providedIn: 'root'
 })
 export class CursoService {
-  private baseUrl = 'http://192.168.3.39:3000/api/cursos'; // Asegúrate de que esta URL es correcta
+  private baseUrl = 'http://localhost:3000/api/cursos'; // Asegúrate de que esta URL es correcta
 
   constructor(private http: HttpClient) {}
 

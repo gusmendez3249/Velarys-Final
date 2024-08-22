@@ -1,26 +1,95 @@
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(to bottom, #6c5ce7, #3b3f54);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+/* Barra de navegación personalizada */
+.custom-toolbar {
+  background-color: #4b0082; /* Color morado oscuro */
+  color: white; /* Color del texto blanco */
+  padding: 10px 20px; /* Espaciado interno */
+  display: flex; /* Disposición flexible para alinear elementos */
+  justify-content: space-between; /* Espacio entre los elementos */
+  align-items: center; /* Alineación vertical al centro */
 }
+
+.custom-toolbar button {
+  background-color: transparent; /* Fondo transparente */
+  border: 1px solid white; /* Borde blanco */
+  color: white; /* Color del texto blanco */
+  padding: 8px 16px; /* Espaciado interno ajustado */
+  cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+  border-radius: 10px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño del texto */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+
+.custom-toolbar button:hover {
+  background-color: #b82d98; /* Color morado más claro */
+  border: 1px solid #b82d98; /* Borde morado más claro */
+  color: white; /* Color del texto blanco */
+  transform: scale(1.05); /* Escalado para efecto de hover */
+}
+
+.spacer {
+  flex: 1; /* Permite que el espaciador ocupe el espacio disponible */
+}
+
+/* Estilos del contenedor */
+.container {
+  padding: 20px;
+}
+
+/* Estilos generales para el cuadro grande */
+.cuadro-grande {
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra moderna */
+  text-align: center; /* Alineación del texto */
+  padding: 40px; /* Espaciado interno */
+  border: 8px solid #e1e1e1; /* Borde suave */
+  width: 80%; /* Ancho del 80% del contenedor */
+  max-width: 800px; /* Ancho máximo */
+  margin: 20px auto; /* Espaciado automático en horizontal */
+}
+
+.cuadro-grande h2 {
+  font-size: 24px; /* Tamaño del título */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+.cuadro-grande p {
+  font-size: 18px; /* Tamaño del párrafo */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilo del contenedor de la imagen */
+.image-container {
+  display: flex; /* Usar flexbox para alinear el contenido */
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  align-items: center; /* Centrar el contenido verticalmente si es necesario */
+  margin: 20px auto; /* Espaciado automático en horizontal */
+}
+
+.image-container img {
+  max-width: 100%; /* Ancho máximo del 100% del contenedor */
+  height: auto; /* Altura automática */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Estilo del botón de PayPal */
 #paypal-button-container {
   background-color: #4a048b; /* Color de fondo más vibrante */
-  color: #ffffff; /* Texto blanco para buen contraste */
-  padding: 5px px; /* Mayor padding para un botón más grande */
-  border: none;
-  border-radius: 8px; /* Radio de borde más sutil */
-  cursor: pointer;
-  font-size: 18px; /* Tamaño de fuente ajustado */
-  font-weight: 600; /* Grosor de fuente mejorado */
-  text-align: center;
-  text-decoration: none;
+  color: #ffffff; /* Texto blanco */
+  padding: 15px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+  font-size: 18px; /* Tamaño del texto */
+  font-weight: 600; /* Grosor del texto */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Sin decoración en el texto */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
-  display: block;
-  margin: 20px auto; /* Espaciado adicional alrededor del botón */
-  width: 350px; /* Ancho del botón ajustado */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  display: inline-block; /* Bloque en línea */
+  margin: 20px auto; /* Espaciado automático en horizontal */
+  width: 350px; /* Ancho del botón */
 }
 
 #paypal-button-container:hover {
@@ -29,35 +98,55 @@ body {
 }
 
 #paypal-button-container:active {
-  transform: scale(2.98); /* Escalado más suave en click */
+  transform: scale(0.98); /* Escalado en click */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ajustada en click */
 }
 
 #paypal-button-container:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px #009cde; /* Sombra de enfoque más prominente */
+  outline: none; /* Sin borde de enfoque */
+  box-shadow: 0 0 0 3px #009cde; /* Sombra de enfoque */
 }
 
-.cuadro-grande {
-  background-color: #ffffff; /* Fondo blanco más limpio */
-  padding: 40px; /* Padding ajustado para más espacio interno */
-  border: 8px solid #e1e1e1; /* Borde más suave */
-  border-radius: 12px; /* Radio de borde más sutil */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más moderna */
-  text-align: center;
-  width: 80%; /* Ancho ajustado para adaptarse mejor a la pantalla */
-  max-width: 800px; /* Ancho máximo para mantener el diseño */
-  margin: 20px auto; /* Espaciado adicional alrededor del cuadro */
-}
-
+/* Estilos del cuadro atractivo */
 .cuadro-atractivo {
-  background-color: #ffffff; /* Fondo blanco para mantener consistencia */
-  padding: 30px; /* Padding ajustado */
-  border: 1px solid #e1e1e1; /* Borde más suave */
-  border-radius: 12px; /* Radio de borde más sutil */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra moderna */
-  text-align: center;
-  width: 90%; /* Ancho ajustado para mejor adaptabilidad */
-  max-width: 400px; /* Ancho máximo para mantener el diseño */
-  margin: 20px auto; /* Espaciado adicional alrededor del cuadro */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra moderna */
+  text-align: center; /* Alineación del texto */
+  padding: 30px; /* Espaciado interno */
+  border: 1px solid #ffffff; /* Borde blanco */
+  width: 90%; /* Ancho del 90% del contenedor */
+  max-width: 400px; /* Ancho máximo */
+  margin: 20px auto; /* Espaciado automático en horizontal */
+}
+
+.cuadro-atractivo h3 {
+  font-size: 20px; /* Tamaño del subtítulo */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+.cuadro-atractivo p {
+  font-size: 16px; /* Tamaño del párrafo */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilo para el footer (opcional) */
+p.copyright {
+  font-family: 'Roboto', sans-serif; /* Tipografía Arial */
+  font-size: 0.9em; /* Tamaño de fuente más pequeño */
+  color: #F0F2F5; /* Color del texto del párrafo */
+  position: absolute;
+  bottom: 1em; /* Alineación al fondo del contenedor */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translateX(-50%); /* Ajustar la posición horizontal */
+  width: auto; /* Ajustar el ancho automáticamente */
+  z-index: 2; /* Asegura que el copyright esté encima de los círculos */
+  text-align: center; /* Centrar el texto */
+}
+
+@media (max-width: 768px) {
+  #paypal-button-container {
+    width: 100%; /* Ancho del botón en pantallas pequeñas */
+    font-size: 16px; /* Tamaño de fuente reducido */
+  }
 }

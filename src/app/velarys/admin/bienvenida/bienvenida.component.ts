@@ -19,10 +19,6 @@ export class BienvenidaComponent {
   }
 
 
-  irAUsuariosPagados(): void {
-    this.router.navigate(['/usuarios-pagados']);
-  }
-
   cerrarSesion(): void {
     this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
       this.router.navigate(['/']);
