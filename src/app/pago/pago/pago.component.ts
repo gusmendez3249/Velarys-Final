@@ -9,7 +9,7 @@ declare var paypal: any; // Declarar PayPal como una variable global
   styleUrls: ['./pago.component.css']
 })
 export class PagoComponent implements AfterViewInit {
-  cursoPrecio: number = 10.00; // Asegúrate de usar un valor adecuado
+  cursoPrecio: number = 100.00; // Asegúrate de usar un valor adecuado
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
