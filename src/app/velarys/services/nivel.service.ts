@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NivelService {
-  private apiUrl = 'http://localhost:3000/api/niveles';
+  private apiUrl = 'http://localhost:8080/api/niveles';
 
   constructor(private http: HttpClient) { }
 
