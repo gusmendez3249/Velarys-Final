@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PreguntaService {
-  private apiUrl = 'http://localhost:8080/api/preguntas'; // Asegúrate de que esta URL sea correcta
+  private apiUrl = 'http://localhost:3000/api/preguntas'; // Asegúrate de que esta URL sea correcta
 
   constructor(private http: HttpClient) {}
 
