@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.component.html',
   styleUrls: ['./bienvenida.component.css']
 })
+
+
 export class BienvenidaComponent {
+  ipInfo:any;
 
   mostrarModal: boolean = false;
   mensajeModal: string = '';
@@ -17,7 +21,6 @@ export class BienvenidaComponent {
   irACursos(): void {
     this.router.navigate(['/cursoadmin']);
   }
-
 
   cerrarSesion(): void {
     this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {

@@ -19,6 +19,18 @@
     {{ errorMessage }}
   </div>
 
+  <!-- Botón para mostrar/ocultar la información de IP -->
+  <button class="boton" (click)="toggleIpInfo()">Mostrar datos de localización</button>
+
+  <div *ngIf="showIpInfo" class="ip-info-box">
+    <h3>Información de IP</h3>
+    <p><strong>IP:</strong> {{ ipInfo?.query }}</p>
+    <p><strong>País:</strong> {{ ipInfo?.country }}</p>
+    <p><strong>Región:</strong> {{ ipInfo?.regionName }}</p>
+    <p><strong>Ciudad:</strong> {{ ipInfo?.city }}</p>
+    <p><strong>ISP:</strong> {{ ipInfo?.isp }}</p>
+  </div>
+
   <div class="social-media">
     <a class="x" href="https://x.com/?lang=es"><img src="assets/twitter.png" alt="Twitter"></a>
     <a class="face" href="https://www.facebook.com/?locale=es_LA"><img src="assets/facebo.png" alt="Facebook"></a>

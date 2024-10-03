@@ -146,5 +146,34 @@ button:hover {
   text-align: center; /* Centra el texto */
 }
 
+/* Estilo para el cuadro de información de IP */
+.ip-info-box {
+  margin-top: 20px;
+  padding: 20px; /* Aumentar padding para mejor espaciado */
+  border: 2px solid #838383; /* Borde similar a los inputs */
+  border-radius: 10px; /* Igual que el contenedor principal */
+  background-color: #D1D4E8; /* Fondo similar al contenedor principal */
+  width: 100%;
+  max-width: 300px; /* Ajustar tamaño máximo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra similar a los botones */
+  position: relative;
+  text-align: center;
+}
 
+.ip-info-box h3 {
+  margin-top: 0;
+  color: #663399; /* Color morado similar al título del formulario */
+  font-size: 1.8em; /* Ajustar tamaño del texto */
+}
 
+.ip-info-box p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333; /* Color coherente con el resto del texto */
+}
+
+/* Efecto hover en el cuadro de información */
+.ip-info-box:hover {
+  transform: scale(1.05); /* Efecto de escalado coherente */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa en hover */
+}

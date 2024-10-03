@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
 })
 export class BienvenidaComponent {
 
+
+
   constructor(private router: Router) { }
+
+
 
   inicio() {
     // Lógica para comenzar el curso o redirigir a otra página
