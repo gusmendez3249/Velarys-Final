@@ -39,7 +39,7 @@
 
       <!-- Botón Pagar -->
       <button
-        *ngIf="curso.esDePaga"
+        *ngIf="curso.esDePaga && !curso.acceso"
         (click)="pagarCurso(curso)"
         class="btn-pagar"
       >

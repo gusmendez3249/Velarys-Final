@@ -5,7 +5,7 @@ import { CursoService } from '../../services/curso.service';
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.css']
+  styleUrls: ['./cursos.component.css'],
 })
 export class CursosComponent implements OnInit {
   cursos: any[] = [];
@@ -37,14 +37,14 @@ export class CursosComponent implements OnInit {
   }
 
   pagarCurso(curso: any): void {
-    // Implementar lógica para el pago del curso
+    // Almacena el ID y precio del curso en el localStorage
+    localStorage.setItem('cursoId', curso.id);
+    localStorage.setItem('cursoPrecio', curso.precio); // Asigna el precio
     this.router.navigate(['/pago']);
-    // Redirigir a la página de pago o realizar el pago aquí
   }
 
   cerrarSesion(): void {
     this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
-      // Redirigir al usuario a la página de cierre de sesión después de la confirmación
       this.router.navigate(['/']);
     });
   }
