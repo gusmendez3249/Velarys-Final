@@ -28,9 +28,20 @@
         <button *ngIf="lecciones[indiceActual].id !== undefined" (click)="verJuegos(lecciones[indiceActual].id)">
           Ver Juegos
         </button>
+        <!-- Botón Ayuda -->
+        <button *ngIf="lecciones[indiceActual].id !== undefined" (click)="mostrarAyuda()" class="btn-ayuda">
+          Ayuda
+        </button>
       </div>
     </div>
 
     <button class="botones" (click)="siguienteLeccion()" [disabled]="indiceActual === lecciones.length - 1">Siguiente</button>
+  </div>
+
+<!-- Mostrar lista de videos -->
+<div *ngIf="videos.length > 0" class="video-list">
+  <h3>Videos de ayuda</h3>
+  <div class="video-container" *ngFor="let video of videos">
+    <iframe [src]="getSafeUrl(video.id.videoId)" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>
