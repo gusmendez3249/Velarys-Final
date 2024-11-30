@@ -1,0 +1,41 @@
+<div class="country-list-container">
+    <h2>Lista de Países</h2>
+  
+    <!-- Botón para regresar a Cursos -->
+    <div class="back-button-container">
+      <button class="btn-back" routerLink="/cursos">Volver a Cursos</button>
+    </div>
+  
+    <!-- Indicador de carga -->
+    <div *ngIf="isLoading" class="loading">Cargando países...</div>
+  
+    <!-- Mensaje si no se encuentran países -->
+    <div *ngIf="!isLoading && countries.length === 0" class="no-data">
+      No se encontraron países.
+    </div>
+  
+    <!-- Lista de países -->
+    <div *ngIf="!isLoading && countries.length > 0" class="countries-grid">
+      <div *ngFor="let country of countries" class="country-card">
+        <!-- Bandera del país -->
+        <img
+          [src]="country.flags.svg"
+          alt="Bandera de {{ country.name }}"
+          class="country-flag"
+        />
+  
+        <!-- Información al pasar el mouse -->
+        <div class="country-details">
+          <h3>{{ country.name }}</h3>
+          <p><strong>Capital:</strong> {{ country.capital || 'N/A' }}</p>
+          <p><strong>Región:</strong> {{ country.region }}</p>
+          <p><strong>Población:</strong> {{ country.population | number }}</p>
+          <p>
+            <strong>Idiomas:</strong>
+            <span *ngIf="country.languages">{{ getLanguages(country.languages) }}</span>
+            <span *ngIf="!country.languages">N/A</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

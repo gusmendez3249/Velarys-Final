@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LeccionService } from './../../services/leccion.service';
 import { Leccion } from './../../models/leccion.model';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { YoutubeService } from '../../../youtube.service';
+import { YoutubeService } from '../../services/youtube.service';
+import { SpotifyService } from '../../services/spotify.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-lecciones',
@@ -16,20 +18,32 @@ export class LeccionesComponent implements OnInit {
   cursoId: number | null = null;
   indiceActual: number = 0;
   videos: any[] = [];  // Ahora almacenamos la lista de videos
+  canciones: any[] = []; // Almacena las canciones de Spotify
+
 
   constructor(
     private leccionService: LeccionService,
     private router: Router,
-    private route: ActivatedRoute,
     private sanitizer: DomSanitizer,  // Para asegurar URLs seguras en el iframe
-    private youtubeService: YoutubeService  // Inyectar el servicio de YouTube
-
+    private youtubeService: YoutubeService,  // Inyectar el servicio de YouTube
+    private spotifyService: SpotifyService,
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
     this.cursoId = +this.route.snapshot.paramMap.get('cursoId')!;
     this.nivelId = +this.route.snapshot.paramMap.get('nivelId')!;
     this.obtenerLecciones();
+
+    // Solo ejecuta el script si estamos en un entorno de navegador
+    if (isPlatformBrowser(this.platformId)) {
+      const script = this.renderer.createElement('script');
+      script.src = 'https://cse.google.com/cse.js?cx=208825525e2834300';
+      script.async = true;
+      this.renderer.appendChild(document.body, script);
+    }
   }
 
   obtenerLecciones(): void {
@@ -85,6 +99,26 @@ export class LeccionesComponent implements OnInit {
     }
   }
   
+  apoyoAuditivo(): void {
+    const leccionActual = this.lecciones[this.indiceActual];
+    if (leccionActual && leccionActual.nombre) {
+      const token = this.spotifyService.getAccessToken();
+  
+      if (!token) {
+        console.warn('Token no disponible. Redirigiendo al inicio de sesión de Spotify...');
+        window.location.href = this.spotifyService.getAuthUrl(this.router.url);
+      } else {
+        this.spotifyService.buscarCanciones(leccionActual.nombre).then(tracks => {
+          console.log('Canciones obtenidas:', tracks);
+          this.canciones = tracks; // Almacenar las canciones en `canciones`
+        }).catch(error => {
+          console.error('Error al buscar canciones en Spotify', error);
+        });
+      }
+    }
+  }
+    
+
   // Método para obtener una URL segura para el iframe
   getSafeUrl(videoId: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);

@@ -11,6 +11,12 @@
   </div>
 </div>
 
+<!-- Barra de búsqueda -->
+<div class="search-container">
+  <h2>Buscar Recursos de Idiomas</h2>
+  <div class="gcse-search"></div>
+</div>
+
 <!-- Encabezado -->
 <div class="encabezado">
   <h2>Bienvenido a las lecciones</h2>
@@ -30,11 +36,13 @@
         </button>
         <!-- Botón Ayuda -->
         <button *ngIf="lecciones[indiceActual].id !== undefined" (click)="mostrarAyuda()" class="btn-ayuda">
-          Ayuda
+          Apoyo visual
+        </button>
+        <button *ngIf="lecciones[indiceActual].id !== undefined" (click)="apoyoAuditivo()" class="btn-apoyo-auditivo">
+          Apoyo Auditivo
         </button>
       </div>
     </div>
-
     <button class="botones" (click)="siguienteLeccion()" [disabled]="indiceActual === lecciones.length - 1">Siguiente</button>
   </div>
 
@@ -43,5 +51,18 @@
   <h3>Videos de ayuda</h3>
   <div class="video-container" *ngFor="let video of videos">
     <iframe [src]="getSafeUrl(video.id.videoId)" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Mostrar lista de canciones de Spotify -->
+<div *ngIf="canciones.length > 0" class="audio-list">
+  <h3>Canciones relacionadas</h3>
+  <div class="audio-container" *ngFor="let audio of canciones">
+    <p><strong>{{ audio.name }}</strong> - {{ audio.artist }}</p>
+    <audio controls *ngIf="audio.preview_url">
+      <source [src]="audio.preview_url" type="audio/mpeg">
+      Tu navegador no soporta la reproducción de audio.
+    </audio>
+    <a *ngIf="audio.spotify_url" [href]="audio.spotify_url" target="_blank">Abrir en Spotify</a>
   </div>
 </div>

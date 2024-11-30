@@ -9,11 +9,13 @@ import { AdminModule } from './velarys/admin/admin.module';
 import { UserModule } from './velarys/user/user.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PagoComponent } from './pago/pago/pago.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PagoComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,

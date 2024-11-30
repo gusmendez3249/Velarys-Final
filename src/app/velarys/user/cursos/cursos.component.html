@@ -8,6 +8,7 @@
   </div>
   <div class="actions">
     <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
+    <button routerLink="/countries" class="btn-paises">Ver Países</button>
   </div>
 </div>
 
@@ -39,12 +40,13 @@
 
       <!-- Botón Pagar -->
       <button
-        *ngIf="curso.esDePaga"
-        (click)="pagarCurso(curso)"
-        class="btn-pagar"
-      >
-        Pagar
-      </button>
+      *ngIf="curso.esDePaga && !curso.acceso"
+      (click)="pagarCurso(curso)"
+      class="btn-pagar"
+    >
+      Pagar
+    </button>
+    
     </div>
   </div>
 </div>
@@ -62,6 +64,9 @@
 </div>
 
 <!-- Footer -->
+<div class="container">
+  <app-map></app-map>
+</div>
 <div class="container">
   <p class="copyright">&copy; 2024 Velarys. Todos los derechos reservados.</p>
 </div>

@@ -8,6 +8,8 @@ import { LeccionesComponent } from './lecciones/lecciones.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from '../../map/map.component';
+import { CountryListComponent } from './country-list/country-list.component';
 @NgModule({
   declarations: [
     CursosComponent,
@@ -15,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LeccionesComponent,
     JuegosComponent,
     PreguntasComponent,
-
+    MapComponent,
+    CountryListComponent,
   ],
   imports: [
     CommonModule,

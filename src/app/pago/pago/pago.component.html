@@ -1,26 +1,38 @@
 <!-- Barra de navegación personalizada -->
 <div class="custom-toolbar">
-  <span>Realiza tu pago</span>
+  <span class="toolbar-title">Realiza tu pago</span>
   <span class="spacer"></span>
-  <button (click)="volver()">Volver</button>
+  <button class="btn volver-btn" (click)="volver()">Volver</button>
+</div>
+
+<!-- Contenedor de éxito -->
+<div id="success-alert" class="success-message" style="display:none;">
+  ¡Compra Exitosa!
 </div>
 
 <!-- Contenedor principal -->
 <div class="container">
-
   <!-- Cuadro grande con imagen y contenido -->
   <div class="cuadro-grande">
-    <div class="image-container">
-      <img src="https://lingokids.com/wp-content/uploads/2020/04/Happy_Penguin.gif" alt="Imagen en Movimiento">
-    </div>
-    <h2>¡Suscríbete!</h2>
-    <p>Obtén los mejores cursos con la mejor calidad. No esperes más y realiza tu compra ahora mismo.</p>
+    <h2 class="section-title">¡Suscríbete!</h2>
+    <p class="section-description">Obtén los mejores cursos con la mejor calidad. No esperes más y realiza tu compra ahora mismo.</p>
+    
     <!-- Contenedor del botón de PayPal -->
-    <div id="paypal-button-container"></div>
+    <div id="paypal-button-container" class="paypal-button"></div>
+
     <!-- Cuadro atractivo con beneficios -->
     <div class="cuadro-atractivo">
-      <h3>Beneficios Exclusivos</h3>
-      <p>Descubre las ventajas de ser parte de nuestra comunidad y accede a nuestros cursos.</p>
+      <h3 class="benefits-title">Beneficios Exclusivos</h3>
+      <p class="benefits-description">Descubre las ventajas de ser parte de nuestra comunidad y accede a nuestros cursos.</p>
     </div>
+  </div>
+</div>
+
+<!-- Contenedor del modal -->
+<div id="success-alert-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarAlerta()">&times;</span>
+    <h2 class="modal-title">¡Compra Exitosa!</h2>
+    <p id="alert-message" class="modal-message"></p>
   </div>
 </div>
