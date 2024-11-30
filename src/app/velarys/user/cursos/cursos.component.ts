@@ -35,11 +35,12 @@ export class CursosComponent implements OnInit {
       this.router.navigate([`niveles/${curso.id}`]);
     }
   }
-
+  
   pagarCurso(curso: any): void {
-    // Implementar lógica para el pago del curso
+    // Almacena el ID y precio del curso en el localStorage
+    localStorage.setItem('cursoId', curso.id);
+    localStorage.setItem('cursoPrecio', curso.precio); // Asigna el precio
     this.router.navigate(['/pago']);
-    // Redirigir a la página de pago o realizar el pago aquí
   }
 
   cerrarSesion(): void {

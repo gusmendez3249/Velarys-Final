@@ -23,7 +23,7 @@ export class LeccionService {
     return this.http.put<Leccion>(`${this.apiUrl}/${id}`, leccion);
   }
 
-  eliminarLeccion(id: number): Observable<void> {
+  eliminarLeccion(id: number): Observable<void> {6
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

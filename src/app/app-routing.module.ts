@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BienvenidaComponent } from './auth/bienvenida/bienvenida.component';
 import { PagoComponent } from './pago/pago/pago.component';
 import { AuthGuard } from './auth/auth.guard'; // Ajusta la ruta según tu estructura de carpetas
-
+import { CallbackComponent } from './callback/callback.component';
 
 
 const routes: Routes = [
@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'pago',
     component: PagoComponent, // Protege la ruta de Pago
   },
+  { path: 'callback',
+     component: CallbackComponent 
+  }, 
+
 ];
 
 @NgModule({

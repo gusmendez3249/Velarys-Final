@@ -197,5 +197,18 @@
   background-color: #d9534f;
   color: #fff;
 }
+.btn-paises {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
 
+.btn-paises:hover {
+  background-color: #0056b3;
+}
 
