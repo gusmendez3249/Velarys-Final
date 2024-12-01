@@ -7,7 +7,9 @@ import { NivelesComponent } from './niveles/niveles.component';
 import { LeccionesComponent } from './lecciones/lecciones.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { PreguntasComponent } from './juegos/preguntas/preguntas.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CountryListComponent } from './country-list/country-list.component';
+
 @NgModule({
   declarations: [
     CursosComponent,
@@ -15,12 +17,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     LeccionesComponent,
     JuegosComponent,
     PreguntasComponent,
+    CountryListComponent,
+
+    
 
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class UserModule { }

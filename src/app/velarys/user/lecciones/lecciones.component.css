@@ -100,3 +100,99 @@
   background-color: #d78c8c; /* Color gris claro para botones deshabilitados */
   cursor: not-allowed;
 }
+
+/* Contenedor de la barra de búsqueda */
+.search-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f1f1f1; /* Fondo claro */
+  border: 2px solid #8b1d99; /* Borde morado claro */
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.search-container h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #4b0082; /* Morado oscuro */
+  font-weight: bold;
+}
+
+/* Estilo del cuadro de búsqueda */
+.gsc-input-box {
+  border: 2px solid #8b1d99; /* Borde morado claro */
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: border-color 0.3s ease;
+}
+
+.gsc-input-box:hover {
+  border-color: #6206a3; /* Borde morado oscuro al pasar el cursor */
+}
+
+.gsc-search-button {
+  padding: 10px 20px;
+  background-color: #8b1d99; /* Morado claro */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.gsc-search-button:hover {
+  background-color: #6206a3; /* Morado oscuro para hover */
+  transform: scale(1.05);
+}
+
+/* Resultados de búsqueda */
+.gsc-results-wrapper {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  border: 2px solid #8b1d99; /* Borde morado claro */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Títulos de los resultados */
+.gsc-webResult .gsc-result .gsc-title {
+  font-size: 18px;
+  color: #4b0082; /* Morado oscuro */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.gsc-webResult .gsc-result .gsc-title:hover {
+  color: #6206a3; /* Morado más intenso al pasar el cursor */
+  text-decoration: underline;
+}
+
+/* Snippet de los resultados */
+.gsc-webResult .gsc-result .gsc-url {
+  font-size: 14px;
+  color: #8b1d99; /* Morado claro */
+}
+
+.gsc-webResult .gsc-result .gs-bidi-start-align {
+  font-size: 16px;
+  color: #333; /* Texto del snippet */
+}
+
+/* Ajustes generales */
+.gsc-results .gsc-cursor-page {
+  color: #8b1d99; /* Numeración morada */
+  font-weight: bold;
+}
+
+.gsc-results .gsc-cursor-page:hover {
+  color: #6206a3; /* Numeración más intensa al pasar el cursor */
+}

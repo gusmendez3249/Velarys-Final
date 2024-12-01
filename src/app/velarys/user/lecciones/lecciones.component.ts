@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LeccionService } from './../../services/leccion.service';
 import { Leccion } from './../../models/leccion.model';
@@ -17,13 +18,23 @@ export class LeccionesComponent implements OnInit {
   constructor(
     private leccionService: LeccionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
     this.cursoId = +this.route.snapshot.paramMap.get('cursoId')!;
     this.nivelId = +this.route.snapshot.paramMap.get('nivelId')!;
     this.obtenerLecciones();
+
+    // Solo ejecuta el script si estamos en un entorno de navegador
+    if (isPlatformBrowser(this.platformId)) {
+      const script = this.renderer.createElement('script');
+      script.src = 'https://cse.google.com/cse.js?cx=208825525e2834300';
+      script.async = true;
+      this.renderer.appendChild(document.body, script);
+    }
   }
 
   obtenerLecciones(): void {
@@ -31,7 +42,6 @@ export class LeccionesComponent implements OnInit {
       this.leccionService.obtenerLeccionesPorNivelId(this.nivelId).subscribe(
         response => {
           this.lecciones = response;
-          // Asegúrate de que hay lecciones disponibles
           if (this.lecciones.length === 0) {
             console.warn('No se encontraron lecciones para este nivel.');
           }
