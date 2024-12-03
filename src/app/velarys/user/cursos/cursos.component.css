@@ -207,6 +207,13 @@
   font-size: 14px;
   margin-left: 10px;
 }
+<<<<<<< HEAD
+
+.btn-paises:hover {
+  background-color: #0056b3;
+}
+=======
+>>>>>>> parent of 7414877 (Revert "Falta la de paypal we")
 
 .btn-paises:hover {
   background-color: #0056b3;

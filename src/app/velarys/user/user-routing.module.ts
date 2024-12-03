@@ -1,4 +1,3 @@
-// src/app/velarys/user/user-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CursosComponent } from './cursos/cursos.component';
@@ -16,7 +15,6 @@ const routes: Routes = [
   { path: 'lecciones/:cursoId/:nivelId', component: LeccionesComponent },
   { path: 'juegos/:cursoId/:nivelId/:leccionId', component: JuegosComponent },
   { path: 'preguntasuser/:cursoId/:nivelId/:leccionId', component: PreguntasComponent },
-  {path: 'map/',component:MapComponent},
   { path: 'countries', component: CountryListComponent }, // Nueva ruta para la lista de países
 ];
 

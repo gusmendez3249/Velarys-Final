@@ -59,7 +59,7 @@ export class PagoComponent implements AfterViewInit {
         },
         onApprove: (data: any, actions: any) => {
           return actions.order.capture().then((details: any) => {
-            this.showSuccessAlert(`Gracias por tu compra, ${details.payer.name.given_name}. Tu pedido ha sido procesado.`);
+            this.showSuccessAlert('Gracias por tu compra, ${details.payer.name.given_name}. Tu pedido ha sido procesado.');
             this.activarCurso(this.cursoId); // Activa el curso después de la compra
           });
         },

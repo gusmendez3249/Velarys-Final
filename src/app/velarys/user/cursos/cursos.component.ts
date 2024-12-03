@@ -5,7 +5,7 @@ import { CursoService } from '../../services/curso.service';
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.css']
+  styleUrls: ['./cursos.component.css'],
 })
 export class CursosComponent implements OnInit {
   cursos: any[] = [];
@@ -45,7 +45,6 @@ export class CursosComponent implements OnInit {
 
   cerrarSesion(): void {
     this.mostrarConfirmacion('¿Estás seguro de que deseas cerrar sesión?', () => {
-      // Redirigir al usuario a la página de cierre de sesión después de la confirmación
       this.router.navigate(['/']);
     });
   }

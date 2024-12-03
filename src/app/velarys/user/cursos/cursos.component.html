@@ -7,7 +7,9 @@
     <h1>Cursos Velarys</h1>
   </div>
   <div class="actions">
+    <!-- Botón para cerrar sesión -->
     <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar Sesión</button>
+
     <button routerLink="/countries" class="btn-paises">Ver Países</button>
   </div>
 </div>
@@ -40,6 +42,7 @@
 
       <!-- Botón Pagar -->
       <button
+
       *ngIf="curso.esDePaga && !curso.acceso"
       (click)="pagarCurso(curso)"
       class="btn-pagar"

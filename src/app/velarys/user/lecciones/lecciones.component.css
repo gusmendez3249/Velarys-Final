@@ -150,6 +150,8 @@
   cursor: not-allowed;
 }
 
+<<<<<<< HEAD
+=======
 .audio-list {
   display: flex;
   flex-wrap: wrap;
@@ -261,6 +263,7 @@
   width: 100%; /* Asegura que el texto ocupe todo el ancho disponible */
 }
 
+>>>>>>> parent of 7414877 (Revert "Falta la de paypal we")
 /* Contenedor de la barra de búsqueda */
 .search-container {
   max-width: 800px;
@@ -355,4 +358,8 @@
 
 .gsc-results .gsc-cursor-page:hover {
   color: #6206a3; /* Numeración más intensa al pasar el cursor */
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> parent of 7414877 (Revert "Falta la de paypal we")
